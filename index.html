@@ -186,6 +186,7 @@
 												<li>기존 대용랑 데이터 조회 쿼리 SQL 튜닝</li>
 												<li>Websocket을 이용한 실시간 알람 기능 구현</li>
 												<li>전반적인 CDC Pipeline 구축</li>
+												<li>서버 포팅 및 배포</li>
 											</ul>
 										</li>
 
@@ -197,6 +198,7 @@
 											<ul>
 												<li>기존 PostgreSQL의 Listen & Notify를 사용하여 실시간 DB 감지 기능의 요구사항 변경시 Trigger도 변경해야 하는 이슈로 유지보수의 어려움</li>
 												<li>수십만개의 데이터 쿼리 조회 성능 개선</li>
+												<li>서버 포팅 및 배포로 인한 이슈</li>
 											</ul>
 										</li>
 										<li>
@@ -204,6 +206,7 @@
 											<ul>
 												<li>Spring Emebedded Debezium을 이용해 자바 소스 내에서 수정 시 유지보수가 될 수 있게끔 수정</li>
 												<li>일정 필요 기간의 데이터를 WITH절을 통해 SQL 튜닝</li>
+												<li>Apache Tomcat을 이용하여 개인적으로 서버 포팅 및 배포 연습</li>
 											</ul>
 										</li>
 
@@ -216,6 +219,7 @@
 											<br>수십만개의 데이터 쿼리 조회 성능을 개선하였다.
 											<br>이 프로젝트를 통해 유지보수가 용이한 코드를 작성하는 것이 중요하다는 것을 느꼈고,
 											<br>유지보수가 용이한 코드를 작성하기 위해 노력하고 있다.
+											<br>또한, 서버 포팅 및 배포를 통해 개인적으로 서버를 다루는 것에 대한 경험을 쌓았다.
 										</li>
 									</ul>
 
@@ -286,6 +290,7 @@
 												<li>대용량 파일 업로드/다운로드 제작</li>
 												<li>Vue.js를 통한 키오스크 제작</li>
 												<li>GPKI를 통한 세움터 연계</li>
+												<li>Docker를 통한 서버 배포</li>
 											</ul>
 										</li>
 
@@ -299,6 +304,8 @@
 												<li>Spring Framework에 대한 이해 부족</li>
 												<li>효율적인 CRUD 제작</li>
 												<li>GPKI 연계 정보 부족</li>
+												<li>Vue.js에 대한 이해 부족</li>
+												<li>Docker를 통한 서버 배포</li>
 											</ul>
 										</li>
 										<li>
@@ -308,6 +315,8 @@
 												<li>퇴근 후 공부와 회사 사수에게 꾸준한 코드리뷰 요청으로 Spring Framework에 대한 이해도 향상</li>
 												<li>기능별로 패키지를 나누고 각 기능별로 클래스를 나누어 효율적인 CRUD 제작</li>
 												<li>관련 문서를 찾아보고 수많은 테스트 및 연계를 통해 GPKI 연계 정보 습득</li>
+												<li>Vue.js 공식 문서를 찾아보며 공부</li>
+												<li>Docker 인강을 구매하여 서버 배포 방법을 배움</li>
 											</ul>
 										</li>
 
@@ -524,7 +533,7 @@
 								<div class="container">
 									<h3>🔧Stack</h3>
 									<p>
-										<b>개발자 김두현이 자주 사용하는 기술들</b>
+										<h3>개발자 김두현이 자주 사용하는 기술들</h3></b>
 									</p>
 									<div class="features">
 										<article>
@@ -533,44 +542,6 @@
 												<h4>JAVA</h4>
 											</div>
 										</article>
-										<!-- <article>
-											<a class="image"><img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/></a>&nbsp;
-											<div class="inner">
-												<h4>Python</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image"><img src="https://img.shields.io/badge/C++-00599C?style=flat-square&logo=C++&logoColor=white"/></a>&nbsp;
-											<div class="inner">
-												<h4>C++</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image"><img src="https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=C&logoColor=white"/></a>&nbsp;
-											<div class="inner">
-												<h4>C</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/></a>&nbsp;
-											<div class="inner">
-												<h4>HTML5</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/></a>&nbsp; 
-											</a>
-											<div class="inner">
-												<h4>CSS</h4>
-												<p>-</p>
-											</div>
-										</article> -->
 										<article>
 											<a class="image">
 												<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/></a>&nbsp;
@@ -595,15 +566,14 @@
 												<h4>Springboot</h4>
 											</div>
 										</article>
-										<!-- <article>
+										<article>
 											<a class="image">
 												<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/></a>&nbsp;
 											</a>
 											<div class="inner">
 												<h4>MySQL</h4>
-												<p>-</p>
 											</div>
-										</article> -->
+										</article>
 										<article>
 											<a class="image">
 												<img src="https://img.shields.io/badge/postgres-%23316192.svg?style=flat-square&logo=postgresql&logoColor=white"/></a>&nbsp;
@@ -612,84 +582,58 @@
 												<h4>PostgresSQL</h4>
 											</div>
 										</article>
-										<!-- <article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/ROS-22314E?style=flat-square&logo=ROS&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>ROS</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/vue.js-4FC08D?style=flat-square&logo=vue.js&logoColor=white"> &nbsp;
-											</a>
-											<div class="inner">
-												<h4>Vue</h4>
-												<p>-</p>
-											</div>
-										</article> -->
-										<!-- <article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=flat-square&logo=IntelliJ IDEA&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>IntelliJ</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/PyCharm-000000?style=flat-square&logo=PyCharm&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>PyCharm</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Apache NetBeans IDE-1B6AC6?style=flat-square&logo=Apache NetBeans IDE&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Apache NetBeans IDE</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Visual Studio-5C2D91?style=flat-square&logo=Visual Studio&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Visual Studio</h4>
-												<p>-</p>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Visual Studio Code</h4>
-												<p>-</p>
-											</div>
-										</article>
 										<article>
 											<a class="image">
 												<img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/></a>&nbsp;
 											</a>
 											<div class="inner">
 												<h4>Git</h4>
-												<p>-</p>
 											</div>
-										</article> -->
+										</article>
 										<article>
 											<a class="image">
 												<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>&nbsp;
 											</a>
 											<div class="inner">
 												<h4>GitHub</h4>
+											</div>
+										</article>
+									</div>
+									<br>
+									<p>
+										<h3>경험(공부)해본 기술들</h3></b>
+									</p>
+									<div class="features">
+										<article>
+											<a class="image">
+												<img src="https://img.shields.io/badge/vue.js-4FC08D?style=flat-square&logo=vue.js&logoColor=white"> &nbsp;
+											</a>
+											<div class="inner">
+												<h4>Vue</h4>
+											</div>
+										</article>
+										<article>
+											<a class="image">
+												<img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=black"/></a>&nbsp;
+											</a>
+											<div class="inner">
+												<h4>Apache Tomcat</h4>
+											</div>
+										</article>
+										<article>
+											<a class="image">
+												<img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/></a>&nbsp;
+											</a>
+											<div class="inner">
+												<h4>Docker</h4>
+											</div>
+										</article>
+										<article>
+											<a class="image">
+												<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white"> </a>&nbsp;
+											</a>
+											<div class="inner">
+												<h4>Redis</h4>
 											</div>
 										</article>
 									</div>
