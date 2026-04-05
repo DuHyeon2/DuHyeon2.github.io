@@ -1,1046 +1,1043 @@
-<!DOCTYPE HTML>
-<!--
-	Read Only by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>KimDuHyeon's Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김두현 | DevOps / Backend Engineer</title>
+<meta name="description" content="Kubernetes 기반 MSA 플랫폼의 인프라 자동화와 데이터 파이프라인 최적화를 전문으로 하는 DevOps/Backend Engineer 김두현의 포트폴리오입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f16;
+    --bg2: #0f1923;
+    --card: #1a2735;
+    --card-hover: #1e3044;
+    --accent: #00d4aa;
+    --accent2: #0ea5e9;
+    --accent3: #f59e0b;
+    --white: #e8edf3;
+    --light: #94a3b8;
+    --muted: #475569;
+    --red: #ef4444;
+    --green: #22c55e;
+    --purple: #a78bfa;
+    --font-display: 'Noto Sans KR', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
 
-		<!-- Header -->
-			<section id="header">
-				<header>
-					<span class="image avatar"><img src="images/avatar.jpg" alt="" /></span>
-					<h1 id="logo"><a href="#">김두현's Portfolio</a></h1>
-					<p>안녕하세요<br />
-					생각하는 백엔드 개발자 김두현 입니다.</p>
-				</header>
-				<nav id="nav">
-					<ul>
-						<li><a href="#one" class="active">About</a></li>
-						<li><a href="#two">Education</a></li>
-						<li><a href="#three">Project</a></li>
-						<li><a href="#four">Stack</a></li>
-						<li><a href="#five">Contact</a></li>
-					</ul>
-				</nav>
-				<!-- <footer>
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-				</footer> -->
-				<footer>
-					template freebie by <a href="http://html5up.net">HTML5 UP</a>.</p>
-				</footer>
-			</section>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg);
+  }
 
-				<!-- Main -->
-					<div id="main">
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-display);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-						<!-- One -->
-							<section id="one">
-								<div class="image main" data-position="center">
-									<img src="images/banner.jpg" alt="" />
-								</div>
-								<div class="container">
-									<header class="major">
-										<h2>김두현이란?</h2>
-										<p>생각하는 개발자<br/>
-										<h5>성 : 김</h4>
-										<h5>이름 : 두현</h4>
-										<h5>생년월일 : 98.02.05</h4>
-									</header>
-									<p>안녕하세요. 결과가 아닌 왜 이렇게 소스코드를 작성해야 하는지 생각하는 개발자 김두현 입니다.
-									<br>저는 개발자로서의 역량을 키우기 위해 끊임없이 공부하고 있습니다.
-									<br>저의 목표는 그냥 단순하게 개발자로서의 역량을 키우는 것이 아닌, 
-									<br>왜 이렇게 코드를 작성해야 하는지에 대해 고민하고, 그 결과를 이해하면서 개발자로서의 역량을 키우는 것입니다.</p>
-									<p>군 복학 후 대학생 2학년 시절 아무것도 몰랐을 때, 오로지 프로젝트를 완료하기 위해 맨바닥에 헤딩하며 Java를 처음 입문했을때,<br>
-									그때의 노력과 만족하는 결과를 얻었을때의 쾌감을 느꼈을때, 개발자로서의 길을 걷기로 결심했습니다.</p>
+  /* === NOISE OVERLAY === */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
 
-									항상 새로운 것을 배우고, 새로운 것을 시도하며, 새로운 것을 만들어내는 것을 좋아합니다.
-									<br>저의 포트폴리오를 통해 저의 역량을 확인해보세요.</p>
-									</p>
-								</div>
-							</section>
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(10, 15, 22, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 212, 170, 0.1);
+    z-index: 100;
+    padding: 0 2rem;
+  }
 
-						<!-- Two -->
-							<section id="two">
-								<div class="container">
-									<h3>Education</h3>
-									<p>개발자로서의 발자취</p>
+  nav .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
 
-									<ul>
-										
-									</ul>
-									<ul>
-										<li><h4>👨🏻‍💼동의대학교 컴퓨터 소프트웨어 공학과 학사 졸업(17.03~23.02)</h4>
-											<ul>
-												<li>📚학점 3.57/4.5</li>
-											</ul>
-											<ul>
-												<li>📚수강과목(전공)
-													<ul>
-														<li><h5>1학년(17.03~18.02)</h5>
-															<ul>
-																<li>컴퓨터개론(3학점 B0)</li>
-																<li>프로그래밍실습Ⅰ(3학점 B+)</li>
-																<li>이산수학(3학점 C0)</li>
-																<li>프로그래밍실습Ⅱ(3학점 C+)</li>
-															</ul>
-														</li>
-													</ul>
-													<ul>
-														<li><h5>2학년(20.03~21.02)</h5>
-															<ul>
-																<li>데이터구조(3학점 A0)</li>
-																<li>공학설계입문(3학점 A0)</li>
-																<li>컴퓨터그래픽스(3학점 A+)</li>
-																<li>객체지향프로그래밍Ⅰ(3학점 A0)</li>
-																<li>확률및통계(3학점 B+)</li>
-																<li>컴퓨터구조이론및실습(3학점 A+)</li>
-																<li>비주얼프로그래밍(3학점 A0)</li>
-																<li>컴퓨터네트워크(3학점 B+)</li>
-																<li>파일처리론(3학점 B+)</li>
-																<li>객체지향프로그래밍Ⅱ(3학점 A0)</li>
-																<li>수치해석학(3학점 A+)</li>
-															</ul>
-														</li>
-													</ul>
-													<ul>
-														<li><h5>3학년(21.03~22.02)</h5>
-															<ul>
-																<li>운영체제(3학점 A0)</li>
-																<li>인터넷프로그래밍(3학점 A0)</li>
-																<li>정보보호론(3학점 A0)</li>
-																<li>소프트웨어설계공학(3학점 B+)</li>
-																<li>데이터베이스이론및실습(3학점 B+)</li>
-																<li>객체지향모델링(3학점 B+)</li>
-																<li>데이터베이스응용(3학점 A0)</li>
-																<li>컴퓨터알고리즘(3학점 B+)</li>
-																<li>캡스톤디자인Ⅰ(1학점 A0)</li>
-															</ul>
-														</li>
-													</ul>
-													<ul>
-														<li><h5>4학년(22.03~23.02)</h5>
-															<ul>
-																<li>컴파일러개론(3학점 B+)</li>
-																<li>임베디드소프트웨어(3학점 B+)</li>
-																<li>캡스톤디자인Ⅱ(2학점 A0)</li>
-															</ul>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-									</ul>
+  nav .logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
 
-									<ul>
-										<li>
-											<h4>💻한국지능정보사회진흥원 2022 데이터분석 청년인재 양성사업 수료(22.05~22.12)</h4>
-										</li>
-										<ul>
-											<li>데이터 기초 개념 획득</li>
-											<li>SQL 지식 획득</li>
-											<li>API 데이터 활용</li>
-											<li>데이터 분석 개발자로 구성된 팀 프로젝트 진행</li>
-											<li>부산광역시 사하구청 전산직 인턴(`22.09~`22.12)</li>
-										</ul>
-									</ul>
+  nav .logo span { color: var(--muted); }
 
-									<ul>
-										<li>
-											<h4>🔧(주)이지스 재직중(22.12~)</h4>
-										</li>
-									</ul>
-								</div>
-							</section>
+  nav .links { display: flex; gap: 2rem; }
 
-							<section id="three">
-								<div class="container">
-									<h3>🎟️수행 프로젝트</h3>
-									<ul>
-										<h4>
-											👨‍💻관공서 재난 시스템 프로젝트 고도화(2024. 11 ~ )
-										</h4>
-										<li>
-											회사 사업 프로젝트로 관공서에서 실제 사용되고 있는 기존 재난 시스템을 고도화 하였다 .
-										</li>
-										<li>
-											수행업무(기능 구현)
-											<ul>
-												<li>Spring Embedded Debezium을 통한 실시간 DB 데이터 변화 감지</li>
-												<li>기존 대용랑 데이터 조회 쿼리 SQL 튜닝</li>
-												<li>Websocket을 이용한 실시간 알람 기능 구현</li>
-												<li>전반적인 CDC Pipeline 구축</li>
-												<li>Apache Tomcat을 이용한 서버 포팅 및 배포</li>
-												<li>Jmeter를 이용한 성능 테스트</li>
-											</ul>
-										</li>
+  nav .links a {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: color 0.3s;
+    letter-spacing: 0.02em;
+  }
 
-										<h5>
-											프로젝트 수행 중 문제점과 해결방안
-										</h5>
-										<li>
-											프로젝트 수행 중 문제점
-											<ul>
-												<li>기존 PostgreSQL의 Listen & Notify를 사용하여 실시간 DB 감지 기능의 요구사항 변경시 Trigger도 변경해야 하는 이슈로 유지보수의 어려움</li>
-												<li>수십만개의 데이터 쿼리 조회 성능 개선</li>
-												<li>서버 포팅 및 배포로 인한 이슈</li>
-											</ul>
-										</li>
-										<li>
-											 해결방안 
-											<ul>
-												<li>Spring Emebedded Debezium을 이용해 자바 소스 내에서 수정 시 유지보수가 될 수 있게끔 수정</li>
-												<li>일정 필요 기간의 데이터를 WITH절을 통해 SQL 튜닝</li>
-												<li>Apache Tomcat을 이용하여 개인적으로 서버 포팅 및 배포 연습</li>
-											</ul>
-										</li>
+  nav .links a:hover { color: var(--accent); }
 
-										<h5>
-											느낀점
-										</h5>
-										<li>
-											사용자와의 소통을 통해 요구사항이 변경되는 것을 빠르게 대응하고, 유지보수가 용이하도록 개발하는 것이 중요하다는 것을 느꼈다.
-											<br>기존의 Listen & Notify를 사용한 실시간 DB 감지 기능을 Spring Embedded Debezium을 사용하여 개선하였고,
-											<br>수십만개의 데이터 쿼리 조회 성능을 개선하였다.
-											<br>이 프로젝트를 통해 유지보수가 용이한 코드를 작성하는 것이 중요하다는 것을 느꼈고,
-											<br>유지보수가 용이한 코드를 작성하기 위해 노력하고 있다.
-											<br>또한, 서버 포팅 및 배포를 통해 개인적으로 서버를 다루는 것에 대한 경험을 쌓았다.
-										</li>
-									</ul>
+  /* === SECTION BASE === */
+  section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
 
-									<ul>
-										<h4>
-											👨‍💻관공서 재난 시스템 프로젝트(2023. 11 ~ 2024. 08)
-										</h4>
-										<li>
-											회사 사업 프로젝트로 관공서에서 실제 사용되고 있는 재난 시스템을 개발하였다.
-										</li>
-										<li>
-											수행업무(기능 구현)
-											<ul>
-												<li>Java Spring-Framework를 이용하여 단순 CRUD 제작</li>
-												<li>Websocket을 이용한 실시간 알람 기능 구현</li>
-												<li>PostgreSQL의 Listen & Notify를 이용해 DB에 실시간 데이터 감지 기능 구현</li>
-												<li>공공데이터 API를 이용해 데이터 표출</li>
-												<li>Jmeter를 이용한 성능 테스트</li>
-											</ul>
-										</li>
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
 
-										<h5>
-											프로젝트 수행 중 문제점과 해결방안
-										</h5>
-										<li>
-											프로젝트 수행 중 문제점
-											<ul>
-												<li>전 프로젝트보다 깔끔한 코드 작성</li>
-												<li>실시간 DB 감지 기능</li>
-												<li>효율적인 공공데이터 API	호출</li> 
-												<li>처음 사용해보는 Jmeter</li>
-											</ul>
-										</li>
-										<li>
-											 해결방안 
-											<ul>
-												<li>CleanCode라는 책을 읽고 변수명, 클래스명, 로직 작성에 대한 규칙을 정함</li>
-												<li>PostgreSQL의 Trigger기반의 Listen & Notify를 이용해 실시간 DB 감지를 하며 Websocket을 통해 실시간으로 변경되는 DB값을 표출</li>
-												<li>JavaScript에서보단 Java에서 API를 호출하는게 개인Key관리에 용이하다 판단하여 팀원들도 사용할 수 있는 API호출 로직 작성</li>
-												<li>Jmeter 문서를 찾아보며 성능 테스트를 진행</li>
-											</ul>
-										</li>
+  .section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+  }
 
-										<h5>
-											느낀점
-										</h5>
-										<li>
-											내가 개발을 하면서 가장 재미를 느낀 프로젝트였다.
-											<br>실시간으로 DB값을 감지하고, 실시간으로 변경되는 값을 표출하는 것이 매우 재미있었고,
-											<br>CleanCode의 책에서 나온 변수명, 클래스명, 로직 작성에 대한 규칙을 정해 깔끔한 코드를 작성하였다.
-											<br>다만 아쉬운점이 있다면 시간에 쫓기며 프로젝트를 진행하다보니, 코드리뷰를 받지 못한점이 아쉽다.
-											<br>프로젝트 마감 후 코드리뷰를 받아보며, 내가 어떤 부분을 더 공부해야할지 알게되었다.
-										</li>
-									</ul>
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
 
-									<ul>
-										<h4>
-											👨‍💻지역 군청 공간정보 시스템 및 지역 군청 소개 키오스크(2023. 05 ~ 2023. 10)
-										</h4>
-										<li>
-											회사 사업 프로젝트로 지역 군청에서 실 사용되는 공간정보 시스템을 개발하고
-											<br>지역 군청 소개 키오스크 시스템을 개발 하였다.
-										</li>
-										<li>
-											수행업무(기능 구현)
-											<ul>
-												<li>Java Spring-Boot를 이용하여 단순 CRUD 제작</li>
-												<li>PostgreSQL을 통한 DB 설계</li>
-												<li>JavaScript로 Java와 Rest API 통신</li>
-												<li>통신된 데이터로 Thymeleaf를 통해 화면 표출</li>
-												<li>대용량 파일 업로드/다운로드 제작</li>
-												<li>Vue.js를 통한 키오스크 제작</li>
-												<li>GPKI를 통한 세움터 연계</li>
-												<li>Docker를 통한 서버 배포</li>
-											</ul>
-										</li>
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
 
-										<h5>
-											프로젝트 수행 중 문제점과 해결방안
-										</h5>
-										<li>
-											프로젝트 수행 중 문제점
-											<ul>
-												<li>첫 회사 프로젝트에 대한 압박감</li>
-												<li>Spring Framework에 대한 이해 부족</li>
-												<li>효율적인 CRUD 제작</li>
-												<li>GPKI 연계 정보 부족</li>
-												<li>Vue.js에 대한 이해 부족</li>
-												<li>Docker를 통한 서버 배포</li>
-											</ul>
-										</li>
-										<li>
-											 해결방안 
-											<ul>
-												<li>사회 선배인 아버지에게 회사 생활에 대한 조언을 구함</li>
-												<li>퇴근 후 공부와 회사 사수에게 꾸준한 코드리뷰 요청으로 Spring Framework에 대한 이해도 향상</li>
-												<li>기능별로 패키지를 나누고 각 기능별로 클래스를 나누어 효율적인 CRUD 제작</li>
-												<li>관련 문서를 찾아보고 수많은 테스트 및 연계를 통해 GPKI 연계 정보 습득</li>
-												<li>Vue.js 공식 문서를 찾아보며 공부</li>
-												<li>Docker 인강을 구매하여 서버 배포 방법을 배움</li>
-											</ul>
-										</li>
+  .hero-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 30% 50%, black 0%, transparent 70%);
+  }
 
-										<h5>
-											느낀점
-										</h5>
-										<li>
-											첫 회사에서의 첫 프로젝트였고, 회사 생활에 대한 압박감과 잘 해야한다는 생각에 많이 힘들었지만,
-											<br>아버지로부터 조언을 받고, 회사 사수에게 코드리뷰를 받으며 많이 성장할 수 있었던 프로젝트였다.
-											<br>로직을 짜는 부분과, CRUD를 효율적으로 만드는 부분에서 나는 매우 부족했다고 느낀 프로젝트였지만,
-											<br>재미를 느끼는 프로젝트기도 하였다.
-											<br>부족하면 안된다는 생각에 스스로 공부를 하였으며 내가 생각하는 개발자에 한걸음 더 다가갈 수 있었던 프로젝트였다.
-										</li>
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 70%);
+    top: 20%; right: -10%;
+    pointer-events: none;
+  }
 
-									</ul>
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
 
-									<ul>
-										<h4>
-											👨‍💻UAM 이·착륙장 최적입지 선정(2022. 06 ~ 2022. 09)
-										</h4>
-										<li>
-											데이터분석 청년인재 양성 수료 과정 프로젝트로 제작한 프로젝트이며
-											<br>발전하는 이동수단에 따라 하늘길을 열어줄 UAM또한 많은 관심을 받고 있다. 
-											<br>이에 따른 UAM 최적입지를 선정하였다.
-										</li>
-										<li>
-											수행업무
-											<ul>
-												<li>Jupyter Notebook을 이용한 데이터 분석</li>
-												<li>QGIS를 이용한 간단한 시각화</li>
-												<li>업무 프로세스 작성</li>
-											</ul>
-										</li>
+  .hero-left .greeting {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
 
-										<h5>
-											프로젝트 수행 중 문제점과 해결방안
-										</h5>
-										<li>
-											프로젝트 수행 중 문제점
-											<ul>
-												<li>처음 접하는 데이터 분석</li>
-												<li>팀원들간의 분쟁</li>
-											</ul>
-										</li>
-										<li>
-											해결방안 
-											<ul>
-												<li>데이터 분석에 대한 기초 지식을 쌓기 위해 데이터분석을 이용한 프로젝트를 참고하며 공부</li>
-												<li>퇴근 후 개인적으로 연락하여 개인보단 팀을위해야 한다는 나의 생각을 전달하며, 해당 팀원이 수긍하여 문제 해결</li>
-											</ul>
-										</li>
+  .hero-left h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
 
-										<h5>
-											느낀점
-										</h5>
-										<li>
-											외부 사람들과의 첫 협업이였고, 데이터 분석에 대한 기초 지식이 없었기에 매우 힘들었지만,
-											<br>내가 프로젝트에 할 수 있는 일을 최대한 찾고,
-											<br>그 일을 열심히 하며 프로젝트에 기여하려고 노력했던 프로젝트였다.
-											<br>프로젝트중 프로젝트 아이디 선정 부분에서 팀원들간의 분쟁도 있었지만,
-											<br>해당 팀원과 대화를 통해 원만한 해결책을 찾아내어 프로젝트를 성공적으로 마무리 할 수 있었다.
-										</li>
+  .hero-left .role {
+    font-size: 1.3rem;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s forwards;
+  }
 
-									</ul>
+  .hero-left .desc {
+    color: var(--light);
+    font-size: 1rem;
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+  }
 
-									<ul>
-										<h4>
-											👨‍💻Phonedyguard(2021. 09 ~ 2022. 05)
-										</h4>
-										<li>
-											대학교 졸업 작품으로 사회적 약자인 노인, 아동, 장애인을 대상으로 보호자가 위치추적, 안심경로 등록, 안심경로 이탈 알림 등의 기능으로 
-											<br>보호자가 안심할 수 있도록 도와주는 Android App
-										</li>
-										<li>
-											수행업무(기능 기능)
-											<ul>
-												<li>Java Spring-Boot를 이용한 MVC RestApi, CRUD 이용</li>
-												<li>안심경로 확인, 안심경로 등록</li>
-												<li>안심경로 DB 저장</li>
-												<li>현재위치 DB 저장</li>
-												<li>안심경로 이탈 확인</li>
-												<li>데이터베이스 설계</li>
-											</ul>
-										</li>
-										<h5>
-											프로젝트 수행 중 문제점과 해결방안
-										</h5>
-										<li>
-											프로젝트 수행 중 문제점
-											<ul>
-												<li>첫 SpringBoot 프로젝트로 인한 미숙한 코드 작성</li>
-												<li>클라이언트에서 보내주는 값을 DB에 저장하는 방법</li>
-												<li>안심경로 이탈 확인에 대한 알고리즘</li>
-											</ul>
-										</li>
-										<li>
-											 해결방안 
-											<ul>
-												<li>온라인 강의 사이트에서 강의를 구매하여 Spring의 기초 개념 획득</li>
-												<li>객체로 값을 전달받고 JPA를 이용하여 DB에 저장</li>
-												<li>안심경로 이탈 확인을 위해 현재위치의 오차범위를 두고 안심경로와 비교</li> 
-											</ul>
-										</li>
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 1s forwards;
+  }
 
-										<h5>
-											느낀점
-										</h5>
-										<li>
-											처음으로 SpringBoot를 이용한 프로젝트를 진행하였고, 이 프로젝트를 통해 SpringBoot에 대한 이해도가 높아졌다.
-											<br>또한, 안심경로 이탈 확인에 대한 알고리즘을 직접 생각해보며, 개발자로서의 역량을 키울 수 있었던 프로젝트였다.
-											<br>솔직히 내가 작성한 알고리즘이 정확한지는 모르겠지만, 직접 짰다는 것에 의의를 두고 있다.
-										</li>
-									</ul>
+  .hero-links a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
 
-									<ul> 
-										<h4>
-											👨‍💻음식주문 및 결제 시스템(2021. 04. 24 ~ 2021. 06. 05)
-										</h4>
-										<li>
-											대학교 학기 프로젝트로써 COVID-19 바이러스로 인해 언택트 쇼핑의 추세가 높아짐에 따라 전자상거래 어플리케이션이 활발하게 사용되고 있다. 
-											<br>전자기기, 가구, 의류 등 여러 분야의 전자상거래 어플이 존재하는 가운데,
-											<br>가장 많이 사용되는 배달 음식 어플인 '배달의 민족'을 모티브로 하여 본 프로젝트를 기획
-										</li>
-										<li>
-											수행업무(기능 기능)
-											<ul>
-												<li>Java Design Pattern을 이용하여 기능 구현</li>
-												<li>데커레이터 패턴 적용(옵션 별 가격 측정)</li>
-												<li>스트레티지 패턴(카테고리에 따른 옵션 변경)</li>
-												<li>메멘토 패턴(장바구니 기능)</li>
-											</ul>
-										</li>
-										<h5>
-											프로젝트 수행 중 문제점과 해결방안
-										</h5>
-										<li>
-											프로젝트 수행 중 문제점
-											<ul>
-												<li>디자인패턴에 대한 이해 부족</li>
-											</ul>
-										</li>
-										<li>
-											 해결방안 
-											<ul>
-												<li>패턴을 적용하기 위해 패턴의 설명을 찾고 특정 패턴에 맞는 기능을 생각하며 적용</li>
-											</ul>
-										</li>
+  .hero-links .primary {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+  }
 
-										<h5>
-											느낀점
-										</h5>
-										<li>
-											디자인패턴에 대해 아무것도 몰랐으며 처음으로 디자인패턴을 적용해본 프로젝트였다.
-											<br>솔직히 프로젝트 당시 사용했던 디자인패턴이 정상적인지도 모르고 사용했었고,
-											<br>프로젝트를 진행하는동안 내내 내 실력이 부족했음을 느꼈지만,
-											<br>이는 나에게 공부를 더 많이 하게 만들었고, 학교 공부만으론 부족하다는 것을 느꼈다.
-										</li>
-									</ul>									
+  .hero-links .primary:hover {
+    background: #00eabb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,212,170,0.25);
+  }
 
-									<ul> 
-										<h4>
-											👨‍💻대학정보시스템(2020. 09. 20 ~ 2020. 11. 23)
-										</h4>
-										<li>
-											대학교 학기 프로젝트로써 JAVA로 개발한 대학정보시스템으로, 처음으로 접한 팀 프로젝트이다. 
-											<br>이 프로젝트로 학생들과 교수들의 수강관련, 대학정보 등의 기능을 구현하였다.
-										</li>
-										<li>
-											수행업무(전체 기능)
-											<ul>
-												<li>NetBeans 사용</li>
-												<li>학생 수강신청</li>
-												<li>학생 수강정정</li>
-												<li>교수 수강확인</li>
-												<li>교수 수강 리스트 확인</li>
-												<li>대학정보 확인</li>
-											</ul>
-										</li>
-										<h5>
-											프로젝트 수행 중 문제점과 해결방안
-										</h5>
-										<li>
-											프로젝트 수행 중 문제점
-											<ul>
-												<li>팀원들과의 소통 부족</li>
-												<li>첫 JAVA 프로젝트로 인한 미숙한 코드 작성</li>
-												<li>회원별 데이터 저장에 대한 문제</li>
-											</ul>
-										</li>
-										<li>
-											해결방안 
-											<ul>
-												<li>직접 팀장을 맡아 팀원들과의 Zoom 온라인 소통을 높임</li>
-												<li>꾸준한 JAVA 공부 및 과 동기들과의 코드리뷰</li>
-												<li>DB개념이 부족하여 txt파일에 저장하여 구현</li>
-											</ul>
-										</li>
+  .hero-links .secondary {
+    border: 1px solid var(--muted);
+    color: var(--light);
+  }
 
-										<h5>
-											느낀점
-										</h5>
-										<li>
-											프로젝트를 진행하면서 코로나로 인해 대면이 불가능하였는데, 팀원들과의 소통이 중요하다는 것을 깨달았다. 
-											<br>소통 문제와 JAVA에 대한 미숙한 점 때문에 프로젝트가 매우 힘들었다.
-											<br>특히 데이터를 저장하는 부분에서 어떻게 해야할지 몰라서 txt파일에 저장하는 방법을 사용하였다.
-											<br>좋은 성적을 받으니 성취감이 느껴졌고, 내가 개발자로서의 길을 걷고 싶다는 생각이 들었던 프로젝트였다.
-										</li>
-									</ul>
-								</div>
-							</section>
+  .hero-links .secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 
-						<!-- four -->
-							<section id="four">
-								<div class="container">
-									<h3>🔧Stack</h3>
-									<p>
-										<h3>개발자 김두현이 자주 사용하는 기술들</h3></b>
-									</p>
-									<div class="features">
-										<article>
-											<a class="image"><img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/></a>&nbsp;
-											<div class="inner">
-												<h4>JAVA</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>JavaScript</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/spring-6DB33F?style=flat-square&logo=spring&logoColor=white">&nbsp; 
-											</a>
-											<div class="inner">
-												<h4>Spring</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Springboot-6DB33F?style=flat-square&logo=Spring&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Springboot</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>MySQL</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/postgres-%23316192.svg?style=flat-square&logo=postgresql&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>PostgresSQL</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Git</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>GitHub</h4>
-											</div>
-										</article>
-									</div>
-									<br>
-									<p>
-										<h3>경험(공부)해본 기술들</h3></b>
-									</p>
-									<div class="features">
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/vue.js-4FC08D?style=flat-square&logo=vue.js&logoColor=white"> &nbsp;
-											</a>
-											<div class="inner">
-												<h4>Vue</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=black"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Apache Tomcat</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Docker</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white"></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Redis</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=Amazon%20EC2&logoColor=white"></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>EC2(AWS)</h4>
-											</div>
-										</article>
-										<article>
-											<a class="image">
-												<img src="https://img.shields.io/badge/Jmeter-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white"></a>&nbsp;
-											</a>
-											<div class="inner">
-												<h4>Jmeter</h4>
-											</div>
-										</article>
-									</div>
-								</div>
-							</section>
+  /* Hero right - tech badges */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
 
-						<!-- Four -->
-							<section id="five">
-								<div class="container">
-									<h3>Contact Me</h3>
-									<p>개발자 김두현과 소통해보세요</p>
-									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="mailto:engus9781@gmail.com">engus9781@gmail.com</a></li>
-										<li class="icon solid fa-phone">010-9771-9781</li>
-										<li class="icon solid fa-home">github : <a href="https://github.com/DuHyeon2">github.com/DuHyeon2</a></li>
-									</ul>
-									<!-- <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
-									<form method="post" action="#">
-										<div class="row gtr-uniform">
-											<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-											<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-											<div class="col-12"><input type="text" name="subject" id="subject" placeholder="Subject" /></div>
-											<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="6"></textarea></div>
-											<div class="col-12">
-												<ul class="actions">
-													<li><input type="submit" class="primary" value="Send Message" /></li>
-													<li><input type="reset" value="Reset Form" /></li>
-												</ul>
-											</div>
-										</div>
-									</form> -->
-								</div>
-							</section>
+  .badge-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
 
-						<!-- Five -->
-						<!--
-						
-							<section id="five">
-								<div class="container">
-									<h3>Elements</h3>
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.45rem 1rem;
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,170,0.15);
+    transition: all 0.3s;
+  }
 
-									<section>
-										<h4>Text</h4>
-										<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-										This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-										This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-										<hr />
-										<header>
-											<h4>Heading with a Subtitle</h4>
-											<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-										</header>
-										<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-										<header>
-											<h5>Heading with a Subtitle</h5>
-											<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
-										</header>
-										<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
-										<hr />
-										<h2>Heading Level 2</h2>
-										<h3>Heading Level 3</h3>
-										<h4>Heading Level 4</h4>
-										<h5>Heading Level 5</h5>
-										<h6>Heading Level 6</h6>
-										<hr />
-										<h5>Blockquote</h5>
-										<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-										<h5>Preformatted</h5>
-										<pre><code>i = 0;
+  .badge:hover {
+    background: var(--card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
 
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
+  /* === PROJECT CARDS === */
+  .project {
+    background: var(--bg2);
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.4s;
+  }
 
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-									</section>
+  .project:hover {
+    border-color: rgba(0,212,170,0.15);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  }
 
-									<section>
-										<h4>Lists</h4>
-										<div class="row">
-											<div class="col-6 col-12-xsmall">
-												<h5>Unordered</h5>
-												<ul>
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Sagittis adipiscing lorem eleifend.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-												</ul>
-												<h5>Alternate</h5>
-												<ul class="alt">
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Sagittis adipiscing lorem eleifend.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-												</ul>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<h5>Ordered</h5>
-												<ol>
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Etiam vel felis at lorem sed viverra.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-													<li>Dolor pulvinar etiam magna etiam.</li>
-													<li>Etiam vel felis at lorem sed viverra.</li>
-													<li>Felis enim feugiat dolore viverra.</li>
-												</ol>
-												<h5>Icons</h5>
-												<ul class="icons">
-													<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-													<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-													<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-													<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-													<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-													<li><a href="#" class="icon brands fa-tumblr"><span class="label">Tumblr</span></a></li>
-												</ul>
-											</div>
-										</div>
-										<h5>Actions</h5>
-										<ul class="actions">
-											<li><a href="#" class="button primary">Default</a></li>
-											<li><a href="#" class="button">Default</a></li>
-											<li><a href="#" class="button alt">Default</a></li>
-										</ul>
-										<ul class="actions small">
-											<li><a href="#" class="button primary small">Small</a></li>
-											<li><a href="#" class="button small">Small</a></li>
-											<li><a href="#" class="button alt small">Small</a></li>
-										</ul>
-										<div class="row">
-											<div class="col-3 col-6-medium col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary">Default</a></li>
-													<li><a href="#" class="button">Default</a></li>
-													<li><a href="#" class="button alt">Default</a></li>
-												</ul>
-											</div>
-											<div class="col-3 col-6 col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary small">Small</a></li>
-													<li><a href="#" class="button small">Small</a></li>
-													<li><a href="#" class="button alt small">Small</a></li>
-												</ul>
-											</div>
-											<div class="col-3 col-6-medium col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary fit">Default</a></li>
-													<li><a href="#" class="button fit">Default</a></li>
-													<li><a href="#" class="button alt fit">Default</a></li>
-												</ul>
-											</div>
-											<div class="col-3 col-6-medium col-12-xsmall">
-												<ul class="actions stacked">
-													<li><a href="#" class="button primary small fit">Small</a></li>
-													<li><a href="#" class="button small fit">Small</a></li>
-													<li><a href="#" class="button alt small fit">Small</a></li>
-												</ul>
-											</div>
-										</div>
-									</section>
+  .project-header {
+    padding: 2.5rem 3rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
-									<section>
-										<h4>Table</h4>
-										<h5>Default</h5>
-										<div class="table-wrapper">
-											<table>
-												<thead>
-													<tr>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Price</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Item One</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Two</td>
-														<td>Vis ac commodo adipiscing arcu aliquet.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Three</td>
-														<td> Morbi faucibus arcu accumsan lorem.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Four</td>
-														<td>Vitae integer tempus condimentum.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Five</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-												</tbody>
-												<tfoot>
-													<tr>
-														<td colspan="2"></td>
-														<td>100.00</td>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
 
-										<h5>Alternate</h5>
-										<div class="table-wrapper">
-											<table class="alt">
-												<thead>
-													<tr>
-														<th>Name</th>
-														<th>Description</th>
-														<th>Price</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Item One</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Two</td>
-														<td>Vis ac commodo adipiscing arcu aliquet.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Three</td>
-														<td> Morbi faucibus arcu accumsan lorem.</td>
-														<td>29.99</td>
-													</tr>
-													<tr>
-														<td>Item Four</td>
-														<td>Vitae integer tempus condimentum.</td>
-														<td>19.99</td>
-													</tr>
-													<tr>
-														<td>Item Five</td>
-														<td>Ante turpis integer aliquet porttitor.</td>
-														<td>29.99</td>
-													</tr>
-												</tbody>
-												<tfoot>
-													<tr>
-														<td colspan="2"></td>
-														<td>100.00</td>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
-									</section>
+  .project:nth-child(1) .project-tag { background: var(--accent); color: var(--bg); }
+  .project:nth-child(2) .project-tag { background: var(--accent2); color: var(--white); }
+  .project:nth-child(3) .project-tag { background: var(--accent3); color: var(--bg); }
 
-									<section>
-										<h4>Buttons</h4>
-										<ul class="actions">
-											<li><a href="#" class="button primary">Primary</a></li>
-											<li><a href="#" class="button">Default</a></li>
-											<li><a href="#" class="button alt">Alternate</a></li>
-										</ul>
-										<ul class="actions">
-											<li><a href="#" class="button primary large">Large</a></li>
-											<li><a href="#" class="button">Default</a></li>
-											<li><a href="#" class="button alt small">Small</a></li>
-										</ul>
-										<ul class="actions fit">
-											<li><a href="#" class="button primary fit">Fit</a></li>
-											<li><a href="#" class="button fit">Fit</a></li>
-											<li><a href="#" class="button alt fit">Fit</a></li>
-										</ul>
-										<ul class="actions fit small">
-											<li><a href="#" class="button primary fit small">Fit + Small</a></li>
-											<li><a href="#" class="button fit small">Fit + Small</a></li>
-											<li><a href="#" class="button alt fit small">Fit + Small</a></li>
-										</ul>
-										<ul class="actions">
-											<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-											<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-											<li><a href="#" class="button alt icon solid fa-check">Icon</a></li>
-										</ul>
-										<ul class="actions">
-											<li><span class="button primary disabled">Primary</span></li>
-											<li><span class="button disabled">Default</span></li>
-											<li><span class="button alt disabled">Alternate</span></li>
-										</ul>
-									</section>
+  .project-headline {
+    font-size: 0.85rem;
+    color: var(--light);
+    font-family: var(--font-mono);
+  }
 
-									<section>
-										<h4>Form</h4>
-										<form method="post" action="#">
-											<div class="row gtr-uniform">
-												<div class="col-6 col-12-xsmall">
-													<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
-												</div>
-												<div class="col-6 col-12-xsmall">
-													<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
-												</div>
-												<div class="col-12">
-													<select name="demo-category" id="demo-category">
-														<option value="">- Category -</option>
-														<option value="1">Manufacturing</option>
-														<option value="1">Shipping</option>
-														<option value="1">Administration</option>
-														<option value="1">Human Resources</option>
-													</select>
-												</div>
-												<div class="col-4 col-12-medium">
-													<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-													<label for="demo-priority-low">Low Priority</label>
-												</div>
-												<div class="col-4 col-12-medium">
-													<input type="radio" id="demo-priority-normal" name="demo-priority">
-													<label for="demo-priority-normal">Normal Priority</label>
-												</div>
-												<div class="col-4 col-12-medium">
-													<input type="radio" id="demo-priority-high" name="demo-priority">
-													<label for="demo-priority-high">High Priority</label>
-												</div>
-												<div class="col-6 col-12-medium">
-													<input type="checkbox" id="demo-copy" name="demo-copy">
-													<label for="demo-copy">Email me a copy of this message</label>
-												</div>
-												<div class="col-6 col-12-medium">
-													<input type="checkbox" id="demo-human" name="demo-human" checked>
-													<label for="demo-human">I am a human and not a robot</label>
-												</div>
-												<div class="col-12">
-													<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-												</div>
-												<div class="col-12">
-													<ul class="actions">
-														<li><input type="submit" value="Send Message" /></li>
-														<li><input type="reset" value="Reset" class="alt" /></li>
-													</ul>
-												</div>
-											</div>
-										</form>
-									</section>
+  .project h3 {
+    padding: 1rem 3rem 0;
+    font-size: 1.6rem;
+    font-weight: 900;
+  }
 
-									<section>
-										<h4>Image</h4>
-										<h5>Fit</h5>
-										<span class="image fit"><img src="images/banner.jpg" alt="" /></span>
-										<div class="box alt">
-											<div class="row gtr-50 gtr-uniform">
-												<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-												<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-											</div>
-										</div>
-										<h5>Left &amp; Right</h5>
-										<p><span class="image left"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-										<p><span class="image right"><img src="images/avatar.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-									</section>
+  .project-subtitle {
+    padding: 0.3rem 3rem 0;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+  }
 
-								</div>
-							</section>
-						-->
+  .project:nth-child(2) .project-subtitle { color: var(--accent2); }
+  .project:nth-child(3) .project-subtitle { color: var(--accent3); }
 
-					</div>
+  .project-body {
+    padding: 2rem 3rem 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
 
-				<!-- Footer -->
-					<section id="footer">
-						<div class="container">
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</section>
+  .psr-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border-left: 3px solid var(--muted);
+    transition: all 0.3s;
+  }
 
-			</div>
+  .psr-card:hover {
+    background: var(--card-hover);
+    transform: translateY(-2px);
+  }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+  .psr-card.problem { border-left-color: var(--red); }
+  .psr-card.solution { border-left-color: var(--accent2); }
+  .psr-card.result { border-left-color: var(--green); }
 
-	</body>
+  .psr-card h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+  }
+
+  .psr-card.problem h4 { color: var(--red); }
+  .psr-card.solution h4 { color: var(--accent2); }
+  .psr-card.result h4 { color: var(--green); }
+
+  .psr-card p {
+    font-size: 0.88rem;
+    color: var(--light);
+    line-height: 1.7;
+  }
+
+  .psr-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .psr-card ul li {
+    font-size: 0.85rem;
+    color: var(--light);
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+
+  .psr-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  .psr-card.problem ul li::before { color: var(--red); }
+  .psr-card.solution ul li::before { color: var(--accent2); }
+  .psr-card.result ul li::before { color: var(--green); }
+
+  .psr-card .highlight {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    background: rgba(0,212,170,0.08);
+    color: var(--accent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .psr-card.problem .highlight { background: rgba(239,68,68,0.1); color: var(--red); }
+  .psr-card.result .highlight { background: rgba(34,197,94,0.1); color: var(--green); }
+
+  /* Architecture flow */
+  .arch-flow {
+    padding: 0 3rem 2.5rem;
+  }
+
+  .arch-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .flow-box {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background: var(--card);
+    border: 1px solid var(--muted);
+    color: var(--white);
+    text-align: center;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .flow-box:hover {
+    border-color: var(--accent);
+    background: var(--card-hover);
+  }
+
+  .flow-arrow {
+    color: var(--accent);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  /* Steps */
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 0 3rem 2.5rem;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 900;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .project:nth-child(3) .step-num { background: var(--accent3); }
+
+  .step-text h5 {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .project:nth-child(3) .step-text h5 { color: var(--accent3); }
+
+  .step-text p {
+    font-size: 0.8rem;
+    color: var(--light);
+    line-height: 1.5;
+  }
+
+  /* === PROJECT OVERVIEW TABLE === */
+  .project-overview {
+    margin-top: 2rem;
+  }
+
+  .overview-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.6rem;
+  }
+
+  .overview-table thead th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: left;
+    padding: 0 1.2rem 0.5rem;
+  }
+
+  .overview-table tbody tr {
+    background: var(--card);
+    border-radius: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .overview-table tbody tr:hover {
+    background: var(--card-hover);
+    transform: translateX(4px);
+  }
+
+  .overview-table td {
+    padding: 1.2rem;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+
+  .overview-table td:first-child {
+    border-radius: 10px 0 0 10px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .overview-table td:last-child {
+    border-radius: 0 10px 10px 0;
+  }
+
+  .overview-table .proj-summary {
+    color: var(--light);
+    font-size: 0.85rem;
+  }
+
+  .contrib-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .contrib-bar .bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+    min-width: 60px;
+  }
+
+  .contrib-bar .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--accent);
+    transition: width 0.6s ease;
+  }
+
+  .contrib-bar .bar-pct {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .overview-table tbody tr:nth-child(2) .bar-fill { background: var(--accent2); }
+  .overview-table tbody tr:nth-child(2) .bar-pct { color: var(--accent2); }
+  .overview-table tbody tr:nth-child(3) .bar-fill { background: var(--accent3); }
+  .overview-table tbody tr:nth-child(3) .bar-pct { color: var(--accent3); }
+
+  @media (max-width: 900px) {
+    .overview-table thead { display: none; }
+    .overview-table tbody tr {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 1rem;
+      gap: 0.5rem;
+      border-radius: 10px;
+    }
+    .overview-table td {
+      padding: 0.3rem 0;
+      border-radius: 0 !important;
+    }
+    .overview-table td:first-child::before { content: '📌 '; }
+  }
+
+  /* === TECH STACK === */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .stack-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.8rem;
+    border-top: 3px solid var(--accent);
+    transition: all 0.4s;
+  }
+
+  .stack-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .stack-card:nth-child(2) { border-top-color: var(--accent2); }
+  .stack-card:nth-child(3) { border-top-color: var(--accent3); }
+  .stack-card:nth-child(4) { border-top-color: var(--green); }
+  .stack-card:nth-child(5) { border-top-color: var(--purple); }
+  .stack-card:nth-child(6) { border-top-color: var(--light); }
+
+  .stack-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+  }
+
+  .stack-card:nth-child(2) h4 { color: var(--accent2); }
+  .stack-card:nth-child(3) h4 { color: var(--accent3); }
+  .stack-card:nth-child(4) h4 { color: var(--green); }
+  .stack-card:nth-child(5) h4 { color: var(--purple); }
+  .stack-card:nth-child(6) h4 { color: var(--light); }
+
+  .stack-card p {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--light);
+    line-height: 2;
+  }
+
+  /* === FOOTER === */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  footer .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  footer .footer-links a:hover { color: var(--accent); }
+
+  footer .copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-left h1 { font-size: 2.5rem; }
+    .project-body { grid-template-columns: 1fr; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-row { grid-template-columns: repeat(2, 1fr); }
+    .project-header { padding: 2rem 1.5rem 0; }
+    .project h3 { padding: 1rem 1.5rem 0; }
+    .project-subtitle { padding: 0.3rem 1.5rem 0; }
+    .project-body { padding: 1.5rem; }
+    .arch-flow { padding: 0 1.5rem 1.5rem; }
+    .steps-row { padding: 0 1.5rem 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-left h1 { font-size: 2rem; }
+    .stack-grid { grid-template-columns: 1fr; }
+    .steps-row { grid-template-columns: 1fr; }
+    nav .links { gap: 1rem; }
+    nav .links a { font-size: 0.75rem; }
+    .flow-row { flex-direction: column; align-items: stretch; }
+    .flow-arrow { transform: rotate(90deg); align-self: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="logo">duhyeon<span>@portfolio</span>:~$</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="https://github.com/DuHyeon2" target="_blank">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="greeting">$ whoami</div>
+      <h1>김두현</h1>
+      <div class="role">DevOps / Backend Engineer</div>
+      <p class="desc">
+        Kubernetes 기반 MSA 플랫폼의 인프라 자동화와<br>
+        데이터 파이프라인 최적화를 전문으로 합니다.<br>
+        안정적이고 확장 가능한 시스템을 설계합니다.
+      </p>
+      <div class="hero-links">
+        <a href="#projects" class="primary">프로젝트 보기</a>
+        <a href="https://github.com/DuHyeon2" target="_blank" class="secondary">GitHub →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="badge-row">
+        <span class="badge">Kubernetes</span>
+        <span class="badge">Spring Boot</span>
+        <span class="badge">FastAPI</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge">Kafka</span>
+        <span class="badge">PostgreSQL</span>
+        <span class="badge">Docker</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge">ArgoCD</span>
+        <span class="badge">Temporal</span>
+        <span class="badge">Terraform</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge">Jenkins</span>
+        <span class="badge">GitHub Actions</span>
+        <span class="badge">Helm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / METRICS -->
+<section id="about">
+  <div class="project-overview reveal">
+    <div class="section-label">Overview</div>
+    <h2 class="section-title">전체 프로젝트 한눈에 보기</h2>
+    <table class="overview-table">
+      <thead>
+        <tr>
+          <th>프로젝트명</th> 
+          <th>요약</th>
+          <th>기여도</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="location.href='#projects'">
+          <td>NetCDF 파이프라인</td>
+          <td class="proj-summary">SSE → Temporal 전환, Redis 적재 + HPA 스케일링으로 타임아웃 제거</td>
+          <td>
+            <div class="contrib-bar">
+              <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
+              <span class="bar-pct">100%</span>
+            </div>
+          </td>
+        </tr>
+        <tr onclick="location.href='#projects'">
+          <td>CDC 파이프라인</td>
+          <td class="proj-summary">Debezium Embedded로 폴링 쿼리 100% 제거, 실시간 변경 감지</td>
+          <td>
+            <div class="contrib-bar">
+              <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
+              <span class="bar-pct">100%</span>
+            </div>
+          </td>
+        </tr>
+        <tr onclick="location.href='#projects'">
+          <td>LLM 오케스트레이션</td>
+          <td class="proj-summary">Temporal + LangChain + Redis Pub/Sub 기반 LLM 요청 파이프라인</td>
+          <td>
+            <div class="contrib-bar">
+              <div class="bar"><div class="bar-fill" style="width:40%"></div></div>
+              <span class="bar-pct">40%</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">Projects</div>
+  <h2 class="section-title reveal">주요 프로젝트</h2>
+
+  <!-- Project 1: NetCDF -->
+  <div class="project reveal">
+    <div class="project-header">
+      <span class="project-tag">Project 1</span>
+      <span class="project-headline">데이터 파이프라인 · 성능 최적화</span>
+    </div>
+    <h3>NetCDF 데이터 처리 파이프라인 최적화</h3>
+    <div class="project-subtitle">FastAPI SSE 엔드포인트 → Temporal Workflow 전환</div>
+    <div class="project-body">
+      <div class="psr-card problem">
+        <h4>문제 (AS-IS)</h4>
+        <ul>
+          <li>대용량 NetCDF 응답을 클라이언트가 <span class="highlight">한 번에 수신 불가</span>, SSE 커넥션 타임아웃 발생</li>
+          <li>동시 요청 증가 시 단일 서비스에 <span class="highlight">병목 집중</span>, 응답 지연 및 장애 전파</li>
+          <li>데이터 가공 도중 에러 발생 시 <span class="highlight">전체 파이프라인 실패</span>, 재시도 로직 부재</li>
+        </ul>
+      </div>
+      <div class="psr-card solution">
+        <h4>해결 (TO-BE)</h4>
+        <ul>
+          <li><span class="highlight">Redis</span>에 가공 완료 데이터를 적재, 클라이언트가 <span class="highlight">SSE</span>로 순차 수신하도록 구조 변경</li>
+          <li><span class="highlight">HPA</span> 오토스케일링으로 Worker Pod 자동 확장, 병목 해소</li>
+          <li><span class="highlight">Temporal</span> Workflow 도입으로 단계별 자동 재시도 및 장애 복구 보장</li>
+        </ul>
+      </div>
+      <div class="psr-card result">
+        <h4>성과</h4>
+        <ul>
+          <li>Redis 적재 + SSE 순차 수신으로 <span class="highlight">타임아웃 제거</span>, 대용량 응답 안정적 전달</li>
+          <li>HPA 기반 Worker 자동 확장으로 동시 요청 <span class="highlight">수평 스케일링</span> 가능한 구조 전환</li>
+          <li>Temporal 자동 재시도로 중간 실패 시 <span class="highlight">해당 단계부터 재개</span>, 처리 유실 제거</li>
+        </ul>
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-label">Architecture</div>
+      <div class="flow-row">
+        <div class="flow-box">Client Request</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">FastAPI Gateway</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Temporal Workflow</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Worker (Lock+Load)</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Redis</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">SSE 순차 응답</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Project 2: CDC -->
+  <div class="project reveal">
+    <div class="project-header">
+      <span class="project-tag">Project 2</span>
+      <span class="project-headline">데이터 동기화 · 이벤트 기반</span>
+    </div>
+    <h3>CDC 데이터 파이프라인 구축</h3>
+    <div class="project-subtitle">Debezium Embedded Engine 기반 경량 CDC 구현</div>
+    <div class="project-body">
+      <div class="psr-card problem">
+        <h4>문제 (AS-IS)</h4>
+        <ul>
+          <li><span class="highlight">@Scheduled</span> 기반 1분 주기 DB 폴링으로 불필요한 부하</li>
+          <li>N개 테이블 × 24h × 60min = 하루 <span class="highlight">수만 건 SELECT</span> 쿼리</li>
+          <li>변경이 없어도 매분 전체 조회, 실제 감지까지 최대 <span class="highlight">1분 지연</span></li>
+        </ul>
+      </div>
+      <div class="psr-card solution">
+        <h4>해결 (TO-BE)</h4>
+        <ul>
+          <li>Spring Boot에 <span class="highlight">Debezium Embedded Engine</span> 내장</li>
+          <li>PostgreSQL <span class="highlight">WAL</span>을 앱 내에서 직접 캡처 · 처리</li>
+          <li>별도 Kafka 인프라 없이 <span class="highlight">경량 CDC</span> 구현</li>
+        </ul>
+      </div>
+      <div class="psr-card result">
+        <h4>성과</h4>
+        <ul>
+          <li>폴링 쿼리 <span class="highlight">100% 제거</span>, DB 부하 대폭 감소</li>
+          <li>변경 감지 지연 1분 → <span class="highlight">실시간</span> (ms 단위)</li>
+          <li>Kafka 없이 단일 앱으로 운영, <span class="highlight">인프라 비용 절감</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-label">Architecture</div>
+      <div class="flow-row">
+        <div class="flow-box">PostgreSQL WAL</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Debezium Embedded</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Spring Boot App</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Event Handler</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Target Service</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project reveal">
+    <div class="project-header">
+      <span class="project-tag">Project 3</span>
+      <span class="project-headline">LLM 오케스트레이션 · 실시간 스트리밍 · 진행 중</span>
+    </div>
+    <h3>LLM 기반 워크플로우 오케스트레이션 시스템</h3>
+    <div class="project-subtitle">FastAPI + Temporal + LangChain + Redis 기반 LLM 요청 파이프라인</div>
+    <div class="project-body">
+      <div class="psr-card problem">
+        <h4>문제 (AS-IS)</h4>
+        <ul>
+          <li>LLM API 호출은 <span class="highlight">응답 시간이 길고 불안정</span> — 타임아웃, 토큰 제한, Rate Limit 등</li>
+          <li>단순 동기 호출 시 클라이언트가 <span class="highlight">응답 완료까지 대기</span>, UX 저하</li>
+          <li>LLM 체인이 복잡해질수록 <span class="highlight">중간 실패 시 전체 재실행</span> 필요</li>
+        </ul>
+      </div>
+      <div class="psr-card solution">
+        <h4>해결 (TO-BE)</h4>
+        <ul>
+          <li><span class="highlight">Temporal Workflow</span>로 LLM 호출을 Activity 단위로 분리, 자동 재시도 보장</li>
+          <li><span class="highlight">LangChain</span>으로 프롬프트 → LLM(OpenAI) → 후처리 체인 구성</li>
+          <li><span class="highlight">Redis Pub/Sub</span>로 처리 상태를 실시간 스트리밍, 클라이언트 즉시 피드백</li>
+        </ul>
+      </div>
+      <div class="psr-card result">
+        <h4>기대 효과</h4>
+        <ul>
+          <li>Temporal 재시도로 LLM API 장애 시 <span class="highlight">자동 복구</span>, 안정성 확보</li>
+          <li>Redis 실시간 알림으로 <span class="highlight">"처리 중 → 완료"</span> 상태를 즉시 전달</li>
+          <li>체인 단계별 분리로 <span class="highlight">LLM 교체·확장</span> 용이한 구조</li>
+        </ul>
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-placeholder">
+        <img src="llm-arch.svg" alt="LLM Orchestration Architecture" style="width:100%;max-width:960px;">
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- TECH STACK -->
+<section id="stack">
+  <div class="section-label reveal">Tech Stack</div>
+  <h2 class="section-title reveal">기술 스택</h2>
+  <div class="stack-grid reveal">
+    <div class="stack-card">
+      <h4>Backend</h4>
+      <p>Spring Boot (Java)<br>FastAPI (Python)<br>PostgreSQL / PostGIS<br>CloudNativePG</p>
+    </div>
+    <div class="stack-card">
+      <h4>Infrastructure</h4>
+      <p>Kubernetes (KakaoCloud)<br>Docker · Helm<br>Terraform · ArgoCD</p>
+    </div>
+    <div class="stack-card">
+      <h4>Data & Messaging</h4>
+      <p>Kafka · Debezium<br>Temporal · Protobuf<br>NetCDF / HDF5</p>
+    </div>
+    <div class="stack-card">
+      <h4>CI/CD & DevOps</h4>
+      <p>Jenkins · GitHub Actions<br>ARC · Kaniko<br>Ruff · SonarQube</p>
+    </div>
+    <div class="stack-card">
+      <h4>Monitoring</h4>
+      <p>OpenTelemetry · SigNoz<br>Grafana · Prometheus</p>
+    </div>
+    <div class="stack-card">
+      <h4>기타</h4>
+      <p>Git Worktree · Claude Code<br>Cloudflare Tunnel<br>LangChain · LangGraph</p>
+    </div> 
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/DuHyeon2" target="_blank">GitHub</a>
+    <a href="https://dhserver.cloud" target="_blank">dhserver.cloud</a>
+  </div>
+  <p class="copy">© 2026 김두현 · DevOps/Backend Engineer</p>
+</footer>
+
+<!-- SCROLL REVEAL -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
 </html>
