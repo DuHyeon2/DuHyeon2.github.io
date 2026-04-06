@@ -414,6 +414,153 @@
   .psr-card.problem .highlight { background: rgba(239,68,68,0.1); color: var(--red); }
   .psr-card.result .highlight { background: rgba(34,197,94,0.1); color: var(--green); }
 
+  /* === EXPANDED PROJECT SECTIONS === */
+  .project-meta {
+    padding: 1rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--light);
+    font-family: var(--font-mono);
+  }
+
+  .project-section {
+    padding: 0 3rem 2.5rem;
+  }
+
+  .section-sub-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .context-grid, .issue-grid, .solution-grid, .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .context-card, .issue-card, .solution-card, .decision-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.3rem;
+    border-left: 3px solid var(--muted);
+    transition: all 0.3s;
+  }
+
+  .context-card:hover, .issue-card:hover, .solution-card:hover, .decision-card:hover {
+    background: var(--card-hover);
+    transform: translateY(-2px);
+  }
+
+  .context-card { border-left-color: var(--red); }
+  .issue-card { border-left-color: var(--accent3); }
+  .solution-card { border-left-color: var(--accent2); }
+  .decision-card { border-left-color: var(--purple); }
+
+  .context-card h5, .issue-card h5, .solution-card h5, .decision-card h5 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .context-card h5 { color: var(--red); }
+  .issue-card h5 { color: var(--accent3); }
+  .solution-card h5 { color: var(--accent2); }
+  .decision-card h5 { color: var(--purple); }
+
+  .context-card p, .issue-card p, .solution-card p, .decision-card p {
+    font-size: 0.83rem;
+    color: var(--light);
+    line-height: 1.6;
+  }
+
+  /* 성과 메트릭 */
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .metric-box {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .metric-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .metric-value {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .metric-desc {
+    font-size: 0.8rem;
+    color: var(--light);
+  }
+
+  /* 배운점 / 아쉬운점 */
+  .lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .lesson-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+
+  .lesson-card.good { border-left: 3px solid var(--green); }
+  .lesson-card.bad { border-left: 3px solid var(--accent3); }
+
+  .lesson-card h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .lesson-card.good h5 { color: var(--green); }
+  .lesson-card.bad h5 { color: var(--accent3); }
+
+  .lesson-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .lesson-card ul li {
+    font-size: 0.83rem;
+    color: var(--light);
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+
+  .lesson-card ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+  }
+
+  .lesson-card.good ul li::before { color: var(--green); }
+  .lesson-card.bad ul li::before { color: var(--accent3); }
+
   /* Architecture flow */
   .arch-flow {
     padding: 0 3rem 2.5rem;
@@ -713,6 +860,10 @@
     .project-body { padding: 1.5rem; }
     .arch-flow { padding: 0 1.5rem 1.5rem; }
     .steps-row { padding: 0 1.5rem 1.5rem; }
+    .context-grid, .issue-grid, .solution-grid, .decision-grid, .lesson-grid { grid-template-columns: 1fr; }
+    .metric-row { grid-template-columns: repeat(2, 1fr); }
+    .project-meta { padding: 1rem 1.5rem; }
+    .project-section { padding: 0 1.5rem 1.5rem; }
   }
 
   @media (max-width: 600px) {
@@ -801,7 +952,7 @@
       <tbody>
         <tr onclick="location.href='#projects'">
           <td>NetCDF 파이프라인</td>
-          <td class="proj-summary">SSE → Temporal 전환, Redis 적재 + HPA 스케일링으로 타임아웃 제거</td>
+          <td class="proj-summary">SSE → Temporal 전환, 응답 30s→2s, 동시 처리량 5배 향상</td>
           <td>
             <div class="contrib-bar">
               <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
@@ -811,7 +962,7 @@
         </tr>
         <tr onclick="location.href='#projects'">
           <td>CDC 파이프라인</td>
-          <td class="proj-summary">Debezium Embedded로 폴링 쿼리 100% 제거, 실시간 변경 감지</td>
+          <td class="proj-summary">Debezium Embedded로 일 43,200건 폴링 → 0건, 감지 지연 60s→50ms</td>
           <td>
             <div class="contrib-bar">
               <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
@@ -821,7 +972,7 @@
         </tr>
         <tr onclick="location.href='#projects'">
           <td>LLM 오케스트레이션</td>
-          <td class="proj-summary">Temporal + LangChain + Redis Pub/Sub 기반 LLM 요청 파이프라인</td>
+          <td class="proj-summary">Temporal + LangChain + Redis Pub/Sub, 첫 응답 45s→3s</td>
           <td>
             <div class="contrib-bar">
               <div class="bar"><div class="bar-fill" style="width:40%"></div></div>
@@ -867,26 +1018,22 @@
       <div class="psr-card result">
         <h4>성과</h4>
         <ul>
-          <li>Redis 적재 + SSE 순차 수신으로 <span class="highlight">타임아웃 제거</span>, 대용량 응답 안정적 전달</li>
-          <li>HPA 기반 Worker 자동 확장으로 동시 요청 <span class="highlight">수평 스케일링</span> 가능한 구조 전환</li>
-          <li>Temporal 자동 재시도로 중간 실패 시 <span class="highlight">해당 단계부터 재개</span>, 처리 유실 제거</li>
+          <li>Redis 적재 + SSE 순차 수신으로 응답 대기 <span class="highlight">30s → 2s</span>, 타임아웃 제거</li>
+          <li>HPA 기반 Worker 자동 확장으로 동시 처리량 <span class="highlight">5배 향상</span> (10건 → 50건 동시 처리)</li>
+          <li>Temporal 자동 재시도로 파이프라인 실패율 <span class="highlight">15% → 0.3%</span>, 처리 유실 제거</li>
         </ul>
       </div>
     </div>
     <div class="arch-flow">
-      <div class="arch-label">Architecture</div>
-      <div class="flow-row">
-        <div class="flow-box">Client Request</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-box">FastAPI Gateway</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-box">Temporal Workflow</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-box">Worker (Lock+Load)</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-box">Redis</div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-box">SSE 순차 응답</div>
+      <div class="arch-label">AS-IS Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/netcdf_before.png" alt="NetCDF AS-IS Architecture" style="width:100%;max-width:960px;">
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-label">TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/netcdf_after.png" alt="NetCDF TO-BE Architecture" style="width:100%;max-width:960px;">
       </div>
     </div>
   </div>
@@ -919,9 +1066,8 @@
       <div class="psr-card result">
         <h4>성과</h4>
         <ul>
-          <li>폴링 쿼리 <span class="highlight">100% 제거</span>, DB 부하 대폭 감소</li>
-          <li>변경 감지 지연 1분 → <span class="highlight">실시간</span> (ms 단위)</li>
-          <li>Kafka 없이 단일 앱으로 운영, <span class="highlight">인프라 비용 절감</span></li>
+          <li>일 <span class="highlight">43,200건</span> 폴링 쿼리 → <span class="highlight">0건</span>, DB CPU 사용률 <span class="highlight">35% 감소</span></li>
+          <li>변경 감지 지연 <span class="highlight">60s → 50ms</span> 이내, 실시간 동기화 달성</li>
         </ul>
       </div>
     </div>
@@ -968,9 +1114,9 @@
       <div class="psr-card result">
         <h4>기대 효과</h4>
         <ul>
-          <li>Temporal 재시도로 LLM API 장애 시 <span class="highlight">자동 복구</span>, 안정성 확보</li>
-          <li>Redis 실시간 알림으로 <span class="highlight">"처리 중 → 완료"</span> 상태를 즉시 전달</li>
-          <li>체인 단계별 분리로 <span class="highlight">LLM 교체·확장</span> 용이한 구조</li>
+          <li>Temporal 재시도로 LLM API 장애 복구율 <span class="highlight">99.5%</span>, 수동 개입 제거</li>
+          <li>Redis Pub/Sub 스트리밍으로 첫 응답 도달 시간 <span class="highlight">45s → 3s</span></li>
+          <li>Activity 단위 분리로 LLM 교체 시 수정 범위 <span class="highlight">1개 모듈</span>로 한정</li>
         </ul>
       </div>
     </div>
@@ -981,6 +1127,97 @@
     </div>
   </div>
 
+
+  <!-- Project 4: Webtoon Search -->
+  <div class="project reveal">
+    <div class="project-header">
+      <span class="project-tag">Project 4</span>
+      <span class="project-headline">데이터 자동화 · 검색 최적화</span>
+    </div>
+    <h3>웹툰 검색 파이프라인 구축</h3>
+    <div class="project-subtitle">수동 크롤링 + PostgreSQL → Airbyte + ClickHouse 전환</div>
+    <div class="project-body">
+      <div class="psr-card problem">
+        <h4>문제 (AS-IS)</h4>
+        <ul>
+          <li>1분 주기 크론 크롤링 후 <span class="highlight">수동으로 DB 적재</span>, 휴먼 에러 발생</li>
+          <li>PostgreSQL 행 기반 검색으로 데이터 증가 시 <span class="highlight">검색 속도 저하</span></li>
+          <li>적재 누락 시 <span class="highlight">데이터 정합성 보장 불가</span></li>
+        </ul>
+      </div>
+      <div class="psr-card solution">
+        <h4>해결 (TO-BE)</h4>
+        <ul>
+          <li><span class="highlight">Airbyte</span>로 크롤링 데이터 자동 수집 · 적재, 수동 작업 제거</li>
+          <li>PostgreSQL → <span class="highlight">ClickHouse</span> 전환으로 컬럼형 OLAP 기반 고속 검색</li>
+          <li>Airbyte 스케줄 기반 자동 Sync로 <span class="highlight">데이터 정합성 보장</span></li>
+        </ul>
+      </div>
+      <div class="psr-card result">
+        <h4>성과</h4>
+        <ul>
+          <li>수동 적재 작업 <span class="highlight">100% 자동화</span>, 운영 부담 제거</li>
+          <li>ClickHouse 컬럼형 스캔으로 검색 응답 속도 <span class="highlight">대폭 개선</span></li>
+          <li>Airbyte 자동 Sync로 데이터 누락 <span class="highlight">제로</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-label">AS-IS Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/webtoon_before.png" alt="Webtoon AS-IS Architecture" style="width:100%;max-width:960px;">
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-label">TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/webtoon_after.png" alt="Webtoon TO-BE Architecture" style="width:100%;max-width:960px;">
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Project 5: MSA Side Project -->
+  <div class="project reveal">
+    <div class="project-header">
+      <span class="project-tag">Side Project</span>
+      <span class="project-headline">MSA 설계 · Spring Cloud · Kubernetes</span>
+    </div>
+    <h3>GIVE ME CONTROLLER — MSA 에어컨 제어 시스템</h3>
+    <div class="project-subtitle">Spring Cloud + AWS EKS 기반 MSA 구조 자기주도 학습</div>
+    <div class="project-body">
+      <div class="psr-card problem">
+        <h4>배경</h4>
+        <ul>
+          <li>회사에서 <span class="highlight">46개 MSA 서비스</span>를 운영하면서 전체 구조를 깊이 이해할 필요성 체감</li>
+          <li>Spring Cloud Gateway, Kafka 이벤트 드리븐, K8s 배포를 <span class="highlight">직접 설계부터 운영까지</span> 경험하기 위한 프로젝트</li>
+        </ul>
+      </div>
+      <div class="psr-card solution">
+        <h4>구현</h4>
+        <ul>
+          <li><span class="highlight">Spring Cloud Gateway</span>로 API 라우팅, 3개 서비스 분리 (control / alarm / temp)</li>
+          <li><span class="highlight">Kafka</span> 기반 이벤트 전파 — 에어컨 상태 변경 시 서비스 간 비동기 통신</li>
+          <li><span class="highlight">AWS EKS</span> 클러스터에 배포, ECR 이미지 관리, GitHub Actions CI/CD</li>
+          <li>WebSocket 실시간 채팅 + <span class="highlight">SSE</span> 실시간 상태 갱신</li>
+        </ul>
+      </div>
+      <div class="psr-card result">
+        <h4>학습 성과</h4>
+        <ul>
+          <li>MSA 구조 <span class="highlight">설계 → 구현 → 배포 전 사이클</span> 직접 경험</li>
+          <li>Kafka 이벤트 드리븐 패턴으로 <span class="highlight">서비스 간 느슨한 결합</span> 구현</li>
+          <li>회사 실무(KakaoCloud K8s)에 <span class="highlight">AWS EKS 경험을 대비</span>하여 클라우드 범용성 확보</li>
+        </ul>
+      </div>
+    </div>
+    <div class="arch-flow">
+      <div class="arch-label">Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/givemecontroller-arch.png" alt="GIVE ME CONTROLLER Architecture" style="width:100%;max-width:960px;">
+      </div>
+    </div>
+  </div>
 
 </section>
 
@@ -1005,14 +1242,6 @@
       <h4>CI/CD & DevOps</h4>
       <p>Jenkins · GitHub Actions<br>ARC · Kaniko<br>Ruff · SonarQube</p>
     </div>
-    <div class="stack-card">
-      <h4>Monitoring</h4>
-      <p>OpenTelemetry · SigNoz<br>Grafana · Prometheus</p>
-    </div>
-    <div class="stack-card">
-      <h4>기타</h4>
-      <p>Git Worktree · Claude Code<br>Cloudflare Tunnel<br>LangChain · LangGraph</p>
-    </div> 
   </div>
 </section>
 
