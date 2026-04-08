@@ -801,15 +801,11 @@
         </div>
         <div class="solution-card">
           <h5>Redis 적재 + Key 반환</h5>
-          <p>Worker가 가공 결과를 Redis에 저장, Gateway는 클라이언트에 Redis Key만 반환</p>
+          <p>Worker가 가공 결과를 Redis에 저장, 클라이언트에 Redis Key만 반환</p>
         </div>
         <div class="solution-card">
           <h5>HPA Worker 확장</h5>
           <p>Kubernetes HPA로 Worker Pod 자동 스케일링, 동시 처리량 수평 확장</p>
-        </div>
-        <div class="solution-card">
-          <h5>threading.Lock</h5>
-          <p>module-level Lock으로 HDF5 I/O 직렬화, dataset.load()로 파일 핸들 즉시 해제</p>
         </div>
       </div>
     </div>
@@ -825,10 +821,7 @@
           <h5>왜 Redis?</h5>
           <p>NFS 대신 Redis에 적재하여 클라이언트 읽기 지연 최소화. TTL로 자동 만료 관리.</p>
         </div>
-        <div class="decision-card">
-          <h5>왜 threading.Lock?</h5>
-          <p>HDF5 C 라이브러리 자체가 thread-safe 미지원. multiprocessing은 메모리 오버헤드가 큼. Lock + load()가 가장 경량 솔루션.</p>
-        </div>
+
         <div class="decision-card">
           <h5>왜 HPA?</h5>
           <p>Temporal Worker의 max_concurrent_activities=2로 제한하되, Pod 수를 HPA로 수평 확장하여 처리량 확보.</p>
@@ -851,7 +844,6 @@
         <div class="lesson-card good">
           <h5>✅ 배운 점</h5>
           <ul>
-            <li>C 라이브러리 레벨의 thread-safety 이슈를 Python에서 제어하는 방법 체득</li>
             <li>워크플로우 오케스트레이션의 장애 복구 패턴 실무 적용 경험</li>
             <li>HPA 튜닝 시 minReplicas 설정이 cold-start 지연 해소에 핵심임을 확인</li>
           </ul>
@@ -859,13 +851,13 @@
         <div class="lesson-card bad">
           <h5>💭 아쉬운 점</h5>
           <ul>
-            <li>초기에 HDF5 thread-safety 문제를 인지하지 못해 디버깅에 시간 소요</li>
-            <li>Redis TTL 만료 시 데이터 유실 가능성에 대한 fallback 미구현</li>
+            <li>Temporal Workflow 버전 관리 전략을 초기에 수립하지 못해 배포 시 호환성 이슈 발생</li>
+            <li>부하 테스트 환경을 프로덕션과 동일하게 구성하지 못해 HPA 튜닝에 시행착오 발생</li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
+  </div>1
 
   <!-- =============================== -->
   <!-- Project 2: CDC                  -->
@@ -890,20 +882,16 @@
       <div class="section-sub-label">🎯 도전 과제 & 배경</div>
       <div class="context-grid">
         <div class="context-card">
-          <h5>JS 폴링 기반 조회</h5>
-          <p>JavaScript에서 1분마다 @Scheduled로 Spring API를 호출, DB 전체 조회 후 클라이언트에 반환하는 비효율적 구조</p>
+          <h5>1분마다 전체 조회</h5>
+          <p>각 센서 테이블을 1분 간격으로 전체 조회하는 비효율 구조, 데이터 변경 여부와 무관하게 반복 실행</p>
         </div>
         <div class="context-card">
-          <h5>수만 건 불필요한 쿼리</h5>
-          <p>N개 테이블 × 24h × 60min = 하루 43,200건 이상 SELECT 쿼리, 변경 없어도 매분 실행</p>
+          <h5>불필요한 쿼리 반복</h5>
+          <p>N개 테이블 × 24시간 × 60분 = 하루 43,200건 이상 데이터가 추가되지 않아도 매분 쿼리 실행</p>
         </div>
         <div class="context-card">
-          <h5>유지보수 어려움</h5>
-          <p>기존 pg_notify 방식은 지자체 3곳 × notify 함수 N개, 트리거/함수 관리가 복잡</p>
-        </div>
-        <div class="context-card">
-          <h5>감지 지연 최대 1분</h5>
-          <p>실시간 재난 알람 시스템에서 1분 지연은 사용자 안전에 직접적 영향</p>
+          <h5>데이터 반영 지연</h5>
+          <p>센서 데이터가 추가돼도 최대 1분 후에야 화면에 반영, 실시간 대응이 필요한 상황에서 치명적</p>
         </div>
       </div>
     </div>
@@ -912,16 +900,6 @@
       <div class="section-sub-label">📐 AS-IS Architecture</div>
       <div class="arch-placeholder">
         <img src="images/cdc_before.png" alt="CDC AS-IS" style="width:100%;max-width:960px;">
-      </div>
-      <div class="issue-grid" style="margin-top:1rem;">
-        <div class="issue-card">
-          <h5>자원 낭비</h5>
-          <p>변경 없어도 매분 전체 테이블 SELECT, DB CPU/IO 불필요 소모</p>
-        </div>
-        <div class="issue-card">
-          <h5>pg_notify 한계</h5>
-          <p>트리거별 notify 함수 직접 작성, 테이블 추가 시 매번 트리거/함수 수동 등록 필요</p>
-        </div>
       </div>
     </div>
 
@@ -932,20 +910,20 @@
       </div>
       <div class="solution-grid" style="margin-top:1rem;">
         <div class="solution-card">
-          <h5>Debezium Embedded Engine</h5>
-          <p>Spring Boot 안에 Debezium 내장, PostgreSQL WAL을 앱에서 직접 캡처 · 처리</p>
+          <h5>데이터 추가 시 자동 감지</h5>
+          <p>DB에 센서 데이터가 추가되는 순간 자동으로 감지하여 처리 (PostgreSQL WAL 기반)</p>
         </div>
         <div class="solution-card">
-          <h5>AlarmHandlerRegistry</h5>
-          <p>@AlarmTableHandle 어노테이션으로 테이블별 핸들러 자동 등록, 확장 시 클래스 추가만으로 완료</p>
+          <h5>테이블별 핸들러 자동 매핑</h5>
+          <p>각 계측기 테이블마다 처리 로직을 자동으로 매핑, 새 테이블 추가 시 핸들러 클래스만 추가하면 완료</p>
         </div>
         <div class="solution-card">
           <h5>배치/즉시 처리 분리</h5>
-          <p>알람 테이블은 즉시 처리, 계측기 테이블은 ConcurrentLinkedQueue 배치 처리로 효율화</p>
+          <p>알람 데이터는 즉시 처리, 일반 센서 데이터는 모아서 배치 처리</p>
         </div>
         <div class="solution-card">
-          <h5>Kafka 없는 경량 CDC</h5>
-          <p>별도 Kafka 인프라 없이 단일 Spring Boot 앱으로 CDC 운영, 인프라 비용 절감</p>
+          <h5>Kafka 없는 경량 구조</h5>
+          <p>별도 인프라 추가 없이 Spring Boot 앱 하나로 변경 감지 운영</p>
         </div>
       </div>
     </div>
@@ -955,11 +933,11 @@
       <div class="decision-grid">
         <div class="decision-card">
           <h5>왜 Embedded Debezium?</h5>
-          <p>Kafka Connect 방식은 Kafka 클러스터 필수. 사업 시스템 특성상 인프라 최소화가 중요, Embedded로 단일 앱 운영.</p>
+          <p>Kafka 클러스터 없이 앱 하나로 변경 감지 가능, 인프라 최소화가 핵심이었기 때문에 Embedded 방식 선택</p>
         </div>
         <div class="decision-card">
           <h5>왜 WAL 기반?</h5>
-          <p>트리거 기반(pg_notify)은 테이블마다 수동 등록 필요. WAL은 DB 레벨에서 모든 변경을 자동 캡처.</p>
+          <p>테이블마다 트리거를 수동 등록할 필요 없이, DB 레벨에서 모든 테이블의 데이터 추가를 자동 캡처</p>
         </div>
       </div>
     </div>
@@ -979,16 +957,16 @@
         <div class="lesson-card good">
           <h5>✅ 배운 점</h5>
           <ul>
-            <li>WAL 기반 CDC의 원리와 PostgreSQL replication slot 관리 방법 체득</li>
-            <li>커스텀 어노테이션 + Registry 패턴으로 확장 가능한 이벤트 핸들링 설계</li>
-            <li>ConcurrentLinkedQueue로 멀티스레드 환경 안정성 확보</li>
+            <li>DB 변경 감지(CDC) 원리와 PostgreSQL 복제 슬롯 관리 경험</li>
+            <li>테이블별 핸들러 자동 등록 패턴으로 확장 가능한 구조 설계</li>
+            <li>멀티스레드 환경에서 안전한 큐 처리 경험</li>
           </ul>
         </div>
         <div class="lesson-card bad">
           <h5>💭 아쉬운 점</h5>
           <ul>
-            <li>slot.drop.on.stop=true 설정으로 앱 재시작 시 일부 이벤트 유실 가능성 존재</li>
-            <li>offset 저장을 FileOffsetBackingStore로 했는데, Pod 재시작 시 offset 유실 위험</li>
+            <li>앱 재시작 시 일부 이벤트 유실 가능성에 대한 보완 미흡</li>
+            <li>변경 감지 오프셋 저장 및 관리 방법 미흡</li>
           </ul>
         </div>
       </div>
