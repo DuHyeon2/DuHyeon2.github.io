@@ -815,7 +815,7 @@
       <div class="decision-grid">
         <div class="decision-card">
           <h5>왜 Temporal?</h5>
-          <p>워크플로우 상태 추적, 자동 재시도, 타임아웃 관리가 선언적으로 가능. gRPC 기반으로 성능 우수.</p>
+          <p>워크플로우 상태 추적, 자동 재시도, 타임아웃 관리가 선언적으로 가능.</p>
         </div>
         <div class="decision-card">
           <h5>왜 Redis?</h5>
@@ -832,10 +832,10 @@
     <div class="project-section">
       <div class="section-sub-label">📊 성과</div>
       <div class="metric-row">
-        <div class="metric-box"><div class="metric-value">30s → 2s</div><div class="metric-desc">응답 대기 시간</div></div>
-        <div class="metric-box"><div class="metric-value">5배</div><div class="metric-desc">동시 처리량 향상</div></div>
-        <div class="metric-box"><div class="metric-value">15% → 0.3%</div><div class="metric-desc">파이프라인 실패율</div></div>
-        <div class="metric-box"><div class="metric-value">0건</div><div class="metric-desc">Heap Corruption</div></div>
+        <div class="metric-box"><div class="metric-value">크래시 → 0</div><div class="metric-desc">100명 동시 테스트 SIGABRT 해결</div></div>
+        <div class="metric-box"><div class="metric-value">즉시 응답</div><div class="metric-desc">Redis Key 반환으로 타임아웃 제거</div></div>
+        <div class="metric-box"><div class="metric-value">N개 병렬</div><div class="metric-desc">Worker replicas 수평 확장</div></div>
+        <div class="metric-box"><div class="metric-value">자동 복구</div><div class="metric-desc">Activity 단위 재시도</div></div>
       </div>
     </div>
 
@@ -857,7 +857,7 @@
         </div>
       </div>
     </div>
-  </div>1
+  </div>
 
   <!-- =============================== -->
   <!-- Project 2: CDC                  -->
@@ -1060,11 +1060,11 @@
       <span class="project-headline">데이터 자동화 · 검색 최적화</span>
     </div>
     <h3>웹툰 검색 파이프라인 구축</h3>
-    <div class="project-subtitle" style="color:var(--green)">수동 크롤링 + PostgreSQL → Airbyte + ClickHouse 전환</div>
+    <div class="project-subtitle" style="color:var(--green)">수동 크롤링 + PostgreSQL → Airbyte + Elasticsearch 전환</div>
     <div class="project-meta">
       <span>기간: 2025</span> | <span>기여도: 100%</span>
       <span class="badge">Airbyte</span>
-      <span class="badge">ClickHouse</span>
+      <span class="badge">Elasticsearch</span>
       <span class="badge">PostgreSQL</span>
     </div>
 
@@ -1073,7 +1073,7 @@
       <div class="context-grid">
         <div class="context-card">
           <h5>수동 적재</h5>
-          <p>1분 주기 크론 크롤링 후 수동으로 DB 적재</p>
+          <p>1분 주기 크론 크롤링 후 데이터 비교 및 DB 적재</p>
         </div>
         <div class="context-card">
           <h5>검색 속도 저하</h5>
@@ -1114,8 +1114,8 @@
           <p>커넥터 기반 EL(Extract/Load) 자동화, 스케줄 Sync로 정합성 보장. Airflow 대비 설정이 간단.</p>
         </div>
         <div class="decision-card">
-          <h5>왜 ClickHouse?</h5>
-          <p>웹툰 검색은 집계/필터 위주의 OLAP 패턴. PostgreSQL 행 기반 대비 컬럼형 스캔이 압도적으로 빠름.</p>
+          <h5>왜 Elasticsearch?</h5>
+          <p>웹툰 검색은 집계/필터 위주의 OLAP 패턴. PostgreSQL 행 기반 대비 Elasticsearch의 검색 성능이 압도적으로 빠름.</p>
         </div>
       </div>
     </div>
@@ -1136,13 +1136,13 @@
           <h5>✅ 배운 점</h5>
           <ul>
             <li>EL(Extract/Load)과 ETL 파이프라인의 차이와 적합한 사용 시나리오 이해</li>
-            <li>OLTP(PostgreSQL) vs OLAP(ClickHouse)의 쿼리 패턴별 성능 차이 체감</li>
+            <li>OLTP(PostgreSQL) vs OLAP(Elasticsearch)의 쿼리 패턴별 성능 차이 체감</li>
           </ul>
         </div>
         <div class="lesson-card bad">
           <h5>💭 아쉬운 점</h5>
           <ul>
-            <li>ClickHouse의 UPDATE/DELETE 제약으로 데이터 수정 시 재적재 필요</li>
+            <li>Elasticsearch의 UPDATE/DELETE 제약으로 데이터 수정 시 재적재 필요</li>
           </ul>
         </div>
       </div>
