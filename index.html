@@ -697,7 +697,7 @@
       <tbody>
         <tr onclick="document.getElementById('p1').scrollIntoView({behavior:'smooth'})">
           <td>NetCDF 파이프라인</td>
-          <td class="proj-summary">SSE → Temporal 전환, 응답 30s→2s, 동시 처리량 5배 향상</td>
+          <td class="proj-summary">SSE → Temporal 전환, 동시 처리량 5배 향상</td>
           <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span class="bar-pct">100%</span></div></td>
         </tr>
         <tr onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
@@ -819,7 +819,7 @@
         </div>
         <div class="decision-card">
           <h5>왜 Redis?</h5>
-          <p>NFS 대신 Redis에 적재하여 클라이언트 읽기 지연 최소화. TTL로 자동 만료 관리.</p>
+          <p>Redis에 적재하여 클라이언트 읽기 지연 최소화. TTL로 자동 만료 관리.</p>
         </div>
 
         <div class="decision-card">
@@ -832,7 +832,7 @@
     <div class="project-section">
       <div class="section-sub-label">📊 성과</div>
       <div class="metric-row">
-        <div class="metric-box"><div class="metric-value">크래시 → 0</div><div class="metric-desc">100명 동시 테스트 SIGABRT 해결</div></div>
+        <div class="metric-box"><div class="metric-value">SIGABRT 0건</div><div class="metric-desc">JMeter 동시 100 요청 HDF5 스레드 충돌 해결</div></div>
         <div class="metric-box"><div class="metric-value">즉시 응답</div><div class="metric-desc">Redis Key 반환으로 타임아웃 제거</div></div>
         <div class="metric-box"><div class="metric-value">N개 병렬</div><div class="metric-desc">Worker replicas 수평 확장</div></div>
         <div class="metric-box"><div class="metric-value">자동 복구</div><div class="metric-desc">Activity 단위 재시도</div></div>
@@ -901,6 +901,16 @@
       <div class="arch-placeholder">
         <img src="images/cdc_before.png" alt="CDC AS-IS" style="width:100%;max-width:960px;">
       </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>1분마다 전체 테이블 조회</h5>
+          <p>변경 여부와 무관하게 N개 테이블을 매분 전량 SELECT, DB에 불필요한 부하 지속 발생</p>
+        </div>
+        <div class="issue-card">
+          <h5>최대 1분 반영 지연</h5>
+          <p>센서 데이터가 추가돼도 다음 폴링 주기까지 대기, 실시간 대응 불가</p>
+        </div>
+      </div>
     </div>
 
     <div class="project-section">
@@ -919,7 +929,7 @@
         </div>
         <div class="solution-card">
           <h5>배치/즉시 처리 분리</h5>
-          <p>알람 데이터는 즉시 처리, 일반 센서 데이터는 모아서 배치 처리</p>
+          <p>알람 데이터는 즉시 처리, 센서 데이터는 모아서 배치 처리</p>
         </div>
         <div class="solution-card">
           <h5>Kafka 없는 경량 구조</h5>
@@ -997,45 +1007,68 @@
       <div class="section-sub-label">🎯 도전 과제 & 배경</div>
       <div class="context-grid">
         <div class="context-card">
-          <h5>LLM 응답 불안정</h5>
-          <p>OpenAI API 호출은 응답 시간이 길고 불안정 — 타임아웃, 토큰 제한, Rate Limit 발생</p>
+          <h5>LLM 응답 지연 · 중단</h5>
+          <p>OpenAI API는 응답까지 수십 초 소요, 중간에 타임아웃으로 끊기면 전체 결과 유실</p>
         </div>
         <div class="context-card">
-          <h5>동기 호출 UX 저하</h5>
-          <p>단순 동기 호출 시 클라이언트가 응답 완료까지 대기, 45초+ 블로킹</p>
+          <h5>클라이언트 커넥션 장시간 점유</h5>
+          <p>응답 완료까지 클라이언트가 45초+ 대기, 중단 시 처음부터 재시도 필요</p>
         </div>
         <div class="context-card">
           <h5>체인 실패 시 전체 재실행</h5>
-          <p>LLM 체인이 복잡해질수록 중간 실패 시 전체 파이프라인 재실행 필요</p>
-        </div>
-        <div class="context-card">
-          <h5>LLM 교체 어려움</h5>
-          <p>비즈니스 로직과 LLM 호출이 결합되어 모델 교체 시 수정 범위가 넓음</p>
+          <p>여러 LLM 단계로 구성된 체인에서 중간 실패 시 앞 단계 결과까지 버리고 처음부터 재실행</p>
         </div>
       </div>
     </div>
 
     <div class="project-section">
-      <div class="section-sub-label">📐 Architecture</div>
+      <div class="section-sub-label">📐 AS-IS Architecture</div>
       <div class="arch-placeholder">
-        <img src="images/llm-arch.png" alt="LLM Orchestration Architecture" style="width:100%;max-width:960px;">
+        <img src="images/llm_before.png" alt="LLM AS-IS" style="width:100%;max-width:960px;">
+      </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>동기 API 호출 블로킹</h5>
+          <p>FastAPI → OpenAI API 동기 호출, 응답 완료까지 클라이언트 커넥션 점유 및 45초+ 대기</p>
+        </div>
+        <div class="issue-card">
+          <h5>실패 시 전체 재실행</h5>
+          <p>다단계 LLM 체인 중간 실패 시 앞 단계 결과 폐기, 비용과 시간 모두 낭비</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/llm_after.png" alt="LLM TO-BE" style="width:100%;max-width:960px;">
       </div>
       <div class="solution-grid" style="margin-top:1rem;">
         <div class="solution-card">
           <h5>Temporal Workflow</h5>
-          <p>LLM 호출을 Activity 단위로 분리, 단계별 자동 재시도 보장</p>
+          <p>LLM 호출을 Activity 단위로 분리, 중간 실패 시 해당 단계만 자동 재시도 — 앞 단계 결과 보존</p>
         </div>
         <div class="solution-card">
           <h5>LangChain 체인</h5>
-          <p>프롬프트 → LLM(OpenAI) → 후처리 체인 구성, 모듈별 교체 용이</p>
+          <p>프롬프트 → LLM(OpenAI) → 후처리 체인 구성, LCEL 파이프라인으로 선언적 조합</p>
         </div>
         <div class="solution-card">
-          <h5>Redis Pub/Sub</h5>
-          <p>처리 상태를 실시간 스트리밍, 클라이언트에 즉시 피드백 전달</p>
+          <h5>즉시 응답 + Redis Pub/Sub</h5>
+          <p>요청 즉시 Channel Key 반환, 처리 상태를 Pub/Sub으로 실시간 스트리밍 — 클라이언트 블로킹 제거</p>
         </div>
-        <div class="solution-card">
-          <h5>Activity 분리</h5>
-          <p>LLM 교체 시 수정 범위를 1개 모듈로 한정, 확장성 확보</p>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🔧 기술 선택 근거</div>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <h5>왜 Temporal?</h5>
+          <p>NetCDF 프로젝트에서 검증된 패턴 재활용. 장시간 LLM 호출의 재시도·타임아웃을 선언적으로 관리 가능.</p>
+        </div>
+        <div class="decision-card">
+          <h5>왜 Redis Pub/Sub?</h5>
+          <p>SSE 대비 다중 클라이언트 구독이 자유롭고, Channel Key만 반환하여 커넥션 점유 제거.</p>
         </div>
       </div>
     </div>
@@ -1043,10 +1076,28 @@
     <div class="project-section">
       <div class="section-sub-label">📊 기대 효과</div>
       <div class="metric-row">
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">99.5%</div><div class="metric-desc">장애 복구율</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">45s → 3s</div><div class="metric-desc">첫 응답 도달 시간</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">1개 모듈</div><div class="metric-desc">LLM 교체 수정 범위</div></div>
+        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">45s → 즉시</div><div class="metric-desc">첫 응답 도달 (Channel Key 반환)</div></div>
+        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">단계 재시도</div><div class="metric-desc">실패 시 해당 Activity만 재실행</div></div>
         <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">0</div><div class="metric-desc">수동 개입</div></div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="lesson-grid">
+        <div class="lesson-card good">
+          <h5>✅ 배운 점</h5>
+          <ul>
+            <li>NetCDF 프로젝트의 Temporal + Redis 패턴을 LLM 도메인에 재적용하며 아키텍처 패턴의 범용성 확인</li>
+            <li>LangChain LCEL 파이프라인으로 프롬프트·모델·파서 조합의 선언적 구성 경험</li>
+          </ul>
+        </div>
+        <div class="lesson-card bad">
+          <h5>💭 아쉬운 점</h5>
+          <ul>
+            <li>Redis Pub/Sub 메시지 유실 가능성(구독 전 발행 시)에 대한 보완 설계 미흡</li>
+            <li>LLM 응답 품질 모니터링 및 평가 체계 미구축</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -1077,15 +1128,25 @@
         </div>
         <div class="context-card">
           <h5>검색 속도 저하</h5>
-          <p>PostgreSQL 행 기반 검색으로 데이터 증가 시 OLAP 쿼리 성능 급락</p>
+          <p>PostgreSQL LIKE 검색으로 데이터 증가 시 검색 쿼리 성능 급락</p>
         </div>
       </div>
     </div>
 
-    <div class="project-section">
+<div class="project-section">
       <div class="section-sub-label">📐 AS-IS Architecture</div>
       <div class="arch-placeholder">
         <img src="images/airbyte_before.png" alt="Webtoon AS-IS" style="width:100%;max-width:960px;">
+      </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>Shell Script 기반 수동 동기화</h5>
+          <p>크론으로 .sh 실행 → SQL 쿼리로 변경 데이터 비교 후 적재, 스크립트 유지보수 부담 및 장애 시 수동 대응 필요</p>
+        </div>
+        <div class="issue-card">
+          <h5>검색 쿼리 성능 저하</h5>
+          <p>PostgreSQL 행 기반 구조에서 데이터 증가 시 검색·필터 쿼리 응답 시간 급락</p>
+        </div>        
       </div>
     </div>
 
@@ -1101,7 +1162,7 @@
         </div>
         <div class="solution-card">
           <h5>ClickHouse 전환</h5>
-          <p>컬럼형 OLAP 엔진으로 대량 검색 쿼리 성능 대폭 개선</p>
+          <p>역인덱스 기반 검색 엔진으로 대량 검색·필터 쿼리 성능 대폭 개선</p>
         </div>
       </div>
     </div>
@@ -1115,7 +1176,7 @@
         </div>
         <div class="decision-card">
           <h5>왜 Elasticsearch?</h5>
-          <p>웹툰 검색은 집계/필터 위주의 OLAP 패턴. PostgreSQL 행 기반 대비 Elasticsearch의 검색 성능이 압도적으로 빠름.</p>
+          <p>웹툰 검색은 텍스트 검색·필터 위주 패턴. PostgreSQL LIKE 대비 역인덱스 기반 검색 성능이 압도적으로 빠름.</p>
         </div>
       </div>
     </div>
@@ -1136,7 +1197,7 @@
           <h5>✅ 배운 점</h5>
           <ul>
             <li>EL(Extract/Load)과 ETL 파이프라인의 차이와 적합한 사용 시나리오 이해</li>
-            <li>OLTP(PostgreSQL) vs OLAP(Elasticsearch)의 쿼리 패턴별 성능 차이 체감</li>
+            <li>OLTP(PostgreSQL) vs 검색 엔진(Elasticsearch)의 쿼리 패턴별 성능 차이 체감</li>
           </ul>
         </div>
         <div class="lesson-card bad">
@@ -1239,20 +1300,12 @@
   <h2 class="section-title reveal">기술 스택</h2>
   <div class="stack-grid reveal">
     <div class="stack-card">
-      <h4>Backend</h4>
-      <p>Spring Boot (Java)<br>FastAPI (Python)<br>PostgreSQL / PostGIS<br>CloudNativePG</p>
+      <h4>Backend & Data</h4>
+      <p>Spring Boot (Java) · FastAPI (Python)<br>PostgreSQL / PostGIS<br>Kafka · Redis · Temporal<br>Elasticsearch · Airbyte</p>
     </div>
     <div class="stack-card">
-      <h4>Infrastructure</h4>
-      <p>Kubernetes (KakaoCloud)<br>Docker · Helm<br>Terraform · ArgoCD</p>
-    </div>
-    <div class="stack-card">
-      <h4>Data & Messaging</h4>
-      <p>Kafka · Debezium<br>Temporal · Protobuf<br>ClickHouse · Airbyte</p>
-    </div>
-    <div class="stack-card">
-      <h4>CI/CD & DevOps</h4>
-      <p>Jenkins · GitHub Actions<br>ARC · Kaniko<br>Ruff · SonarQube</p>
+      <h4>Infrastructure & CI/CD</h4>
+      <p>Kubernetes (KakaoCloud) · Docker · Helm<br>Terraform · ArgoCD<br>Jenkins · GitHub Actions</p>
     </div>
   </div>
 </section>
