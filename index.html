@@ -630,12 +630,12 @@
 <nav>
   <div class="inner">
     <div class="logo">duhyeon<span>@portfolio</span>:~$</div>
-    <div class="links">
+    <!-- <div class="links">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#stack">Stack</a>
       <a href="https://github.com/DuHyeon2" target="_blank">GitHub</a>
-    </div>
+    </div> -->
   </div>
 </nav>
 
@@ -652,7 +652,9 @@
         생년월일: 98.02.05<br>
         연락처: 010-9771-9781<br>
         이메일: engus9781@gmail.com<br>
-        github: <a href="https://github.com/DuHyeon2" target="_blank">DuHyeon2</a>
+        github: <a href="https://github.com/DuHyeon2" target="_blank">https://github.com/DuHyeon2
+
+        </a>
       </p>
       <div class="hero-links">
         <a href="#projects" class="primary">프로젝트 보기</a>
@@ -818,7 +820,7 @@
         </div>
         <div class="decision-card">
           <h5>왜 Redis?</h5>
-          <p>Redis에 적재하여 클라이언트 읽기 지연 최소화. TTL로 자동 만료 관리.</p>
+          <p>Redis에 적재하여 클라이언트 읽기 지연 최소화.</p>
         </div>
 
         <div class="decision-card">
@@ -1076,7 +1078,6 @@
       <div class="metric-row">
         <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">45s → 즉시</div><div class="metric-desc">첫 응답 도달 (Channel Key 반환)</div></div>
         <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">단계 재시도</div><div class="metric-desc">실패 시 해당 Activity만 재실행</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">0</div><div class="metric-desc">수동 개입</div></div>
       </div>
     </div>
 
@@ -1282,8 +1283,8 @@
         <div class="lesson-card bad">
           <h5>💭 아쉬운 점</h5>
           <ul>
-            <li>t3.small 4노드로 비용 부담, 장기 운영 시 Spot Instance 활용 필요</li>
-            <li>서비스 간 장애 전파 차단(Circuit Breaker) 미적용</li>
+            <li>t3.small 4노드로 비용 부담</li>
+            <li>CI/CD 를 서비스 별로 아닌 전체 프로젝트 단위로 구성</li>
           </ul>
         </div>
       </div>
@@ -1310,10 +1311,6 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-links">
-    <a href="https://github.com/DuHyeon2" target="_blank">GitHub</a>
-    <a href="https://dhserver.cloud" target="_blank">dhserver.cloud</a>
-  </div>
   <p class="copy">© 2026 김두현 · DevOps/Backend Engineer</p>
 </footer>
 
