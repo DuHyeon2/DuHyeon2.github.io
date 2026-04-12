@@ -653,7 +653,6 @@
         연락처: 010-9771-9781<br>
         이메일: engus9781@gmail.com<br>
         github: <a href="https://github.com/DuHyeon2" target="_blank">https://github.com/DuHyeon2
-
         </a>
       </p>
       <div class="hero-links">
@@ -701,15 +700,15 @@
           <td class="proj-summary">SSE → Temporal 전환, 동시 처리량 5배 향상</td>
           <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span class="bar-pct">100%</span></div></td>
         </tr>
+        <tr onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">
+          <td>LLM 오케스트레이션</td>
+          <td class="proj-summary">Temporal + LangChain + Redis 파이프라인</td>
+          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:60%;background:var(--accent3)"></div></div><span class="bar-pct" style="color:var(--accent3)">60%</span></div></td>
+        </tr>
         <tr onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
           <td>CDC 파이프라인</td>
           <td class="proj-summary">Debezium Embedded로 일 43,200건 폴링 → 0건</td>
           <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--accent2)"></div></div><span class="bar-pct" style="color:var(--accent2)">100%</span></div></td>
-        </tr>
-        <tr onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">
-          <td>LLM 오케스트레이션</td>
-          <td class="proj-summary">Temporal + LangChain + Redis Pub/Sub 파이프라인</td>
-          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:60%;background:var(--accent3)"></div></div><span class="bar-pct" style="color:var(--accent3)">60%</span></div></td>
         </tr>
         <tr onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">
           <td>웹툰 검색 파이프라인</td>
@@ -861,6 +860,124 @@
   </div>
 
   <!-- =============================== -->
+  <!-- Project 3: LLM                  -->
+  <!-- =============================== -->
+  <div class="project reveal" id="p3">
+    <div class="project-header">
+      <span class="project-tag yellow">Project 3 · 진행 중</span>
+      <span class="project-headline">LLM 오케스트레이션 · 실시간 스트리밍</span>
+    </div>
+    <h3>LLM 기반 워크플로우 오케스트레이션 시스템</h3>
+    <div class="project-subtitle" style="color:var(--accent3)">FastAPI + Temporal + LangChain + Redis Pub/Sub</div>
+    <div class="project-meta">
+      <span>기간: 2025.12 ~ 2026.04</span> | <span>기여도: 60%</span>
+      <span class="badge">Python</span>
+      <span class="badge">FastAPI</span>
+      <span class="badge">Temporal</span>
+      <span class="badge">LangChain</span>
+      <span class="badge">Redis</span>
+      <span class="badge">OpenAI</span>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
+      <div class="context-grid">
+        <div class="context-card">
+          <h5>LLM 응답 지연 · 중단</h5>
+          <p>OpenAI API는 응답까지 수십 초 소요, 중간에 타임아웃으로 끊기면 전체 결과 유실</p>
+        </div>
+        <div class="context-card">
+          <h5>클라이언트 커넥션 장시간 점유</h5>
+          <p>응답 완료까지 클라이언트가 45초+ 대기, 중단 시 처음부터 재시도 필요</p>
+        </div>
+        <div class="context-card">
+          <h5>체인 실패 시 전체 재실행</h5>
+          <p>여러 LLM 단계로 구성된 체인에서 중간 실패 시 앞 단계 결과까지 버리고 처음부터 재실행</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 AS-IS Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/llm_before.png" alt="LLM AS-IS" style="width:100%;max-width:960px;">
+      </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>동기 API 호출 블로킹</h5>
+          <p>FastAPI → OpenAI API 동기 호출, 응답 완료까지 클라이언트 커넥션 점유 및 45초+ 대기</p>
+        </div>
+        <div class="issue-card">
+          <h5>실패 시 전체 재실행</h5>
+          <p>다단계 LLM 체인 중간 실패 시 앞 단계 결과 폐기, 비용과 시간 모두 낭비</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/llm_after.png" alt="LLM TO-BE" style="width:100%;max-width:960px;">
+      </div>
+      <div class="solution-grid" style="margin-top:1rem;">
+        <div class="solution-card">
+          <h5>Temporal Workflow</h5>
+          <p>LLM 호출을 Activity 단위로 분리, 중간 실패 시 해당 단계만 자동 재시도 — 앞 단계 결과 보존</p>
+        </div>
+        <div class="solution-card">
+          <h5>LangChain 체인</h5>
+          <p>프롬프트 → LLM(OpenAI) → 후처리 체인 구성, LCEL 파이프라인으로 선언적 조합</p>
+        </div>
+        <div class="solution-card">
+          <h5>즉시 응답 + Redis Pub/Sub</h5>
+          <p>요청 즉시 Channel Key 반환, 처리 상태를 Pub/Sub으로 실시간 스트리밍 — 클라이언트 블로킹 제거</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🔧 기술 선택 근거</div>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <h5>왜 Temporal?</h5>
+          <p>NetCDF 프로젝트에서 검증된 패턴 재활용. 장시간 LLM 호출의 재시도·타임아웃을 선언적으로 관리 가능.</p>
+        </div>
+        <div class="decision-card">
+          <h5>왜 Redis Pub/Sub?</h5>
+          <p>SSE 대비 다중 클라이언트 구독이 자유롭고, Channel Key만 반환하여 커넥션 점유 제거.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📊 기대 효과</div>
+      <div class="metric-row">
+        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">45s → 즉시</div><div class="metric-desc">첫 응답 도달 (Channel Key 반환)</div></div>
+        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">단계 재시도</div><div class="metric-desc">실패 시 해당 Activity만 재실행</div></div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="lesson-grid">
+        <div class="lesson-card good">
+          <h5>✅ 배운 점</h5>
+          <ul>
+            <li>NetCDF 프로젝트의 Temporal + Redis 패턴을 LLM 도메인에 재적용하며 아키텍처 패턴의 범용성 확인</li>
+            <li>LangChain LCEL 파이프라인으로 프롬프트·모델·파서 조합의 선언적 구성 경험</li>
+          </ul>
+        </div>
+        <div class="lesson-card bad">
+          <h5>💭 아쉬운 점</h5>
+          <ul>
+            <li>Redis Pub/Sub 메시지 유실 가능성(구독 전 발행 시)에 대한 보완 설계 미흡</li>
+            <li>LLM 응답 품질 모니터링 및 평가 체계 미구축</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================== -->
   <!-- Project 2: CDC                  -->
   <!-- =============================== -->
   <div class="project reveal" id="p2">
@@ -983,123 +1100,6 @@
     </div>
   </div>
 
-  <!-- =============================== -->
-  <!-- Project 3: LLM                  -->
-  <!-- =============================== -->
-  <div class="project reveal" id="p3">
-    <div class="project-header">
-      <span class="project-tag yellow">Project 3 · 진행 중</span>
-      <span class="project-headline">LLM 오케스트레이션 · 실시간 스트리밍</span>
-    </div>
-    <h3>LLM 기반 워크플로우 오케스트레이션 시스템</h3>
-    <div class="project-subtitle" style="color:var(--accent3)">FastAPI + Temporal + LangChain + Redis Pub/Sub</div>
-    <div class="project-meta">
-      <span>기간: 2026.01 ~ 현재</span> | <span>기여도: 40%</span>
-      <span class="badge">Python</span>
-      <span class="badge">FastAPI</span>
-      <span class="badge">Temporal</span>
-      <span class="badge">LangChain</span>
-      <span class="badge">Redis</span>
-      <span class="badge">OpenAI</span>
-    </div>
-
-    <div class="project-section">
-      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
-      <div class="context-grid">
-        <div class="context-card">
-          <h5>LLM 응답 지연 · 중단</h5>
-          <p>OpenAI API는 응답까지 수십 초 소요, 중간에 타임아웃으로 끊기면 전체 결과 유실</p>
-        </div>
-        <div class="context-card">
-          <h5>클라이언트 커넥션 장시간 점유</h5>
-          <p>응답 완료까지 클라이언트가 45초+ 대기, 중단 시 처음부터 재시도 필요</p>
-        </div>
-        <div class="context-card">
-          <h5>체인 실패 시 전체 재실행</h5>
-          <p>여러 LLM 단계로 구성된 체인에서 중간 실패 시 앞 단계 결과까지 버리고 처음부터 재실행</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-section">
-      <div class="section-sub-label">📐 AS-IS Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/llm_before.png" alt="LLM AS-IS" style="width:100%;max-width:960px;">
-      </div>
-      <div class="issue-grid" style="margin-top:1rem;">
-        <div class="issue-card">
-          <h5>동기 API 호출 블로킹</h5>
-          <p>FastAPI → OpenAI API 동기 호출, 응답 완료까지 클라이언트 커넥션 점유 및 45초+ 대기</p>
-        </div>
-        <div class="issue-card">
-          <h5>실패 시 전체 재실행</h5>
-          <p>다단계 LLM 체인 중간 실패 시 앞 단계 결과 폐기, 비용과 시간 모두 낭비</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-section">
-      <div class="section-sub-label">📐 TO-BE Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/llm_after.png" alt="LLM TO-BE" style="width:100%;max-width:960px;">
-      </div>
-      <div class="solution-grid" style="margin-top:1rem;">
-        <div class="solution-card">
-          <h5>Temporal Workflow</h5>
-          <p>LLM 호출을 Activity 단위로 분리, 중간 실패 시 해당 단계만 자동 재시도 — 앞 단계 결과 보존</p>
-        </div>
-        <div class="solution-card">
-          <h5>LangChain 체인</h5>
-          <p>프롬프트 → LLM(OpenAI) → 후처리 체인 구성, LCEL 파이프라인으로 선언적 조합</p>
-        </div>
-        <div class="solution-card">
-          <h5>즉시 응답 + Redis Pub/Sub</h5>
-          <p>요청 즉시 Channel Key 반환, 처리 상태를 Pub/Sub으로 실시간 스트리밍 — 클라이언트 블로킹 제거</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-section">
-      <div class="section-sub-label">🔧 기술 선택 근거</div>
-      <div class="decision-grid">
-        <div class="decision-card">
-          <h5>왜 Temporal?</h5>
-          <p>NetCDF 프로젝트에서 검증된 패턴 재활용. 장시간 LLM 호출의 재시도·타임아웃을 선언적으로 관리 가능.</p>
-        </div>
-        <div class="decision-card">
-          <h5>왜 Redis Pub/Sub?</h5>
-          <p>SSE 대비 다중 클라이언트 구독이 자유롭고, Channel Key만 반환하여 커넥션 점유 제거.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-section">
-      <div class="section-sub-label">📊 기대 효과</div>
-      <div class="metric-row">
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">45s → 즉시</div><div class="metric-desc">첫 응답 도달 (Channel Key 반환)</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">단계 재시도</div><div class="metric-desc">실패 시 해당 Activity만 재실행</div></div>
-      </div>
-    </div>
-
-    <div class="project-section">
-      <div class="lesson-grid">
-        <div class="lesson-card good">
-          <h5>✅ 배운 점</h5>
-          <ul>
-            <li>NetCDF 프로젝트의 Temporal + Redis 패턴을 LLM 도메인에 재적용하며 아키텍처 패턴의 범용성 확인</li>
-            <li>LangChain LCEL 파이프라인으로 프롬프트·모델·파서 조합의 선언적 구성 경험</li>
-          </ul>
-        </div>
-        <div class="lesson-card bad">
-          <h5>💭 아쉬운 점</h5>
-          <ul>
-            <li>Redis Pub/Sub 메시지 유실 가능성(구독 전 발행 시)에 대한 보완 설계 미흡</li>
-            <li>LLM 응답 품질 모니터링 및 평가 체계 미구축</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- =============================== -->
   <!-- Project 4: Webtoon              -->
