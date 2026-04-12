@@ -649,11 +649,10 @@
       <h1>김두현</h1>
       <div class="role">DevOps / Backend Engineer</div>
       <p class="desc">
-        생년월일: <br>
-        전공: <br>
-        연락처: <br>
-        이메일: <br>
-        거주지:
+        생년월일: 98.02.05<br>
+        연락처: 010-9771-9781<br>
+        이메일: engus9781@gmail.com<br>
+        github: <a href="https://github.com/DuHyeon2" target="_blank">DuHyeon2</a>
       </p>
       <div class="hero-links">
         <a href="#projects" class="primary">프로젝트 보기</a>
@@ -712,7 +711,7 @@
         </tr>
         <tr onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">
           <td>웹툰 검색 파이프라인</td>
-          <td class="proj-summary">수동 적재 → Airbyte + ClickHouse 자동화</td>
+          <td class="proj-summary">수동 적재 → Airbyte + Elasticsearch 자동화</td>
           <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div><span class="bar-pct" style="color:var(--green)">100%</span></div></td>
         </tr>
         <tr onclick="document.getElementById('p5').scrollIntoView({behavior:'smooth'})">
@@ -851,8 +850,8 @@
         <div class="lesson-card bad">
           <h5>💭 아쉬운 점</h5>
           <ul>
-            <li>Temporal Workflow 버전 관리 전략을 초기에 수립하지 못해 배포 시 호환성 이슈 발생</li>
-            <li>부하 테스트 환경을 프로덕션과 동일하게 구성하지 못해 HPA 튜닝에 시행착오 발생</li>
+            <li>Temporal Worker 장애 시 모니터링/알림 체계 없이 수동으로 확인해야 했음</li>
+            <li>HDF5 스레드 안전성 문제를 threading.Lock으로 해결했지만, 근본적으로 프로세스 격리 방식 검토가 미흡</li>
           </ul>
         </div>
       </div>
@@ -969,7 +968,6 @@
           <ul>
             <li>DB 변경 감지(CDC) 원리와 PostgreSQL 복제 슬롯 관리 경험</li>
             <li>테이블별 핸들러 자동 등록 패턴으로 확장 가능한 구조 설계</li>
-            <li>멀티스레드 환경에서 안전한 큐 처리 경험</li>
           </ul>
         </div>
         <div class="lesson-card bad">
