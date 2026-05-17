@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김두현 | DevOps / Backend Engineer</title>
+<meta name="description" content="Kubernetes 기반 MSA 플랫폼의 인프라 자동화와 데이터 파이프라인 최적화를 전문으로 하는 DevOps/Backend Engineer 김두현의 포트폴리오입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f16;
+    --bg2: #0f1923;
+    --card: #1a2735;
+    --card-hover: #1e3044;
+    --accent: #00d4aa;
+    --accent2: #0ea5e9;
+    --accent3: #f59e0b;
+    --white: #e8edf3;
+    --light: #94a3b8;
+    --muted: #475569;
+    --red: #ef4444;
+    --green: #22c55e;
+    --purple: #a78bfa;
+    --font-display: 'Noto Sans KR', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--font-display);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(10, 15, 22, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 212, 170, 0.1);
+    z-index: 100;
+    padding: 0 2rem;
+  }
+  nav .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  nav .logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+  }
+  nav .logo span { color: var(--muted); }
+  nav .links { display: flex; gap: 2rem; }
+  nav .links a {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: color 0.3s;
+    letter-spacing: 0.02em;
+  }
+  nav .links a:hover { color: var(--accent); }
+
+  /* === SECTION BASE === */
+  section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+  }
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 30% 50%, black 0%, transparent 70%);
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 70%);
+    top: 20%; right: -10%;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .hero-left .greeting {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-left h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s forwards;
+  }
+  .hero-left .role {
+    font-size: 1.3rem;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s forwards;
+  }
+  .hero-left .desc {
+    color: var(--light);
+    font-size: 1rem;
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+  }
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 1s forwards;
+  }
+  .hero-links a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .hero-links .primary {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+  }
+  .hero-links .primary:hover {
+    background: #00eabb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,212,170,0.25);
+  }
+  .hero-links .secondary {
+    border: 1px solid var(--muted);
+    color: var(--light);
+  }
+  .hero-links .secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+  .badge-row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.45rem 1rem;
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,170,0.15);
+    transition: all 0.3s;
+  }
+  .badge:hover {
+    background: var(--card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* === PROJECT CARDS === */
+  .project {
+    background: var(--bg2);
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.4s;
+  }
+  .project:hover {
+    border-color: rgba(0,212,170,0.15);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  }
+  .project-header {
+    padding: 2.5rem 3rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .project-tag.blue { background: var(--accent2); color: var(--white); }
+  .project-tag.yellow { background: var(--accent3); color: var(--bg); }
+  .project-tag.purple { background: var(--purple); color: var(--white); }
+  .project-tag.green { background: var(--green); color: var(--bg); }
+
+  .project-headline {
+    font-size: 0.85rem;
+    color: var(--light);
+    font-family: var(--font-mono);
+  }
+  .project h3 {
+    padding: 1rem 3rem 0;
+    font-size: 1.6rem;
+    font-weight: 900;
+  }
+  .project-subtitle {
+    padding: 0.3rem 3rem 0;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-family: var(--font-mono);
+  }
+
+  /* Project meta */
+  .project-meta {
+    padding: 1rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--light);
+    font-family: var(--font-mono);
+  }
+  .project-meta .badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  /* Project sections */
+  .project-section {
+    padding: 0 3rem 2.5rem;
+  }
+  .section-sub-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Grids */
+  .context-grid, .issue-grid, .solution-grid, .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .context-card, .issue-card, .solution-card, .decision-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.3rem;
+    border-left: 3px solid var(--muted);
+    transition: all 0.3s;
+  }
+  .context-card:hover, .issue-card:hover, .solution-card:hover, .decision-card:hover {
+    background: var(--card-hover);
+    transform: translateY(-2px);
+  }
+  .context-card { border-left-color: var(--red); }
+  .issue-card { border-left-color: var(--accent3); }
+  .solution-card { border-left-color: var(--accent2); }
+  .decision-card { border-left-color: var(--purple); }
+
+  .context-card h5 { color: var(--red); }
+  .issue-card h5 { color: var(--accent3); }
+  .solution-card h5 { color: var(--accent2); }
+  .decision-card h5 { color: var(--purple); }
+
+  .context-card h5, .issue-card h5, .solution-card h5, .decision-card h5 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .context-card p, .issue-card p, .solution-card p, .decision-card p {
+    font-size: 0.83rem;
+    color: var(--light);
+    line-height: 1.6;
+  }
+
+  /* Metric row */
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .metric-box {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+    transition: all 0.3s;
+  }
+  .metric-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .metric-value {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .metric-desc {
+    font-size: 0.78rem;
+    color: var(--light);
+  }
+
+  /* Lesson grid */
+  .lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .lesson-card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .lesson-card.good { border-left: 3px solid var(--green); }
+  .lesson-card.bad { border-left: 3px solid var(--accent3); }
+  .lesson-card h5 { font-size: 0.9rem; margin-bottom: 0.8rem; }
+  .lesson-card.good h5 { color: var(--green); }
+  .lesson-card.bad h5 { color: var(--accent3); }
+  .lesson-card ul { list-style: none; padding: 0; }
+  .lesson-card ul li {
+    font-size: 0.83rem;
+    color: var(--light);
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+  .lesson-card ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+  }
+  .lesson-card.good ul li::before { color: var(--green); }
+  .lesson-card.bad ul li::before { color: var(--accent3); }
+
+  /* Architecture */
+  .arch-flow {
+    padding: 0 3rem 2.5rem;
+  }
+  .arch-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .arch-placeholder img {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .flow-box {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background: var(--card);
+    border: 1px solid var(--muted);
+    color: var(--white);
+    text-align: center;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .flow-box:hover {
+    border-color: var(--accent);
+    background: var(--card-hover);
+  }
+  .flow-arrow {
+    color: var(--accent);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  /* === OVERVIEW TABLE === */
+  .project-overview { margin-top: 2rem; }
+  .overview-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.6rem;
+  }
+  .overview-table thead th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: left;
+    padding: 0 1.2rem 0.5rem;
+  }
+  .overview-table tbody tr {
+    background: var(--card);
+    border-radius: 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .overview-table tbody tr:hover {
+    background: var(--card-hover);
+    transform: translateX(4px);
+  }
+  .overview-table td {
+    padding: 1.2rem;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+  .overview-table td:first-child {
+    border-radius: 10px 0 0 10px;
+    font-weight: 700;
+  }
+  .overview-table td:last-child {
+    border-radius: 0 10px 10px 0;
+  }
+  .overview-table .proj-summary {
+    color: var(--light);
+    font-size: 0.85rem;
+  }
+  .contrib-bar { display: flex; align-items: center; gap: 0.6rem; }
+  .contrib-bar .bar {
+    flex: 1; height: 6px; background: var(--bg);
+    border-radius: 3px; overflow: hidden; min-width: 60px;
+  }
+  .contrib-bar .bar-fill {
+    height: 100%; border-radius: 3px;
+    background: var(--accent); transition: width 0.6s ease;
+  }
+  .contrib-bar .bar-pct {
+    font-family: var(--font-mono); font-size: 0.8rem;
+    font-weight: 700; color: var(--accent); white-space: nowrap;
+  }
+
+  /* === TECH STACK === */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .stack-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.8rem;
+    border-top: 3px solid var(--accent);
+    transition: all 0.4s;
+  }
+  .stack-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .stack-card:nth-child(2) { border-top-color: var(--accent2); }
+  .stack-card:nth-child(3) { border-top-color: var(--accent3); }
+  .stack-card:nth-child(4) { border-top-color: var(--green); }
+  .stack-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--accent); }
+  .stack-card:nth-child(2) h4 { color: var(--accent2); }
+  .stack-card:nth-child(3) h4 { color: var(--accent3); }
+  .stack-card:nth-child(4) h4 { color: var(--green); }
+  .stack-card p {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--light);
+    line-height: 2;
+  }
+
+  /* === FOOTER === */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  footer .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--light);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  footer .footer-links a:hover { color: var(--accent); }
+  footer .copy { font-size: 0.8rem; color: var(--muted); }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-left h1 { font-size: 2.5rem; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .project-header { padding: 2rem 1.5rem 0; }
+    .project h3 { padding: 1rem 1.5rem 0; }
+    .project-subtitle { padding: 0.3rem 1.5rem 0; }
+    .project-meta { padding: 1rem 1.5rem; }
+    .project-section { padding: 0 1.5rem 1.5rem; }
+    .arch-flow { padding: 0 1.5rem 1.5rem; }
+    .context-grid, .issue-grid, .solution-grid, .decision-grid, .lesson-grid { grid-template-columns: 1fr; }
+    .metric-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .hero-left h1 { font-size: 2rem; }
+    .stack-grid { grid-template-columns: 1fr; }
+    .metric-row { grid-template-columns: 1fr; }
+    nav .links { gap: 1rem; }
+    nav .links a { font-size: 0.75rem; }
+    .flow-row { flex-direction: column; align-items: stretch; }
+    .flow-arrow { transform: rotate(90deg); align-self: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="logo">duhyeon<span>@portfolio</span>:~$</div>
+    <!-- <div class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="https://github.com/DuHyeon2" target="_blank">GitHub</a>
+    </div> -->
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="greeting">$ whoami</div>
+      <h1>김두현</h1>
+      <div class="role">DevOps / Backend Engineer</div>
+      <p class="desc">
+        생년월일: 98.02.05<br>
+        연락처: 010-9771-9781<br>
+        이메일: engus9781@gmail.com<br>
+        github: <a href="https://github.com/DuHyeon2" target="_blank">https://github.com/DuHyeon2
+        </a>
+      </p>
+      <div class="hero-links">
+        <a href="#projects" class="primary">프로젝트 보기</a>
+        <a href="https://github.com/DuHyeon2" target="_blank" class="secondary">GitHub →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="badge-row">
+        <span class="badge">Kubernetes</span>
+        <span class="badge">Spring Boot</span>
+        <span class="badge">FastAPI</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge">Kafka</span>
+        <span class="badge">PostgreSQL</span>
+        <span class="badge">Docker</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge">ArgoCD</span>
+        <span class="badge">Temporal</span>
+        <span class="badge">Elasticsearch</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge">Jenkins</span>
+        <span class="badge">GitHub Actions</span>
+        <span class="badge">Helm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="about">
+  <div class="project-overview reveal">
+    <div class="section-label">Overview</div>
+    <h2 class="section-title">전체 프로젝트 한눈에 보기</h2>
+    <table class="overview-table">
+      <thead>
+        <tr><th>프로젝트명</th><th>요약</th><th>기여도</th></tr>
+      </thead>
+      <tbody>
+        <tr onclick="document.getElementById('p1').scrollIntoView({behavior:'smooth'})">
+          <td>NetCDF 파이프라인</td>
+          <td class="proj-summary">SSE → Temporal 전환, 동시 처리량 5배 향상</td>
+          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span class="bar-pct">100%</span></div></td>
+        </tr>
+        <tr onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">
+          <td>LLM 오케스트레이션</td>
+          <td class="proj-summary">Temporal + LangChain + Redis 파이프라인</td>
+          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:60%;background:var(--accent3)"></div></div><span class="bar-pct" style="color:var(--accent3)">60%</span></div></td>
+        </tr>
+        <tr onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
+          <td>CDC 파이프라인</td>
+          <td class="proj-summary">Debezium Embedded로 일 43,200건 폴링 → 0건</td>
+          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--accent2)"></div></div><span class="bar-pct" style="color:var(--accent2)">100%</span></div></td>
+        </tr>
+        <tr onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">
+          <td>웹툰 검색 파이프라인</td>
+          <td class="proj-summary">수동 적재 → Airbyte + Elasticsearch 자동화</td>
+          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div><span class="bar-pct" style="color:var(--green)">100%</span></div></td>
+        </tr>
+        <tr onclick="document.getElementById('p5').scrollIntoView({behavior:'smooth'})">
+          <td>GIVE ME CONTROLLER</td>
+          <td class="proj-summary">Spring Cloud + AWS EKS MSA 자기주도 학습</td>
+          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--purple)"></div></div><span class="bar-pct" style="color:var(--purple)">100%</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">Projects</div>
+  <h2 class="section-title reveal">주요 프로젝트</h2>
+
+  <!-- =============================== -->
+  <!-- Project 1: NetCDF               -->
+  <!-- =============================== -->
+  <div class="project reveal" id="p1">
+    <div class="project-header">
+      <span class="project-tag">Project 1</span>
+      <span class="project-headline">데이터 파이프라인 · 성능 최적화</span>
+    </div>
+    <h3>NetCDF 데이터 처리 파이프라인 최적화</h3>
+    <div class="project-subtitle">FastAPI SSE 엔드포인트 → Temporal Workflow 전환</div>
+    <div class="project-meta">
+      <span>기간: 2025.08 ~ 2026.01</span> | <span>기여도: 100%</span>
+      <span class="badge">Python</span>
+      <span class="badge">FastAPI</span>
+      <span class="badge">Temporal</span>
+      <span class="badge">Redis</span>
+      <span class="badge">Kubernetes</span>
+      <span class="badge">HPA</span>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
+      <div class="context-grid">
+        <div class="context-card">
+          <h5>SSE 커넥션 타임아웃</h5>
+          <p>대용량 NetCDF 응답을 클라이언트가 한 번에 수신 불가</p>
+        </div>
+        <div class="context-card">
+          <h5>단일 서비스 병목</h5>
+          <p>동시 요청 증가 시 단일 FastAPI Pod에 병목 집중, 응답 지연 및 장애 전파</p>
+        </div>
+        <div class="context-card">
+          <h5>처리 시간 과다</h5>
+          <p>NetCDF 파일당 수천 개 타임스텝 이미지 생성, 단일 Pod에서 평균 282초 소요로 사용자 대기 불가</p>
+        </div>
+        <div class="context-card">
+          <h5>재시도 로직 부재</h5>
+          <p>데이터 가공 도중 에러 발생 시 전체 파이프라인 실패, 수동 재실행 필요</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 AS-IS Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/netcdf_before.png" alt="NetCDF AS-IS" style="width:100%;max-width:960px;">
+      </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>커넥션 불안정</h5>
+          <p>FastAPI가 직접 NetCDF 처리 후 SSE로 스트리밍</p>
+        </div>
+        <div class="issue-card">
+          <h5>스케일링 불가</h5>
+          <p>단일 Pod에서 처리/응답을 모두 담당, 수평 확장 구조 부재</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/netcdf_after.png" alt="NetCDF TO-BE" style="width:100%;max-width:960px;">
+      </div>
+      <div class="solution-grid" style="margin-top:1rem;">
+        <div class="solution-card">
+          <h5>Temporal Workflow</h5>
+          <p>Worker 단위 자동 재시도 및 타임아웃 선언적 관리</p>
+        </div>
+        <div class="solution-card">
+          <h5>Redis 적재 + Key 반환</h5>
+          <p>Worker가 가공 결과를 Redis에 저장, 클라이언트에 Redis Key만 반환</p>
+        </div>
+        <div class="solution-card">
+          <h5>HPA Worker 확장</h5>
+          <p>Kubernetes HPA로 Worker Pod 자동 스케일링, 동시 처리량 수평 확장</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🔧 기술 선택 근거</div>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <h5>왜 Temporal?</h5>
+          <p>워크플로우 상태 추적, 자동 재시도, 타임아웃 관리가 선언적으로 가능.</p>
+        </div>
+        <div class="decision-card">
+          <h5>왜 Redis?</h5>
+          <p>Redis에 적재하여 클라이언트 읽기 지연 최소화.</p>
+        </div>
+
+        <div class="decision-card">
+          <h5>왜 HPA?</h5>
+          <p>Temporal Worker의 max_concurrent_activities=2로 제한하되, Pod 수를 HPA로 수평 확장하여 처리량 확보.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📊 성과</div>
+      <div class="metric-row">
+        <div class="metric-box"><div class="metric-value">SIGABRT 0건</div><div class="metric-desc">JMeter 동시 100 요청 HDF5 스레드 충돌 해결</div></div>
+        <div class="metric-box"><div class="metric-value">즉시 응답</div><div class="metric-desc">Redis Key 반환으로 타임아웃 제거</div></div>
+        <div class="metric-box"><div class="metric-value">N개 병렬</div><div class="metric-desc">Worker replicas 수평 확장</div></div>
+        <div class="metric-box"><div class="metric-value">자동 복구</div><div class="metric-desc">Activity 단위 재시도</div></div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="lesson-grid">
+        <div class="lesson-card good">
+          <h5>✅ 배운 점</h5>
+          <ul>
+            <li>워크플로우 오케스트레이션의 장애 복구 패턴 실무 적용 경험</li>
+            <li>HPA 튜닝 시 minReplicas 설정이 cold-start 지연 해소에 핵심임을 확인</li>
+          </ul>
+        </div>
+        <div class="lesson-card bad">
+          <h5>💭 아쉬운 점</h5>
+          <ul>
+            <li>Temporal Worker 장애 시 모니터링/알림 체계 없이 수동으로 확인해야 했음</li>
+            <li>HDF5 스레드 안전성 문제를 threading.Lock으로 해결했지만, 근본적으로 프로세스 격리 방식 검토가 미흡</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================== -->
+  <!-- Project 2: LLM                  -->
+  <!-- =============================== -->
+  <div class="project reveal" id="p2">
+    <div class="project-header">
+      <span class="project-tag yellow">Project 2</span>
+      <span class="project-headline">LLM 오케스트레이션 · 실시간 스트리밍</span>
+    </div>
+    <h3>LLM 기반 워크플로우 오케스트레이션 시스템</h3>
+    <div class="project-subtitle" style="color:var(--accent3)">FastAPI + Temporal + LangChain + Redis Pub/Sub</div>
+    <div class="project-meta">
+      <span>기간: 2025.12 ~ 2026.04</span> | <span>기여도: 60%</span>
+      <span class="badge">Python</span>
+      <span class="badge">FastAPI</span>
+      <span class="badge">Temporal</span>
+      <span class="badge">LangChain</span>
+      <span class="badge">Redis</span>
+      <span class="badge">OpenAI</span>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
+      <div class="context-grid">
+        <div class="context-card">
+          <h5>LLM 응답 지연 · 중단</h5>
+          <p>OpenAI API는 응답까지 수십 초 소요, 중간에 타임아웃으로 끊기면 전체 결과 유실</p>
+        </div>
+        <div class="context-card">
+          <h5>클라이언트 커넥션 장시간 점유</h5>
+          <p>응답 완료까지 클라이언트가 45초+ 대기, 중단 시 처음부터 재시도 필요</p>
+        </div>
+        <div class="context-card">
+          <h5>체인 실패 시 전체 재실행</h5>
+          <p>여러 LLM 단계로 구성된 체인에서 중간 실패 시 앞 단계 결과까지 버리고 처음부터 재실행</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 AS-IS Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/llm_before.png" alt="LLM AS-IS" style="width:100%;max-width:960px;">
+      </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>동기 API 호출 블로킹</h5>
+          <p>FastAPI → OpenAI API 동기 호출, 응답 완료까지 클라이언트 커넥션 점유 및 45초+ 대기</p>
+        </div>
+        <div class="issue-card">
+          <h5>실패 시 전체 재실행</h5>
+          <p>다단계 LLM 체인 중간 실패 시 앞 단계 결과 폐기, 비용과 시간 모두 낭비</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/llm_after.png" alt="LLM TO-BE" style="width:100%;max-width:960px;">
+      </div>
+      <div class="solution-grid" style="margin-top:1rem;">
+        <div class="solution-card">
+          <h5>Temporal Workflow</h5>
+          <p>LLM 호출을 Activity 단위로 분리, 중간 실패 시 해당 단계만 자동 재시도 — 앞 단계 결과 보존</p>
+        </div>
+        <div class="solution-card">
+          <h5>LangChain 체인</h5>
+          <p>프롬프트 → LLM(OpenAI) → 후처리 체인 구성, LCEL 파이프라인으로 선언적 조합</p>
+        </div>
+        <div class="solution-card">
+          <h5>즉시 응답 + Redis Pub/Sub</h5>
+          <p>요청 즉시 Channel Key 반환, 처리 상태를 Pub/Sub으로 실시간 스트리밍 — 클라이언트 블로킹 제거</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🔧 기술 선택 근거</div>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <h5>왜 Temporal?</h5>
+          <p>NetCDF 프로젝트에서 검증된 패턴 재활용. 장시간 LLM 호출의 재시도·타임아웃을 선언적으로 관리 가능.</p>
+        </div>
+        <div class="decision-card">
+          <h5>왜 Redis Pub/Sub?</h5>
+          <p>SSE 대비 다중 클라이언트 구독이 자유롭고, Channel Key만 반환하여 커넥션 점유 제거.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📊 기대 효과</div>
+      <div class="metric-row">
+        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">45s → 즉시</div><div class="metric-desc">첫 응답 도달 (Channel Key 반환)</div></div>
+        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">단계 재시도</div><div class="metric-desc">실패 시 해당 Activity만 재실행</div></div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="lesson-grid">
+        <div class="lesson-card good">
+          <h5>✅ 배운 점</h5>
+          <ul>
+            <li>NetCDF 프로젝트의 Temporal + Redis 패턴을 LLM 도메인에 재적용하며 아키텍처 패턴의 범용성 확인</li>
+            <li>LangChain LCEL 파이프라인으로 프롬프트·모델·파서 조합의 선언적 구성 경험</li>
+          </ul>
+        </div>
+        <div class="lesson-card bad">
+          <h5>💭 아쉬운 점</h5>
+          <ul>
+            <li>Redis Pub/Sub 메시지 유실 가능성(구독 전 발행 시)에 대한 보완 설계 미흡</li>
+            <li>LLM 응답 품질 모니터링 및 평가 체계 미구축</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================== -->
+  <!-- Project 3: CDC                  -->
+  <!-- =============================== -->
+  <div class="project reveal" id="p3">
+    <div class="project-header">
+      <span class="project-tag blue">Project 3</span>
+      <span class="project-headline">데이터 동기화 · 이벤트 기반</span>
+    </div>
+    <h3>CDC 데이터 파이프라인 구축</h3>
+    <div class="project-subtitle" style="color:var(--accent2)">Debezium Embedded Engine 기반 경량 CDC 구현</div>
+    <div class="project-meta">
+      <span>기간: 2023.11 ~ 2024.08</span> | <span>기여도: 100%</span>
+      <span class="badge">Java</span>
+      <span class="badge">Spring Boot</span>
+      <span class="badge">Debezium</span>
+      <span class="badge">PostgreSQL</span>
+      <span class="badge">WebSocket</span>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
+      <div class="context-grid">
+        <div class="context-card">
+          <h5>1분마다 전체 조회</h5>
+          <p>각 센서 테이블을 1분 간격으로 전체 조회하는 비효율 구조, 데이터 변경 여부와 무관하게 반복 실행</p>
+        </div>
+        <div class="context-card">
+          <h5>불필요한 쿼리 반복</h5>
+          <p>N개 테이블 × 24시간 × 60분 = 하루 43,200건 이상 데이터가 추가되지 않아도 매분 쿼리 실행</p>
+        </div>
+        <div class="context-card">
+          <h5>데이터 반영 지연</h5>
+          <p>센서 데이터가 추가돼도 최대 1분 후에야 화면에 반영, 실시간 대응이 필요한 상황에서 치명적</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 AS-IS Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/cdc_before.png" alt="CDC AS-IS" style="width:100%;max-width:960px;">
+      </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>1분마다 전체 테이블 조회</h5>
+          <p>변경 여부와 무관하게 N개 테이블을 매분 전량 SELECT, DB에 불필요한 부하 지속 발생</p>
+        </div>
+        <div class="issue-card">
+          <h5>최대 1분 반영 지연</h5>
+          <p>센서 데이터가 추가돼도 다음 폴링 주기까지 대기, 실시간 대응 불가</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/cdc_after.png" alt="CDC TO-BE" style="width:100%;max-width:960px;">
+      </div>
+      <div class="solution-grid" style="margin-top:1rem;">
+        <div class="solution-card">
+          <h5>데이터 추가 시 자동 감지</h5>
+          <p>DB에 센서 데이터가 추가되는 순간 자동으로 감지하여 처리 (PostgreSQL WAL 기반)</p>
+        </div>
+        <div class="solution-card">
+          <h5>테이블별 핸들러 자동 매핑</h5>
+          <p>각 계측기 테이블마다 처리 로직을 자동으로 매핑, 새 테이블 추가 시 핸들러 클래스만 추가하면 완료</p>
+        </div>
+        <div class="solution-card">
+          <h5>배치/즉시 처리 분리</h5>
+          <p>알람 데이터는 즉시 처리, 센서 데이터는 모아서 배치 처리</p>
+        </div>
+        <div class="solution-card">
+          <h5>Kafka 없는 경량 구조</h5>
+          <p>별도 인프라 추가 없이 Spring Boot 앱 하나로 변경 감지 운영</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🔧 기술 선택 근거</div>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <h5>왜 Embedded Debezium?</h5>
+          <p>Kafka 클러스터 없이 앱 하나로 변경 감지 가능, 인프라 최소화가 핵심이었기 때문에 Embedded 방식 선택</p>
+        </div>
+        <div class="decision-card">
+          <h5>왜 WAL 기반?</h5>
+          <p>테이블마다 트리거를 수동 등록할 필요 없이, DB 레벨에서 모든 테이블의 데이터 추가를 자동 캡처</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📊 성과</div>
+      <div class="metric-row">
+        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">43,200 → 0</div><div class="metric-desc">일 폴링 쿼리 수</div></div>
+        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">35%↓</div><div class="metric-desc">DB CPU 사용률</div></div>
+        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">60s → 50ms</div><div class="metric-desc">변경 감지 지연</div></div>
+        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">0개</div><div class="metric-desc">추가 인프라</div></div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="lesson-grid">
+        <div class="lesson-card good">
+          <h5>✅ 배운 점</h5>
+          <ul>
+            <li>DB 변경 감지(CDC) 원리와 PostgreSQL 복제 슬롯 관리 경험</li>
+            <li>테이블별 핸들러 자동 등록 패턴으로 확장 가능한 구조 설계</li>
+          </ul>
+        </div>
+        <div class="lesson-card bad">
+          <h5>💭 아쉬운 점</h5>
+          <ul>
+            <li>앱 재시작 시 일부 이벤트 유실 가능성에 대한 보완 미흡</li>
+            <li>변경 감지 오프셋 저장 및 관리 방법 미흡</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =============================== -->
+  <!-- Project 4: Webtoon              -->
+  <!-- =============================== -->
+  <div class="project reveal" id="p4">
+    <div class="project-header">
+      <span class="project-tag green">Side Project</span>
+      <span class="project-headline">데이터 자동화 · 검색 최적화</span>
+    </div>
+    <h3>웹툰 검색 파이프라인 구축</h3>
+    <div class="project-subtitle" style="color:var(--green)">수동 크롤링 + PostgreSQL → Airbyte + Elasticsearch 전환</div>
+    <div class="project-meta">
+      <span>기간: 2025</span> | <span>기여도: 100%</span>
+      <span class="badge">Airbyte</span>
+      <span class="badge">Elasticsearch</span>
+      <span class="badge">PostgreSQL</span>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
+      <div class="context-grid">
+        <div class="context-card">
+          <h5>수동 적재</h5>
+          <p>1분 주기 크론 크롤링 후 데이터 비교 및 DB 적재</p>
+        </div>
+        <div class="context-card">
+          <h5>검색 속도 저하</h5>
+          <p>PostgreSQL LIKE 검색으로 데이터 증가 시 검색 쿼리 성능 급락</p>
+        </div>
+      </div>
+    </div>
+
+<div class="project-section">
+      <div class="section-sub-label">📐 AS-IS Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/airbyte_before.png" alt="Webtoon AS-IS" style="width:100%;max-width:960px;">
+      </div>
+      <div class="issue-grid" style="margin-top:1rem;">
+        <div class="issue-card">
+          <h5>Shell Script 기반 수동 동기화</h5>
+          <p>크론으로 .sh 실행 → SQL 쿼리로 변경 데이터 비교 후 적재, 스크립트 유지보수 부담 및 장애 시 수동 대응 필요</p>
+        </div>
+        <div class="issue-card">
+          <h5>검색 쿼리 성능 저하</h5>
+          <p>PostgreSQL 행 기반 구조에서 데이터 증가 시 검색·필터 쿼리 응답 시간 급락</p>
+        </div>        
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 TO-BE Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/airbyte_after.png" alt="Webtoon TO-BE" style="width:100%;max-width:960px;">
+      </div>
+      <div class="solution-grid" style="margin-top:1rem;">
+        <div class="solution-card">
+          <h5>Airbyte 자동 Sync</h5>
+          <p>크롤링 데이터 자동 수집 · 적재, 수동 작업 100% 제거</p>
+        </div>
+        <div class="solution-card">
+          <h5>ClickHouse 전환</h5>
+          <p>역인덱스 기반 검색 엔진으로 대량 검색·필터 쿼리 성능 대폭 개선</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🔧 기술 선택 근거</div>
+      <div class="decision-grid">
+        <div class="decision-card">
+          <h5>왜 Airbyte?</h5>
+          <p>커넥터 기반 EL(Extract/Load) 자동화, 스케줄 Sync로 정합성 보장. Airflow 대비 설정이 간단.</p>
+        </div>
+        <div class="decision-card">
+          <h5>왜 Elasticsearch?</h5>
+          <p>웹툰 검색은 텍스트 검색·필터 위주 패턴. PostgreSQL LIKE 대비 역인덱스 기반 검색 성능이 압도적으로 빠름.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📊 성과</div>
+      <div class="metric-row">
+        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">100%</div><div class="metric-desc">수동 적재 자동화</div></div>
+        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">대폭↑</div><div class="metric-desc">검색 속도 개선</div></div>
+        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">0건</div><div class="metric-desc">데이터 누락</div></div>
+        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">자동</div><div class="metric-desc">스케줄 Sync</div></div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="lesson-grid">
+        <div class="lesson-card good">
+          <h5>✅ 배운 점</h5>
+          <ul>
+            <li>EL(Extract/Load)과 ETL 파이프라인의 차이와 적합한 사용 시나리오 이해</li>
+            <li>OLTP(PostgreSQL) vs 검색 엔진(Elasticsearch)의 쿼리 패턴별 성능 차이 체감</li>
+          </ul>
+        </div>
+        <div class="lesson-card bad">
+          <h5>💭 아쉬운 점</h5>
+          <ul>
+            <li>Elasticsearch의 UPDATE/DELETE 제약으로 데이터 수정 시 재적재 필요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================== -->
+  <!-- Project 5: MSA Side Project     -->
+  <!-- =============================== -->
+  <div class="project reveal" id="p5">
+    <div class="project-header">
+      <span class="project-tag purple">Side Project</span>
+      <span class="project-headline">MSA 설계 · Spring Cloud · Kubernetes</span>
+    </div>
+    <h3>GIVE ME CONTROLLER — MSA 에어컨 제어 시스템</h3>
+    <div class="project-subtitle" style="color:var(--purple)">Spring Cloud + AWS EKS 기반 MSA 구조 자기주도 학습</div>
+    <div class="project-meta">
+      <span>기간: 2025</span> | <span>기여도: 100%</span>
+      <span class="badge">Java 17</span>
+      <span class="badge">Spring Cloud</span>
+      <span class="badge">Kafka</span>
+      <span class="badge">AWS EKS</span>
+      <span class="badge">GitHub Actions</span>
+      <span class="badge">WebSocket</span>
+      <span class="badge">SSE</span>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">🎯 배경 & 동기</div>
+      <div class="context-grid">
+        <div class="context-card" style="border-left-color:var(--purple)">
+          <h5 style="color:var(--purple)">MSA 깊이 이해 필요</h5>
+          <p>회사에서 46개 MSA 서비스를 운영하면서 전체 구조를 직접 설계부터 배포까지 경험할 필요성 체감</p>
+        </div>
+        <div class="context-card" style="border-left-color:var(--purple)">
+          <h5 style="color:var(--purple)">AWS 경험 확보</h5>
+          <p>회사는 KakaoCloud 사용, AWS EKS/ECR/RDS 경험을 통해 멀티 클라우드 범용성 확보 목표</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="section-sub-label">📐 Architecture</div>
+      <div class="arch-placeholder">
+        <img src="images/givemecontroller-arch.png" alt="GIVE ME CONTROLLER Architecture" style="width:100%;max-width:960px;">
+      </div>
+      <div class="solution-grid" style="margin-top:1rem;">
+        <div class="solution-card" style="border-left-color:var(--purple)">
+          <h5 style="color:var(--purple)">Spring Cloud Gateway</h5>
+          <p>API 라우팅, 3개 서비스 분리 (control / alarm / temp)</p>
+        </div>
+        <div class="solution-card" style="border-left-color:var(--purple)">
+          <h5 style="color:var(--purple)">Kafka 이벤트 전파</h5>
+          <p>에어컨 상태 변경 시 control → alarm/temp 서비스로 비동기 이벤트 전달</p>
+        </div>
+        <div class="solution-card" style="border-left-color:var(--purple)">
+          <h5 style="color:var(--purple)">AWS EKS + ECR</h5>
+          <p>4노드 클러스터(t3.small), 서비스별 ECR 리포지토리, GitHub Actions CI/CD</p>
+        </div>
+        <div class="solution-card" style="border-left-color:var(--purple)">
+          <h5 style="color:var(--purple)">실시간 통신</h5>
+          <p>alarm-service: WebSocket 익명 채팅, temp-service: SSE 실시간 상태 갱신</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="lesson-grid">
+        <div class="lesson-card good">
+          <h5>✅ 학습 성과</h5>
+          <ul>
+            <li>MSA 구조 설계 → 구현 → 배포 전 사이클 직접 경험</li>
+            <li>Kafka 이벤트 드리븐 패턴으로 서비스 간 느슨한 결합 구현</li>
+            <li>Route53 → LB → Ingress → Gateway → Service 전체 네트워크 흐름 이해</li>
+            <li>회사 실무에 AWS EKS 경험을 대비하여 클라우드 범용성 확보</li>
+          </ul>
+        </div>
+        <div class="lesson-card bad">
+          <h5>💭 아쉬운 점</h5>
+          <ul>
+            <li>t3.small 4노드로 비용 부담</li>
+            <li>CI/CD 를 서비스 별로 아닌 전체 프로젝트 단위로 구성</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TECH STACK -->
+<section id="stack">
+  <div class="section-label reveal">Tech Stack</div>
+  <h2 class="section-title reveal">기술 스택</h2>
+  <div class="stack-grid reveal">
+    <div class="stack-card">
+      <h4>Backend & Data</h4>
+      <p>Spring Boot (Java) · FastAPI (Python)<br>PostgreSQL<br>Kafka · Redis · Temporal<br>Elasticsearch · Airbyte</p>
+    </div>
+    <div class="stack-card">
+      <h4>Infrastructure & CI/CD</h4>
+      <p>Kubernetes · Docker · Helm<br>Jenkins · ArgoCD · GitHub Actions</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="copy">© 2026 김두현 · DevOps/Backend Engineer</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

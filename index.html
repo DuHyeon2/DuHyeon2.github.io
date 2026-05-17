@@ -1,1328 +1,726 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>김두현 | DevOps / Backend Engineer</title>
-<meta name="description" content="Kubernetes 기반 MSA 플랫폼의 인프라 자동화와 데이터 파이프라인 최적화를 전문으로 하는 DevOps/Backend Engineer 김두현의 포트폴리오입니다.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>김두현 · Portfolio</title>
+<meta name="description" content="김두현 — Backend / DevOps Engineer 포트폴리오" />
+<meta property="og:title" content="김두현 · Portfolio" />
+<meta property="og:description" content="Backend / DevOps Engineer 포트폴리오" />
 <style>
   :root {
-    --bg: #0a0f16;
-    --bg2: #0f1923;
-    --card: #1a2735;
-    --card-hover: #1e3044;
-    --accent: #00d4aa;
-    --accent2: #0ea5e9;
-    --accent3: #f59e0b;
-    --white: #e8edf3;
-    --light: #94a3b8;
-    --muted: #475569;
-    --red: #ef4444;
-    --green: #22c55e;
-    --purple: #a78bfa;
-    --font-display: 'Noto Sans KR', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --ink: #1a1a1a;
+    --ink-2: #444;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e8e8e8;
+    --line-2: #f0f0f0;
+    --bg-soft: #fafafa;
+    --accent: #2d5fa3;
+    --accent-soft: #eef3fa;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent) var(--bg);
-  }
-
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: var(--font-display);
+    margin: 0;
+    background: #fff;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+                 "Malgun Gothic", system-ui, sans-serif;
+    font-size: 16px;
     line-height: 1.7;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  /* === NAV === */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: rgba(10, 15, 22, 0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 212, 170, 0.1);
-    z-index: 100;
-    padding: 0 2rem;
-  }
-  nav .inner {
-    max-width: 1200px;
+  .wrap {
+    max-width: 780px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
+    padding: 64px 24px 96px;
   }
-  nav .logo {
-    font-family: var(--font-mono);
+  a { color: var(--ink); }
+  a:hover { color: var(--accent); }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+    background: #f3f3f3;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 20px; }
+  li { margin: 4px 0; }
+
+  /* ----- Header ----- */
+  h1 {
+    font-size: 30px;
     font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--accent);
-  }
-  nav .logo span { color: var(--muted); }
-  nav .links { display: flex; gap: 2rem; }
-  nav .links a {
-    color: var(--light);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 400;
-    transition: color 0.3s;
-    letter-spacing: 0.02em;
-  }
-  nav .links a:hover { color: var(--accent); }
-
-  /* === SECTION BASE === */
-  section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 6rem 2rem;
-  }
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 0.5rem;
-  }
-  .section-title {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 3rem;
-    position: relative;
-    display: inline-block;
-  }
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-
-  /* === HERO === */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-grid {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image:
-      linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at 30% 50%, black 0%, transparent 70%);
-  }
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 70%);
-    top: 20%; right: -10%;
-    pointer-events: none;
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-  .hero-left .greeting {
-    font-family: var(--font-mono);
-    color: var(--accent);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
-  }
-  .hero-left h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1.15;
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.4s forwards;
-  }
-  .hero-left .role {
-    font-size: 1.3rem;
-    color: var(--accent);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.6s forwards;
-  }
-  .hero-left .desc {
-    color: var(--light);
-    font-size: 1rem;
-    max-width: 480px;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.8s forwards;
-  }
-  .hero-links {
-    display: flex;
-    gap: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 1s forwards;
-  }
-  .hero-links a {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    padding: 0.6rem 1.5rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .hero-links .primary {
-    background: var(--accent);
-    color: var(--bg);
-    font-weight: 700;
-  }
-  .hero-links .primary:hover {
-    background: #00eabb;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0,212,170,0.25);
-  }
-  .hero-links .secondary {
-    border: 1px solid var(--muted);
-    color: var(--light);
-  }
-  .hero-links .secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 1.2s forwards;
-  }
-  .badge-row {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-  }
-  .badge {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    padding: 0.45rem 1rem;
-    border-radius: 6px;
-    background: var(--card);
-    color: var(--accent);
-    border: 1px solid rgba(0,212,170,0.15);
-    transition: all 0.3s;
-  }
-  .badge:hover {
-    background: var(--card-hover);
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  /* === PROJECT CARDS === */
-  .project {
-    background: var(--bg2);
-    border-radius: 16px;
-    margin-bottom: 3rem;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.04);
-    transition: all 0.4s;
-  }
-  .project:hover {
-    border-color: rgba(0,212,170,0.15);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
-  }
-  .project-header {
-    padding: 2.5rem 3rem 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .project-tag {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    background: var(--accent);
-    color: var(--bg);
-  }
-  .project-tag.blue { background: var(--accent2); color: var(--white); }
-  .project-tag.yellow { background: var(--accent3); color: var(--bg); }
-  .project-tag.purple { background: var(--purple); color: var(--white); }
-  .project-tag.green { background: var(--green); color: var(--bg); }
-
-  .project-headline {
-    font-size: 0.85rem;
-    color: var(--light);
-    font-family: var(--font-mono);
-  }
-  .project h3 {
-    padding: 1rem 3rem 0;
-    font-size: 1.6rem;
-    font-weight: 900;
-  }
-  .project-subtitle {
-    padding: 0.3rem 3rem 0;
-    color: var(--accent);
-    font-size: 0.9rem;
-    font-family: var(--font-mono);
-  }
-
-  /* Project meta */
-  .project-meta {
-    padding: 1rem 3rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-    font-size: 0.82rem;
-    color: var(--light);
-    font-family: var(--font-mono);
-  }
-  .project-meta .badge {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.7rem;
-  }
-
-  /* Project sections */
-  .project-section {
-    padding: 0 3rem 2.5rem;
-  }
-  .section-sub-label {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  /* Grids */
-  .context-grid, .issue-grid, .solution-grid, .decision-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  .context-card, .issue-card, .solution-card, .decision-card {
-    background: var(--card);
-    border-radius: 10px;
-    padding: 1.3rem;
-    border-left: 3px solid var(--muted);
-    transition: all 0.3s;
-  }
-  .context-card:hover, .issue-card:hover, .solution-card:hover, .decision-card:hover {
-    background: var(--card-hover);
-    transform: translateY(-2px);
-  }
-  .context-card { border-left-color: var(--red); }
-  .issue-card { border-left-color: var(--accent3); }
-  .solution-card { border-left-color: var(--accent2); }
-  .decision-card { border-left-color: var(--purple); }
-
-  .context-card h5 { color: var(--red); }
-  .issue-card h5 { color: var(--accent3); }
-  .solution-card h5 { color: var(--accent2); }
-  .decision-card h5 { color: var(--purple); }
-
-  .context-card h5, .issue-card h5, .solution-card h5, .decision-card h5 {
-    font-size: 0.88rem;
-    font-weight: 700;
-    margin-bottom: 0.4rem;
-  }
-  .context-card p, .issue-card p, .solution-card p, .decision-card p {
-    font-size: 0.83rem;
-    color: var(--light);
-    line-height: 1.6;
-  }
-
-  /* Metric row */
-  .metric-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-  .metric-box {
-    background: var(--card);
-    border-radius: 10px;
-    padding: 1.5rem;
-    text-align: center;
-    border-top: 3px solid var(--accent);
-    transition: all 0.3s;
-  }
-  .metric-box:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-  }
-  .metric-value {
-    font-family: var(--font-mono);
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: var(--accent);
-    margin-bottom: 0.3rem;
-  }
-  .metric-desc {
-    font-size: 0.78rem;
-    color: var(--light);
-  }
-
-  /* Lesson grid */
-  .lesson-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  .lesson-card {
-    background: var(--card);
-    border-radius: 10px;
-    padding: 1.5rem;
-  }
-  .lesson-card.good { border-left: 3px solid var(--green); }
-  .lesson-card.bad { border-left: 3px solid var(--accent3); }
-  .lesson-card h5 { font-size: 0.9rem; margin-bottom: 0.8rem; }
-  .lesson-card.good h5 { color: var(--green); }
-  .lesson-card.bad h5 { color: var(--accent3); }
-  .lesson-card ul { list-style: none; padding: 0; }
-  .lesson-card ul li {
-    font-size: 0.83rem;
-    color: var(--light);
-    line-height: 1.7;
-    padding-left: 1rem;
-    position: relative;
-    margin-bottom: 0.3rem;
-  }
-  .lesson-card ul li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-  }
-  .lesson-card.good ul li::before { color: var(--green); }
-  .lesson-card.bad ul li::before { color: var(--accent3); }
-
-  /* Architecture */
-  .arch-flow {
-    padding: 0 3rem 2.5rem;
-  }
-  .arch-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-  }
-  .arch-placeholder img {
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-  .flow-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .flow-box {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    background: var(--card);
-    border: 1px solid var(--muted);
-    color: var(--white);
-    text-align: center;
-    transition: all 0.3s;
-    white-space: nowrap;
-  }
-  .flow-box:hover {
-    border-color: var(--accent);
-    background: var(--card-hover);
-  }
-  .flow-arrow {
-    color: var(--accent);
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  /* === OVERVIEW TABLE === */
-  .project-overview { margin-top: 2rem; }
-  .overview-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 0.6rem;
-  }
-  .overview-table thead th {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: left;
-    padding: 0 1.2rem 0.5rem;
-  }
-  .overview-table tbody tr {
-    background: var(--card);
-    border-radius: 10px;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-  .overview-table tbody tr:hover {
-    background: var(--card-hover);
-    transform: translateX(4px);
-  }
-  .overview-table td {
-    padding: 1.2rem;
-    font-size: 0.9rem;
-    vertical-align: middle;
-  }
-  .overview-table td:first-child {
-    border-radius: 10px 0 0 10px;
-    font-weight: 700;
-  }
-  .overview-table td:last-child {
-    border-radius: 0 10px 10px 0;
-  }
-  .overview-table .proj-summary {
-    color: var(--light);
-    font-size: 0.85rem;
-  }
-  .contrib-bar { display: flex; align-items: center; gap: 0.6rem; }
-  .contrib-bar .bar {
-    flex: 1; height: 6px; background: var(--bg);
-    border-radius: 3px; overflow: hidden; min-width: 60px;
-  }
-  .contrib-bar .bar-fill {
-    height: 100%; border-radius: 3px;
-    background: var(--accent); transition: width 0.6s ease;
-  }
-  .contrib-bar .bar-pct {
-    font-family: var(--font-mono); font-size: 0.8rem;
-    font-weight: 700; color: var(--accent); white-space: nowrap;
-  }
-
-  /* === TECH STACK === */
-  .stack-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .stack-card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 1.8rem;
-    border-top: 3px solid var(--accent);
-    transition: all 0.4s;
-  }
-  .stack-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-  }
-  .stack-card:nth-child(2) { border-top-color: var(--accent2); }
-  .stack-card:nth-child(3) { border-top-color: var(--accent3); }
-  .stack-card:nth-child(4) { border-top-color: var(--green); }
-  .stack-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--accent); }
-  .stack-card:nth-child(2) h4 { color: var(--accent2); }
-  .stack-card:nth-child(3) h4 { color: var(--accent3); }
-  .stack-card:nth-child(4) h4 { color: var(--green); }
-  .stack-card p {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--light);
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .role {
+    color: var(--ink-3);
+    margin: 0 0 24px;
+    font-size: 15px;
+  }
+  .contact {
+    font-size: 14px;
+    color: var(--ink-2);
     line-height: 2;
   }
-
-  /* === FOOTER === */
-  footer {
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 3rem 2rem;
-    text-align: center;
+  .contact b {
+    display: inline-block;
+    width: 70px;
+    color: var(--ink-4);
+    font-weight: 400;
   }
-  footer .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  footer .footer-links a {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--light);
+  .download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 14px;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: border-color .15s, color .15s;
   }
-  footer .footer-links a:hover { color: var(--accent); }
-  footer .copy { font-size: 0.8rem; color: var(--muted); }
+  .download:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* === ANIMATIONS === */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* ----- Section heads ----- */
+  h2 {
+    font-size: 21px;
+    font-weight: 700;
+    margin: 72px 0 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: -0.005em;
   }
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s, transform 0.6s;
+  h2 .pnum {
+    display: inline-block;
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 6px;
+    letter-spacing: 0;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+  h2 .side {
+    color: var(--ink-4);
+    font-size: 13px;
+    font-weight: 400;
+    margin-left: 6px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 28px 0 8px;
+    color: var(--ink);
+  }
+  h3::before {
+    content: "▸";
+    color: var(--accent);
+    margin-right: 6px;
+    font-size: 13px;
   }
 
-  /* === RESPONSIVE === */
-  @media (max-width: 900px) {
-    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-left h1 { font-size: 2.5rem; }
-    .stack-grid { grid-template-columns: repeat(2, 1fr); }
-    .project-header { padding: 2rem 1.5rem 0; }
-    .project h3 { padding: 1rem 1.5rem 0; }
-    .project-subtitle { padding: 0.3rem 1.5rem 0; }
-    .project-meta { padding: 1rem 1.5rem; }
-    .project-section { padding: 0 1.5rem 1.5rem; }
-    .arch-flow { padding: 0 1.5rem 1.5rem; }
-    .context-grid, .issue-grid, .solution-grid, .decision-grid, .lesson-grid { grid-template-columns: 1fr; }
-    .metric-row { grid-template-columns: repeat(2, 1fr); }
+  /* ----- About ----- */
+  .about {
+    color: var(--ink-2);
+    line-height: 1.75;
   }
+
+  /* ----- TOC ----- */
+  .toc {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    font-size: 15px;
+  }
+  .toc li {
+    border-bottom: 1px solid var(--line-2);
+  }
+  .toc li:last-child { border-bottom: none; }
+  .toc a {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: baseline;
+    padding: 10px 0;
+    transition: padding-left .15s, color .15s;
+  }
+  .toc a:hover {
+    padding-left: 6px;
+    color: var(--accent);
+  }
+  .toc .num {
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  .toc .stack {
+    color: var(--ink-4);
+    font-size: 13px;
+    flex-shrink: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  /* ----- Project meta ----- */
+  .meta {
+    color: var(--ink-3);
+    font-size: 13.5px;
+    margin: 0 0 4px;
+  }
+  .stack-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 8px 0 24px;
+  }
+  .stack-line span {
+    display: inline-block;
+    padding: 2px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--ink-3);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.01em;
+  }
+
+  /* ----- Architecture figure ----- */
+  figure.arch {
+    margin: 20px 0 24px;
+  }
+  figure.arch figcaption {
+    font-size: 12px;
+    color: var(--ink-4);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    margin-bottom: 8px;
+  }
+  figure.arch figcaption .label {
+    display: inline-block;
+    color: var(--accent);
+    margin-right: 8px;
+  }
+  figure.arch img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: #0d0d10;
+  }
+
+  /* ----- Result callout ----- */
+  .result {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .result b { color: var(--ink); }
+
+  /* ----- Rationale dl ----- */
+  dl.rationale { margin: 8px 0; }
+  dl.rationale dt {
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 14px;
+    color: var(--ink);
+  }
+  dl.rationale dd {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: var(--ink-2);
+    padding-left: 14px;
+    border-left: 2px solid var(--line);
+  }
+
+  /* ----- Footer ----- */
+  footer {
+    margin-top: 96px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-4);
+  }
+  footer a { color: var(--ink-3); }
+
   @media (max-width: 600px) {
-    .hero-left h1 { font-size: 2rem; }
-    .stack-grid { grid-template-columns: 1fr; }
-    .metric-row { grid-template-columns: 1fr; }
-    nav .links { gap: 1rem; }
-    nav .links a { font-size: 0.75rem; }
-    .flow-row { flex-direction: column; align-items: stretch; }
-    .flow-arrow { transform: rotate(90deg); align-self: center; }
+    .wrap { padding: 40px 18px 64px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 19px; }
+    .toc a { flex-direction: column; gap: 2px; }
+    .toc .stack { font-size: 12px; }
+    .contact b { width: 60px; }
   }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<!-- NAV -->
-<nav>
-  <div class="inner">
-    <div class="logo">duhyeon<span>@portfolio</span>:~$</div>
-    <!-- <div class="links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#stack">Stack</a>
-      <a href="https://github.com/DuHyeon2" target="_blank">GitHub</a>
-    </div> -->
+<header>
+  <h1>김두현</h1>
+  <p class="role">Backend / DevOps Engineer</p>
+  <div class="contact">
+    <div><b>Email</b><a href="mailto:engus9781@gmail.com">engus9781@gmail.com</a></div>
+    <div><b>GitHub</b><a href="https://github.com/DuHyeon2" target="_blank" rel="noopener">github.com/DuHyeon2</a></div>
+    <div><b>Phone</b>010-9771-9781</div>
+    <div><b>DOB</b>1998.02.05</div>
   </div>
-</nav>
+  <a class="download" href="portfolio.pdf" download="김두현_포트폴리오.pdf">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    PDF 버전 다운로드
+  </a>
+</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-left">
-      <div class="greeting">$ whoami</div>
-      <h1>김두현</h1>
-      <div class="role">DevOps / Backend Engineer</div>
-      <p class="desc">
-        생년월일: 98.02.05<br>
-        연락처: 010-9771-9781<br>
-        이메일: engus9781@gmail.com<br>
-        github: <a href="https://github.com/DuHyeon2" target="_blank">https://github.com/DuHyeon2
-        </a>
-      </p>
-      <div class="hero-links">
-        <a href="#projects" class="primary">프로젝트 보기</a>
-        <a href="https://github.com/DuHyeon2" target="_blank" class="secondary">GitHub →</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="badge-row">
-        <span class="badge">Kubernetes</span>
-        <span class="badge">Spring Boot</span>
-        <span class="badge">FastAPI</span>
-      </div>
-      <div class="badge-row">
-        <span class="badge">Kafka</span>
-        <span class="badge">PostgreSQL</span>
-        <span class="badge">Docker</span>
-      </div>
-      <div class="badge-row">
-        <span class="badge">ArgoCD</span>
-        <span class="badge">Temporal</span>
-        <span class="badge">Elasticsearch</span>
-      </div>
-      <div class="badge-row">
-        <span class="badge">Jenkins</span>
-        <span class="badge">GitHub Actions</span>
-        <span class="badge">Helm</span>
-      </div>
-    </div>
-  </div>
-</section>
+<h2>About</h2>
+<p class="about">
+  데이터 파이프라인 설계, 성능 최적화, 이벤트 아키텍처 구축까지 폭넓은 경험을 쌓아왔습니다.
+  Temporal·Kafka·CDC로 안정성을, LangGraph·LLM으로 가치를, Kubernetes·GitOps로 확장성을 만듭니다.
+</p>
 
-<!-- OVERVIEW -->
-<section id="about">
-  <div class="project-overview reveal">
-    <div class="section-label">Overview</div>
-    <h2 class="section-title">전체 프로젝트 한눈에 보기</h2>
-    <table class="overview-table">
-      <thead>
-        <tr><th>프로젝트명</th><th>요약</th><th>기여도</th></tr>
-      </thead>
-      <tbody>
-        <tr onclick="document.getElementById('p1').scrollIntoView({behavior:'smooth'})">
-          <td>NetCDF 파이프라인</td>
-          <td class="proj-summary">SSE → Temporal 전환, 동시 처리량 5배 향상</td>
-          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%"></div></div><span class="bar-pct">100%</span></div></td>
-        </tr>
-        <tr onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">
-          <td>LLM 오케스트레이션</td>
-          <td class="proj-summary">Temporal + LangChain + Redis 파이프라인</td>
-          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:60%;background:var(--accent3)"></div></div><span class="bar-pct" style="color:var(--accent3)">60%</span></div></td>
-        </tr>
-        <tr onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
-          <td>CDC 파이프라인</td>
-          <td class="proj-summary">Debezium Embedded로 일 43,200건 폴링 → 0건</td>
-          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--accent2)"></div></div><span class="bar-pct" style="color:var(--accent2)">100%</span></div></td>
-        </tr>
-        <tr onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">
-          <td>웹툰 검색 파이프라인</td>
-          <td class="proj-summary">수동 적재 → Airbyte + Elasticsearch 자동화</td>
-          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--green)"></div></div><span class="bar-pct" style="color:var(--green)">100%</span></div></td>
-        </tr>
-        <tr onclick="document.getElementById('p5').scrollIntoView({behavior:'smooth'})">
-          <td>GIVE ME CONTROLLER</td>
-          <td class="proj-summary">Spring Cloud + AWS EKS MSA 자기주도 학습</td>
-          <td><div class="contrib-bar"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--purple)"></div></div><span class="bar-pct" style="color:var(--purple)">100%</span></div></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+<h2>Projects</h2>
+<ul class="toc">
+  <li><a href="#p1"><span><span class="num">01</span>NetCDF 데이터 처리 파이프라인 최적화</span><span class="stack">FastAPI · Temporal · K8s</span></a></li>
+  <li><a href="#p2"><span><span class="num">02</span>이미지 분석 챗봇 서비스</span><span class="stack">LangGraph · Temporal · Redis</span></a></li>
+  <li><a href="#p3"><span><span class="num">03</span>Kafka Streams 기반 CSV 적재 파이프라인</span><span class="stack">Kafka · Spring · Protobuf</span></a></li>
+  <li><a href="#p4"><span><span class="num">04</span>계측기 알람 서비스 (CDC)</span><span class="stack">Spring Boot · Debezium</span></a></li>
+  <li><a href="#p5"><span><span class="num">05</span>지역 군청 공간정보 & 키오스크</span><span class="stack">Spring Boot · Vue · GPKI</span></a></li>
+  <li><a href="#p6"><span><span class="num">06</span>웹툰 검색 파이프라인 <em style="font-style:normal;color:var(--ink-4)">(side)</em></span><span class="stack">Airbyte · Elasticsearch</span></a></li>
+  <li><a href="#p7"><span><span class="num">07</span>Give Me Controller <em style="font-style:normal;color:var(--ink-4)">(side)</em></span><span class="stack">Spring Cloud · AWS EKS</span></a></li>
+</ul>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label reveal">Projects</div>
-  <h2 class="section-title reveal">주요 프로젝트</h2>
+<!-- =================== PROJECT 1 =================== -->
+<h2 id="p1"><span class="pnum">01</span>NetCDF 데이터 처리 파이프라인 최적화</h2>
+<p class="meta">디지털 트윈 플랫폼 · 대규모 다차원 배열 과학 데이터 가공 서비스 · 기간 2025.08 ~ 2026.01 · 기여도 100%</p>
+<p class="stack-line">
+  <span>FastAPI</span><span>Temporal</span><span>Redis</span><span>S3</span><span>Kubernetes</span><span>HPA</span><span>JMeter</span>
+</p>
 
-  <!-- =============================== -->
-  <!-- Project 1: NetCDF               -->
-  <!-- =============================== -->
-  <div class="project reveal" id="p1">
-    <div class="project-header">
-      <span class="project-tag">Project 1</span>
-      <span class="project-headline">데이터 파이프라인 · 성능 최적화</span>
-    </div>
-    <h3>NetCDF 데이터 처리 파이프라인 최적화</h3>
-    <div class="project-subtitle">FastAPI SSE 엔드포인트 → Temporal Workflow 전환</div>
-    <div class="project-meta">
-      <span>기간: 2025.08 ~ 2026.01</span> | <span>기여도: 100%</span>
-      <span class="badge">Python</span>
-      <span class="badge">FastAPI</span>
-      <span class="badge">Temporal</span>
-      <span class="badge">Redis</span>
-      <span class="badge">Kubernetes</span>
-      <span class="badge">HPA</span>
-    </div>
+<h3>문제 상황</h3>
+<ul>
+  <li><b>대용량 응답으로 클라이언트 다운</b> — NetCDF 시계열 데이터를 한 번에 전송하니 클라이언트가 응답을 처리하지 못하고 다운되는 현상 발생, 커넥션도 장시간 점유</li>
+  <li><b>중단 시 전체 재시작</b> — Worker Pod가 중간에 재시작되거나 배포되면, 이미 처리한 수천 개의 타임스텝도 처음부터 다시 처리해야 함</li>
+  <li><b>단일 Pod 병목</b> — FastAPI 하나가 수신·처리·응답을 모두 담당, 수평 확장 구조 부재로 요청 증가 시 응답 지연 폭증</li>
+  <li><b>대용량 업로드 시간 지연</b> — 클라이언트 → 서버 → NFS로 경유되며 서버가 전체 파일을 수신한 뒤 NFS에 저장해야 해서 업로드 완료까지 시간이 길어지고 서버 메모리·네트워크 비용도 이중으로 발생</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
-      <div class="context-grid">
-        <div class="context-card">
-          <h5>SSE 커넥션 타임아웃</h5>
-          <p>대용량 NetCDF 응답을 클라이언트가 한 번에 수신 불가</p>
-        </div>
-        <div class="context-card">
-          <h5>단일 서비스 병목</h5>
-          <p>동시 요청 증가 시 단일 FastAPI Pod에 병목 집중, 응답 지연 및 장애 전파</p>
-        </div>
-        <div class="context-card">
-          <h5>처리 시간 과다</h5>
-          <p>NetCDF 파일당 수천 개 타임스텝 이미지 생성, 단일 Pod에서 평균 282초 소요로 사용자 대기 불가</p>
-        </div>
-        <div class="context-card">
-          <h5>재시도 로직 부재</h5>
-          <p>데이터 가공 도중 에러 발생 시 전체 파이프라인 실패, 수동 재실행 필요</p>
-        </div>
-      </div>
-    </div>
+<figure class="arch">
+  <figcaption><span class="label">AS-IS</span>기존 아키텍처</figcaption>
+  <img src="arch/p1_as_is.jpg" alt="NetCDF 파이프라인 AS-IS 아키텍처 — User → FastAPI Server → NetCDF Processor → SSE stream → Client" loading="lazy" />
+</figure>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 AS-IS Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/netcdf_before.png" alt="NetCDF AS-IS" style="width:100%;max-width:960px;">
-      </div>
-      <div class="issue-grid" style="margin-top:1rem;">
-        <div class="issue-card">
-          <h5>커넥션 불안정</h5>
-          <p>FastAPI가 직접 NetCDF 처리 후 SSE로 스트리밍</p>
-        </div>
-        <div class="issue-card">
-          <h5>스케일링 불가</h5>
-          <p>단일 Pod에서 처리/응답을 모두 담당, 수평 확장 구조 부재</p>
-        </div>
-      </div>
-    </div>
+<h3>해결 과정</h3>
+<ul>
+  <li><b>응답 모델 재설계</b> — 한 번에 전부 전송하는 구조에서, 타임스텝별 결과물을 Redis에 저장하고 클라이언트가 시계열 단위로 Key를 통해 순차 조회하는 구조로 전환</li>
+  <li><b>Temporal 비동기 처리 도입</b> — FastAPI는 Workflow 시작과 Key 반환만 담당, 실제 처리는 Worker가 수행 — 요청과 실행을 분리</li>
+  <li><b>Heartbeat 기반 체크포인트 복구</b> — 처리 중인 타임스텝 인덱스를 <code>activity.heartbeat</code>로 주기 보고, 재시작 시 <code>heartbeat_details</code>에서 마지막 인덱스를 꺼내 이어서 처리</li>
+  <li><b>S3 Presigned URL 업로드 구조</b> — 클라이언트가 S3에 직접 업로드 후 서비스가 S3에서 copy해 NFS에 저장 — 업로드 시간 단축 + 서버 부하 절감</li>
+  <li><b>HPA 수평 확장</b> — Worker Pod 수를 HPA로 오토스케일링, 부하에 따라 처리량 확보</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 TO-BE Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/netcdf_after.png" alt="NetCDF TO-BE" style="width:100%;max-width:960px;">
-      </div>
-      <div class="solution-grid" style="margin-top:1rem;">
-        <div class="solution-card">
-          <h5>Temporal Workflow</h5>
-          <p>Worker 단위 자동 재시도 및 타임아웃 선언적 관리</p>
-        </div>
-        <div class="solution-card">
-          <h5>Redis 적재 + Key 반환</h5>
-          <p>Worker가 가공 결과를 Redis에 저장, 클라이언트에 Redis Key만 반환</p>
-        </div>
-        <div class="solution-card">
-          <h5>HPA Worker 확장</h5>
-          <p>Kubernetes HPA로 Worker Pod 자동 스케일링, 동시 처리량 수평 확장</p>
-        </div>
-      </div>
-    </div>
+<figure class="arch">
+  <figcaption><span class="label">TO-BE</span>개선된 아키텍처</figcaption>
+  <img src="arch/p1_to_be.jpg" alt="NetCDF 파이프라인 TO-BE 아키텍처 — FastAPI Pod + Temporal Server + Worker Pods (HPA 오토스케일링) + Redis Key 반환 + S3 Presigned URL" loading="lazy" />
+</figure>
 
-    <div class="project-section">
-      <div class="section-sub-label">🔧 기술 선택 근거</div>
-      <div class="decision-grid">
-        <div class="decision-card">
-          <h5>왜 Temporal?</h5>
-          <p>워크플로우 상태 추적, 자동 재시도, 타임아웃 관리가 선언적으로 가능.</p>
-        </div>
-        <div class="decision-card">
-          <h5>왜 Redis?</h5>
-          <p>Redis에 적재하여 클라이언트 읽기 지연 최소화.</p>
-        </div>
+<h3>역할</h3>
+<ul>
+  <li><b>아키텍처 전환 설계</b> — SSE 직접 전송 방식의 한계(커넥션 점유, 중단 시 재처리)를 진단하고, Temporal + Redis 기반 비동기 구조로의 전환 결정 및 설계</li>
+  <li><b>프론트와 응답 스펙 합의</b> — Redis Key 반환 방식을 먼저 제안, 클라이언트 소비 방식·조회 패턴을 프론트 개발자와 협의 후 확정하고 구현 착수</li>
+  <li><b>체크포인트 복구 구현</b> — heartbeat 콜백 함수를 이미지 생성 루프에 주입, Activity 재시작 시 heartbeat_details에서 start_idx를 꺼내 이어서 처리하도록 구현</li>
+  <li><b>S3 Presigned URL 발급 API 구현</b> — KakaoCloud Object Storage 연동, 서버에서 임시 URL을 발급해 클라이언트가 S3에 직접 업로드 → 서비스가 S3에서 copy해 NFS에 저장하는 구조 설계 및 엔드포인트 구현</li>
+  <li><b>HPA 설정 및 튜닝</b> — Worker Pod의 HPA minReplicas/maxReplicas 설정, cold-start 지연을 고려한 최소 Replica 수 결정</li>
+  <li><b>JMeter 부하 테스트</b> — 동시 50건 부하 시나리오 구성, 처리량·에러율 측정 및 HPA 튜닝 결과 검증</li>
+</ul>
 
-        <div class="decision-card">
-          <h5>왜 HPA?</h5>
-          <p>Temporal Worker의 max_concurrent_activities=2로 제한하되, Pod 수를 HPA로 수평 확장하여 처리량 확보.</p>
-        </div>
-      </div>
-    </div>
+<h3>기술 선택 근거</h3>
+<dl class="rationale">
+  <dt>SSE 직접 스트리밍 대신 Redis Key 반환을 택한 이유</dt>
+  <dd>SSE는 단일 커넥션으로 실시간 전송에 적합하지만, 연결이 끊어지면 클라이언트가 어디까지 받았는지 알 수 없고 재연결 시 처음부터 다시 받아야 함. Redis Key 방식은 원하는 시점에 원하는 범위만 조회할 수 있어 대용량 시계열 데이터에 더 적합하다고 판단.</dd>
+  <dt>단순 재시도 대신 Heartbeat를 택한 이유</dt>
+  <dd>타임스텝 처리 중 Worker가 죽으면 단순 재시도는 처음부터 다시. Heartbeat로 진행 상태를 저장해두면 마지막 위치부터 이어받기 가능.</dd>
+  <dt>서버 직접 업로드 대신 Presigned URL을 택한 이유</dt>
+  <dd>기존 클라이언트 → 서버 → NFS 구조에서는 서버가 대용량 파일 전체를 수신한 뒤 NFS에 저장해야 해서 업로드 시간이 길어지고 서버 메모리·네트워크 비용도 이중으로 발생. Presigned URL 방식은 서버가 인증 토큰만 발급하고 클라이언트가 S3에 직접 업로드, 서비스는 이후 S3에서 copy해 NFS에 저장만 수행하므로 업로드 소요 시간이 줄고 서버 부담 없이 확장 가능.</dd>
+</dl>
 
-    <div class="project-section">
-      <div class="section-sub-label">📊 성과</div>
-      <div class="metric-row">
-        <div class="metric-box"><div class="metric-value">SIGABRT 0건</div><div class="metric-desc">JMeter 동시 100 요청 HDF5 스레드 충돌 해결</div></div>
-        <div class="metric-box"><div class="metric-value">즉시 응답</div><div class="metric-desc">Redis Key 반환으로 타임아웃 제거</div></div>
-        <div class="metric-box"><div class="metric-value">N개 병렬</div><div class="metric-desc">Worker replicas 수평 확장</div></div>
-        <div class="metric-box"><div class="metric-value">자동 복구</div><div class="metric-desc">Activity 단위 재시도</div></div>
-      </div>
-    </div>
+<div class="result">
+  <b>성과 · 2.5/min → 7.1/min</b><br>
+  동시 50건 부하 기준 처리량 약 3배 향상. 단일 Pod → Temporal + HPA 수평 확장 구조로 전환, 에러율 0% 유지.
+</div>
 
-    <div class="project-section">
-      <div class="lesson-grid">
-        <div class="lesson-card good">
-          <h5>✅ 배운 점</h5>
-          <ul>
-            <li>워크플로우 오케스트레이션의 장애 복구 패턴 실무 적용 경험</li>
-            <li>HPA 튜닝 시 minReplicas 설정이 cold-start 지연 해소에 핵심임을 확인</li>
-          </ul>
-        </div>
-        <div class="lesson-card bad">
-          <h5>💭 아쉬운 점</h5>
-          <ul>
-            <li>Temporal Worker 장애 시 모니터링/알림 체계 없이 수동으로 확인해야 했음</li>
-            <li>HDF5 스레드 안전성 문제를 threading.Lock으로 해결했지만, 근본적으로 프로세스 격리 방식 검토가 미흡</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<h3>배운 점</h3>
+<p>장시간 반복 처리는 "재시도"가 아니라 "이어받기(체크포인트)"가 답이다. 진행 상태를 외부에 저장해두는 설계가 장애 복원력의 핵심이다.</p>
 
-  <!-- =============================== -->
-  <!-- Project 2: LLM                  -->
-  <!-- =============================== -->
-  <div class="project reveal" id="p2">
-    <div class="project-header">
-      <span class="project-tag yellow">Project 2</span>
-      <span class="project-headline">LLM 오케스트레이션 · 실시간 스트리밍</span>
-    </div>
-    <h3>LLM 기반 워크플로우 오케스트레이션 시스템</h3>
-    <div class="project-subtitle" style="color:var(--accent3)">FastAPI + Temporal + LangChain + Redis Pub/Sub</div>
-    <div class="project-meta">
-      <span>기간: 2025.12 ~ 2026.04</span> | <span>기여도: 60%</span>
-      <span class="badge">Python</span>
-      <span class="badge">FastAPI</span>
-      <span class="badge">Temporal</span>
-      <span class="badge">LangChain</span>
-      <span class="badge">Redis</span>
-      <span class="badge">OpenAI</span>
-    </div>
+<h3>아쉬운 점</h3>
+<ul>
+  <li><code>heartbeat_timeout</code> 시간 선택이 실측 기반 튜닝이 아닌 보수적 설정 수준 — 실제 heartbeat 주기 분포에 맞춘 정교한 값 조정 필요</li>
+  <li>Temporal 내부의 Replay·상태 저장 메커니즘은 더 깊이 이해하는 것이 다음 학습 과제</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
-      <div class="context-grid">
-        <div class="context-card">
-          <h5>LLM 응답 지연 · 중단</h5>
-          <p>OpenAI API는 응답까지 수십 초 소요, 중간에 타임아웃으로 끊기면 전체 결과 유실</p>
-        </div>
-        <div class="context-card">
-          <h5>클라이언트 커넥션 장시간 점유</h5>
-          <p>응답 완료까지 클라이언트가 45초+ 대기, 중단 시 처음부터 재시도 필요</p>
-        </div>
-        <div class="context-card">
-          <h5>체인 실패 시 전체 재실행</h5>
-          <p>여러 LLM 단계로 구성된 체인에서 중간 실패 시 앞 단계 결과까지 버리고 처음부터 재실행</p>
-        </div>
-      </div>
-    </div>
+<!-- =================== PROJECT 2 =================== -->
+<h2 id="p2"><span class="pnum">02</span>이미지 분석 챗봇 서비스</h2>
+<p class="meta">디지털 트윈 플랫폼 · LLM 기반 워크플로우 오케스트레이션 시스템 · 기간 2025.12 ~ 2026.04 · 기여도 60%</p>
+<p class="stack-line">
+  <span>FastAPI</span><span>Temporal</span><span>LangChain</span><span>LangGraph</span><span>Redis Pub/Sub</span><span>OpenAI</span>
+</p>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 AS-IS Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/llm_before.png" alt="LLM AS-IS" style="width:100%;max-width:960px;">
-      </div>
-      <div class="issue-grid" style="margin-top:1rem;">
-        <div class="issue-card">
-          <h5>동기 API 호출 블로킹</h5>
-          <p>FastAPI → OpenAI API 동기 호출, 응답 완료까지 클라이언트 커넥션 점유 및 45초+ 대기</p>
-        </div>
-        <div class="issue-card">
-          <h5>실패 시 전체 재실행</h5>
-          <p>다단계 LLM 체인 중간 실패 시 앞 단계 결과 폐기, 비용과 시간 모두 낭비</p>
-        </div>
-      </div>
-    </div>
+<h3>문제 상황</h3>
+<ul>
+  <li><b>LLM 응답 1분 이상 대기</b> — OpenAI API 응답까지 장시간 소요, 클라이언트 커넥션 장시간 점유</li>
+  <li><b>질문 유형별 처리 분기</b> — 도메인별로 다른 프롬프트·후처리가 필요했으나 단일 체인으로는 분기 어려움</li>
+  <li><b>노드 중간 장애 시 무한 대기</b> — LangGraph 노드가 AI 호출 중 멈추면 전체 워크플로우가 응답을 못 받고 무한 대기 — 자동 재시도·타임아웃 부재</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 TO-BE Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/llm_after.png" alt="LLM TO-BE" style="width:100%;max-width:960px;">
-      </div>
-      <div class="solution-grid" style="margin-top:1rem;">
-        <div class="solution-card">
-          <h5>Temporal Workflow</h5>
-          <p>LLM 호출을 Activity 단위로 분리, 중간 실패 시 해당 단계만 자동 재시도 — 앞 단계 결과 보존</p>
-        </div>
-        <div class="solution-card">
-          <h5>LangChain 체인</h5>
-          <p>프롬프트 → LLM(OpenAI) → 후처리 체인 구성, LCEL 파이프라인으로 선언적 조합</p>
-        </div>
-        <div class="solution-card">
-          <h5>즉시 응답 + Redis Pub/Sub</h5>
-          <p>요청 즉시 Channel Key 반환, 처리 상태를 Pub/Sub으로 실시간 스트리밍 — 클라이언트 블로킹 제거</p>
-        </div>
-      </div>
-    </div>
+<figure class="arch">
+  <figcaption><span class="label">AS-IS</span>기존 아키텍처</figcaption>
+  <img src="arch/p2_as_is.jpg" alt="이미지 분석 챗봇 AS-IS — Client ↔ FastAPI Pod ↔ OpenAI API (SSE streaming, astream 45s+)" loading="lazy" />
+</figure>
 
-    <div class="project-section">
-      <div class="section-sub-label">🔧 기술 선택 근거</div>
-      <div class="decision-grid">
-        <div class="decision-card">
-          <h5>왜 Temporal?</h5>
-          <p>NetCDF 프로젝트에서 검증된 패턴 재활용. 장시간 LLM 호출의 재시도·타임아웃을 선언적으로 관리 가능.</p>
-        </div>
-        <div class="decision-card">
-          <h5>왜 Redis Pub/Sub?</h5>
-          <p>SSE 대비 다중 클라이언트 구독이 자유롭고, Channel Key만 반환하여 커넥션 점유 제거.</p>
-        </div>
-      </div>
-    </div>
+<h3>해결 과정</h3>
+<ul>
+  <li><b>비동기 응답 패턴 적용</b> — 요청 즉시 Channel Key 반환, 클라이언트는 Pub/Sub 구독으로 결과 수신</li>
+  <li><b>LangGraph 도메인 라우팅</b> — intent 분류 노드가 사용자 질문 유형을 판별 → <code>add_conditional_edges</code>로 도메인별 처리 노드로 조건부 분기</li>
+  <li><b>Temporal 워크플로우 단위 재시도</b> — LangGraph 그래프 전체를 하나의 Temporal Activity로 감싸 자동 재시도·타임아웃·지수 백오프 적용 — 개별 LLM 호출 장애가 전체 완주를 막지 못하도록 설계, 무한 대기 문제 해소</li>
+  <li><b>Pub/Sub fan-out 구조</b> — 동일 결과를 여러 클라이언트가 동시 구독할 수 있도록 Redis Pub/Sub 채택</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">📊 기대 효과</div>
-      <div class="metric-row">
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">45s → 즉시</div><div class="metric-desc">첫 응답 도달 (Channel Key 반환)</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent3)"><div class="metric-value" style="color:var(--accent3)">단계 재시도</div><div class="metric-desc">실패 시 해당 Activity만 재실행</div></div>
-      </div>
-    </div>
+<figure class="arch">
+  <figcaption><span class="label">TO-BE</span>개선된 아키텍처</figcaption>
+  <img src="arch/p2_to_be.jpg" alt="이미지 분석 챗봇 TO-BE — Channel Key 반환 + Temporal Activity로 감싼 LangGraph + Redis Pub/Sub fan-out" loading="lazy" />
+</figure>
 
-    <div class="project-section">
-      <div class="lesson-grid">
-        <div class="lesson-card good">
-          <h5>✅ 배운 점</h5>
-          <ul>
-            <li>NetCDF 프로젝트의 Temporal + Redis 패턴을 LLM 도메인에 재적용하며 아키텍처 패턴의 범용성 확인</li>
-            <li>LangChain LCEL 파이프라인으로 프롬프트·모델·파서 조합의 선언적 구성 경험</li>
-          </ul>
-        </div>
-        <div class="lesson-card bad">
-          <h5>💭 아쉬운 점</h5>
-          <ul>
-            <li>Redis Pub/Sub 메시지 유실 가능성(구독 전 발행 시)에 대한 보완 설계 미흡</li>
-            <li>LLM 응답 품질 모니터링 및 평가 체계 미구축</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<h3>역할</h3>
+<ul>
+  <li><b>LangGraph 노드 설계·구현</b> — 질문 유형 분류 노드와 도메인별 처리 노드를 직접 설계, TypedDict 기반 State 정의로 노드 간 데이터 전달</li>
+  <li><b>조건부 라우팅 구현</b> — <code>add_conditional_edges</code>를 활용해 질문 유형별 워크플로우 분기 로직 구현</li>
+  <li><b>비동기 응답 구조 설계</b> — Channel Key 반환 + Pub/Sub 구독 패턴 설계 및 API 엔드포인트 규약 정의</li>
+  <li><b>Temporal 도입 제안</b> — NetCDF 프로젝트에서 실운영으로 먼저 검증한 Temporal을 LLM 오케스트레이션에 도입 제안 — 외부 API 실패 복원력·타임아웃 관리 이점을 논거로 팀 합의 도출</li>
+</ul>
 
-  <!-- =============================== -->
-  <!-- Project 3: CDC                  -->
-  <!-- =============================== -->
-  <div class="project reveal" id="p3">
-    <div class="project-header">
-      <span class="project-tag blue">Project 3</span>
-      <span class="project-headline">데이터 동기화 · 이벤트 기반</span>
-    </div>
-    <h3>CDC 데이터 파이프라인 구축</h3>
-    <div class="project-subtitle" style="color:var(--accent2)">Debezium Embedded Engine 기반 경량 CDC 구현</div>
-    <div class="project-meta">
-      <span>기간: 2023.11 ~ 2024.08</span> | <span>기여도: 100%</span>
-      <span class="badge">Java</span>
-      <span class="badge">Spring Boot</span>
-      <span class="badge">Debezium</span>
-      <span class="badge">PostgreSQL</span>
-      <span class="badge">WebSocket</span>
-    </div>
+<h3>기술 선택 근거</h3>
+<dl class="rationale">
+  <dt>SSE 직접 스트리밍 대신 Channel Key 반환을 택한 이유</dt>
+  <dd>OpenAI API 응답이 1분 이상 소요되는 상황에서 SSE로 직접 전송하면 커넥션이 장시간 점유됨. Channel Key 반환 방식은 요청과 결과 수신을 분리해 여러 클라이언트가 동일 결과를 구독할 수 있고, 커넥션 타임아웃 문제도 해소.</dd>
+  <dt>단일 체인 대신 LangGraph를 택한 이유</dt>
+  <dd>질문 유형에 따라 다른 프롬프트·후처리가 필요한 상황에서 단일 체인은 분기 로직이 코드에 산재됨. LangGraph의 <code>conditional_edges</code>로 라우팅을 그래프 구조로 표현하면 분기가 많아져도 노드 단위로 관리 가능.</dd>
+  <dt>Temporal을 도입한 이유</dt>
+  <dd>LangGraph 노드 중간에 LLM 호출이 멈추면 전체 워크플로우가 무한 대기 상태에 빠짐. LangGraph 그래프 전체를 하나의 Temporal Activity로 감싸 자동 재시도·타임아웃·지수 백오프를 적용, 일시적 LLM API 장애를 흡수하는 구조로 전환.</dd>
+</dl>
 
-    <div class="project-section">
-      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
-      <div class="context-grid">
-        <div class="context-card">
-          <h5>1분마다 전체 조회</h5>
-          <p>각 센서 테이블을 1분 간격으로 전체 조회하는 비효율 구조, 데이터 변경 여부와 무관하게 반복 실행</p>
-        </div>
-        <div class="context-card">
-          <h5>불필요한 쿼리 반복</h5>
-          <p>N개 테이블 × 24시간 × 60분 = 하루 43,200건 이상 데이터가 추가되지 않아도 매분 쿼리 실행</p>
-        </div>
-        <div class="context-card">
-          <h5>데이터 반영 지연</h5>
-          <p>센서 데이터가 추가돼도 최대 1분 후에야 화면에 반영, 실시간 대응이 필요한 상황에서 치명적</p>
-        </div>
-      </div>
-    </div>
+<div class="result">
+  <b>성과 · 에러율 14% → 0%</b><br>
+  동시 50건 부하 기준 완주율 100% 확보. LangGraph 그래프 전체를 Temporal Activity로 감싸 자동 재시도·타임아웃·지수 백오프 적용.
+</div>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 AS-IS Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/cdc_before.png" alt="CDC AS-IS" style="width:100%;max-width:960px;">
-      </div>
-      <div class="issue-grid" style="margin-top:1rem;">
-        <div class="issue-card">
-          <h5>1분마다 전체 테이블 조회</h5>
-          <p>변경 여부와 무관하게 N개 테이블을 매분 전량 SELECT, DB에 불필요한 부하 지속 발생</p>
-        </div>
-        <div class="issue-card">
-          <h5>최대 1분 반영 지연</h5>
-          <p>센서 데이터가 추가돼도 다음 폴링 주기까지 대기, 실시간 대응 불가</p>
-        </div>
-      </div>
-    </div>
+<h3>배운 점</h3>
+<ul>
+  <li>복잡한 LLM 워크플로우는 선형 체인보다 그래프로 모델링할 때 분기·재사용이 명확해진다 — 도메인 로직이 다양할수록 LangGraph의 노드 분리가 유지보수성을 높인다</li>
+  <li>외부 API를 부르는 워크플로우는 "성공 시간"이 아니라 "실패 시 복원 전략"이 안정성을 결정한다 — 자동 재시도·타임아웃·백오프를 워크플로우 단위로 걸어두면 일시적 장애가 전체 실패로 이어지지 않는다</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 TO-BE Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/cdc_after.png" alt="CDC TO-BE" style="width:100%;max-width:960px;">
-      </div>
-      <div class="solution-grid" style="margin-top:1rem;">
-        <div class="solution-card">
-          <h5>데이터 추가 시 자동 감지</h5>
-          <p>DB에 센서 데이터가 추가되는 순간 자동으로 감지하여 처리 (PostgreSQL WAL 기반)</p>
-        </div>
-        <div class="solution-card">
-          <h5>테이블별 핸들러 자동 매핑</h5>
-          <p>각 계측기 테이블마다 처리 로직을 자동으로 매핑, 새 테이블 추가 시 핸들러 클래스만 추가하면 완료</p>
-        </div>
-        <div class="solution-card">
-          <h5>배치/즉시 처리 분리</h5>
-          <p>알람 데이터는 즉시 처리, 센서 데이터는 모아서 배치 처리</p>
-        </div>
-        <div class="solution-card">
-          <h5>Kafka 없는 경량 구조</h5>
-          <p>별도 인프라 추가 없이 Spring Boot 앱 하나로 변경 감지 운영</p>
-        </div>
-      </div>
-    </div>
+<h3>아쉬운 점</h3>
+<ul>
+  <li>Pub/Sub 구독 전 발행 시 메시지 유실 가능성에 대한 보완 설계 미흡</li>
+  <li>50건 샘플 기준 측정으로 통계적 신뢰도는 제한적 — 더 큰 샘플과 다양한 장애 시나리오에서의 지속 측정 필요</li>
+  <li>실측 LLM 응답 지연 분포에 맞춘 재시도·타임아웃 값 튜닝이 미흡 — 현재 값은 경험적 설정 수준, 추후 지속 관측 필요</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">🔧 기술 선택 근거</div>
-      <div class="decision-grid">
-        <div class="decision-card">
-          <h5>왜 Embedded Debezium?</h5>
-          <p>Kafka 클러스터 없이 앱 하나로 변경 감지 가능, 인프라 최소화가 핵심이었기 때문에 Embedded 방식 선택</p>
-        </div>
-        <div class="decision-card">
-          <h5>왜 WAL 기반?</h5>
-          <p>테이블마다 트리거를 수동 등록할 필요 없이, DB 레벨에서 모든 테이블의 데이터 추가를 자동 캡처</p>
-        </div>
-      </div>
-    </div>
+<!-- =================== PROJECT 3 =================== -->
+<h2 id="p3"><span class="pnum">03</span>Kafka Streams 기반 CSV 적재 파이프라인</h2>
+<p class="meta">디지털 트윈 플랫폼 · CSV 동기 적재 → 이벤트 기반 비동기 파이프라인 전환 · 기간 2025.07 ~ 2025.09 · 기여도 60%</p>
+<p class="stack-line">
+  <span>Spring Boot</span><span>Kafka</span><span>Kafka Streams</span><span>Protobuf</span><span>WebSocket</span>
+</p>
 
-    <div class="project-section">
-      <div class="section-sub-label">📊 성과</div>
-      <div class="metric-row">
-        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">43,200 → 0</div><div class="metric-desc">일 폴링 쿼리 수</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">35%↓</div><div class="metric-desc">DB CPU 사용률</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">60s → 50ms</div><div class="metric-desc">변경 감지 지연</div></div>
-        <div class="metric-box" style="border-top-color:var(--accent2)"><div class="metric-value" style="color:var(--accent2)">0개</div><div class="metric-desc">추가 인프라</div></div>
-      </div>
-    </div>
+<h3>문제 상황</h3>
+<ul>
+  <li><b>동기 처리로 API 점유</b> — CSV 적재 요청이 FastAPI 안에서 동기로 DB INSERT까지 수행되어, 처리 동안 워커가 묶여 다른 요청 응답 지연</li>
+  <li><b>행 단위 INSERT로 DB 부하</b> — 파싱된 행을 한 건씩 INSERT하는 구조로 트랜잭션 비용·네트워크 왕복이 누적되어 DB CPU에 부담</li>
+  <li><b>중단 시 재요청 부담 · 확장 한계</b> — 처리 중간에 끊기면 어디까지 적재됐는지 추적이 어렵고, 적재 로직이 API 서버에 묶여 별도 스케일이 불가능</li>
+</ul>
 
-    <div class="project-section">
-      <div class="lesson-grid">
-        <div class="lesson-card good">
-          <h5>✅ 배운 점</h5>
-          <ul>
-            <li>DB 변경 감지(CDC) 원리와 PostgreSQL 복제 슬롯 관리 경험</li>
-            <li>테이블별 핸들러 자동 등록 패턴으로 확장 가능한 구조 설계</li>
-          </ul>
-        </div>
-        <div class="lesson-card bad">
-          <h5>💭 아쉬운 점</h5>
-          <ul>
-            <li>앱 재시작 시 일부 이벤트 유실 가능성에 대한 보완 미흡</li>
-            <li>변경 감지 오프셋 저장 및 관리 방법 미흡</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<figure class="arch">
+  <figcaption><span class="label">AS-IS</span>기존 아키텍처</figcaption>
+  <img src="arch/p3_as_is.jpg" alt="CSV 적재 AS-IS — User → FastAPI (CSV Parser + Validator + Inserter 동기 처리) → PostgreSQL 단건 INSERT" loading="lazy" />
+</figure>
 
+<h3>해결 과정</h3>
+<ul>
+  <li><b>역할 분리 — 3단계 파이프라인</b> — FastAPI는 파싱·검증·발행만, Streams가 변환·SQL 생성, Consumer가 실제 적재·진행률 푸시를 담당하도록 분리</li>
+  <li><b>WebSocket 진행률 푸시</b> — Consumer가 누적 처리 건수를 추적해 percent 계산 후 진행률 실시간 전송</li>
+</ul>
 
-  <!-- =============================== -->
-  <!-- Project 4: Webtoon              -->
-  <!-- =============================== -->
-  <div class="project reveal" id="p4">
-    <div class="project-header">
-      <span class="project-tag green">Side Project</span>
-      <span class="project-headline">데이터 자동화 · 검색 최적화</span>
-    </div>
-    <h3>웹툰 검색 파이프라인 구축</h3>
-    <div class="project-subtitle" style="color:var(--green)">수동 크롤링 + PostgreSQL → Airbyte + Elasticsearch 전환</div>
-    <div class="project-meta">
-      <span>기간: 2025</span> | <span>기여도: 100%</span>
-      <span class="badge">Airbyte</span>
-      <span class="badge">Elasticsearch</span>
-      <span class="badge">PostgreSQL</span>
-    </div>
+<figure class="arch">
+  <figcaption><span class="label">TO-BE</span>개선된 아키텍처</figcaption>
+  <img src="arch/p3_to_be.jpg" alt="CSV 적재 TO-BE — FastAPI Producer → Kafka (streams.topic) → Spring Streams Service (SQL Builder) → Kafka (consumer.topic) → Spring Consumer Service (Bulk Insert + WebSocket 진행률)" loading="lazy" />
+</figure>
 
-    <div class="project-section">
-      <div class="section-sub-label">🎯 도전 과제 & 배경</div>
-      <div class="context-grid">
-        <div class="context-card">
-          <h5>수동 적재</h5>
-          <p>1분 주기 크론 크롤링 후 데이터 비교 및 DB 적재</p>
-        </div>
-        <div class="context-card">
-          <h5>검색 속도 저하</h5>
-          <p>PostgreSQL LIKE 검색으로 데이터 증가 시 검색 쿼리 성능 급락</p>
-        </div>
-      </div>
-    </div>
+<h3>역할</h3>
+<ul>
+  <li><b>전환 결정과 아키텍처 설계</b> — 기존 FastAPI 내부 동기 적재 흐름을 3단계 이벤트 파이프라인으로 분리하는 의사결정과 전체 토폴로지 설계</li>
+  <li><b>Producer 추가</b> — 기존 CSV 파싱 로직은 그대로 두고, 파싱 결과를 행 단위 Protobuf로 Kafka에 발행하는 Producer 레이어 추가</li>
+  <li><b>Streams · Consumer 신규 구현</b> — KStream 파이프라인, 상태별 분기, PostGIS WKT SQL 생성 및 Consumer Bulk Insert</li>
+</ul>
 
-<div class="project-section">
-      <div class="section-sub-label">📐 AS-IS Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/airbyte_before.png" alt="Webtoon AS-IS" style="width:100%;max-width:960px;">
-      </div>
-      <div class="issue-grid" style="margin-top:1rem;">
-        <div class="issue-card">
-          <h5>Shell Script 기반 수동 동기화</h5>
-          <p>크론으로 .sh 실행 → SQL 쿼리로 변경 데이터 비교 후 적재, 스크립트 유지보수 부담 및 장애 시 수동 대응 필요</p>
-        </div>
-        <div class="issue-card">
-          <h5>검색 쿼리 성능 저하</h5>
-          <p>PostgreSQL 행 기반 구조에서 데이터 증가 시 검색·필터 쿼리 응답 시간 급락</p>
-        </div>        
-      </div>
-    </div>
+<h3>기술 선택 근거</h3>
+<dl class="rationale">
+  <dt>Kafka Streams를 택한 이유</dt>
+  <dd>단순 컨슈머로 적재만 한다면 일반 Consumer로 충분. 그러나 좌표 검증·SQL 생성·상태 분기·배치 그룹핑처럼 흐름 자체에 변환 단계가 여러 개 있어 KStream의 선언적 파이프라인 모델이 코드 구조 측면에서 더 명확하다고 판단.</dd>
+  <dt>Protobuf를 두 종류로 분리한 이유</dt>
+  <dd>입력은 "원시 CSV 행", 출력은 "DB에 던질 SQL 배치"로 의미가 다름. 하나의 proto로 묶으면 nullable 필드가 늘어나고 의미가 흐려지므로 분리. 각 토픽이 무엇을 운반하는지 타입 시그니처만으로 표현.</dd>
+  <dt>Bulk Insert 이유</dt>
+  <dd>단건 INSERT를 보내면 트랜잭션 및 네트워크 왕복이 행 수만큼 누적되지만, BatchUpdate로 한 번에 묶어 보내면 왕복 비용이 배치당 1회로 줄어 DB 부하와 적재 시간이 동시 감소.</dd>
+</dl>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 TO-BE Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/airbyte_after.png" alt="Webtoon TO-BE" style="width:100%;max-width:960px;">
-      </div>
-      <div class="solution-grid" style="margin-top:1rem;">
-        <div class="solution-card">
-          <h5>Airbyte 자동 Sync</h5>
-          <p>크롤링 데이터 자동 수집 · 적재, 수동 작업 100% 제거</p>
-        </div>
-        <div class="solution-card">
-          <h5>ClickHouse 전환</h5>
-          <p>역인덱스 기반 검색 엔진으로 대량 검색·필터 쿼리 성능 대폭 개선</p>
-        </div>
-      </div>
-    </div>
+<h3>배운 점</h3>
+<ul>
+  <li>의도에 맞게 Kafka Streams와 Kafka Consumer를 사용함으로써 Kafka에 대한 이해도가 올라갔다</li>
+  <li>Protobuf로 단계별 의도를 코드 구조로 표현하는 게 유지보수에 유리</li>
+  <li>배치는 size만으로도 time만으로도 부족하다 — 둘을 함께 다뤄야 실운영에서 안정적이다</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">🔧 기술 선택 근거</div>
-      <div class="decision-grid">
-        <div class="decision-card">
-          <h5>왜 Airbyte?</h5>
-          <p>커넥터 기반 EL(Extract/Load) 자동화, 스케줄 Sync로 정합성 보장. Airflow 대비 설정이 간단.</p>
-        </div>
-        <div class="decision-card">
-          <h5>왜 Elasticsearch?</h5>
-          <p>웹툰 검색은 텍스트 검색·필터 위주 패턴. PostgreSQL LIKE 대비 역인덱스 기반 검색 성능이 압도적으로 빠름.</p>
-        </div>
-      </div>
-    </div>
+<h3>아쉬운 점</h3>
+<ul>
+  <li>bulkInsert 실패 시 어떤 행이 실패했는지 추적·재처리하는 DLQ 전략 미흡 — 현재는 트랜잭션 전체 롤백</li>
+  <li>Kafka Streams 처리량을 별도 노출하지 않아 운영 중 병목 현상 발생 시 외부 확인이 미흡</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">📊 성과</div>
-      <div class="metric-row">
-        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">100%</div><div class="metric-desc">수동 적재 자동화</div></div>
-        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">대폭↑</div><div class="metric-desc">검색 속도 개선</div></div>
-        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">0건</div><div class="metric-desc">데이터 누락</div></div>
-        <div class="metric-box" style="border-top-color:var(--green)"><div class="metric-value" style="color:var(--green)">자동</div><div class="metric-desc">스케줄 Sync</div></div>
-      </div>
-    </div>
+<!-- =================== PROJECT 4 =================== -->
+<h2 id="p4"><span class="pnum">04</span>계측기 알람 서비스 (CDC)</h2>
+<p class="meta">관공서 침수 재난 대비 프로젝트 · CDC 데이터 파이프라인 구축 · 기간 2023.11 ~ 2025.03 · 기여도 100%</p>
+<p class="stack-line">
+  <span>Java</span><span>Spring Boot</span><span>JPA</span><span>Debezium</span><span>PostgreSQL</span><span>WebSocket</span>
+</p>
 
-    <div class="project-section">
-      <div class="lesson-grid">
-        <div class="lesson-card good">
-          <h5>✅ 배운 점</h5>
-          <ul>
-            <li>EL(Extract/Load)과 ETL 파이프라인의 차이와 적합한 사용 시나리오 이해</li>
-            <li>OLTP(PostgreSQL) vs 검색 엔진(Elasticsearch)의 쿼리 패턴별 성능 차이 체감</li>
-          </ul>
-        </div>
-        <div class="lesson-card bad">
-          <h5>💭 아쉬운 점</h5>
-          <ul>
-            <li>Elasticsearch의 UPDATE/DELETE 제약으로 데이터 수정 시 재적재 필요</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<h3>문제 상황</h3>
+<ul>
+  <li><b>1분마다 전체 조회</b> — N개 센서 테이블을 1분 간격으로 전체 SELECT, 변경 여부와 무관하게 하루 43,200건 이상 반복</li>
+  <li><b>데이터 반영 지연</b> — 센서 데이터 추가 후 최대 1분 후에야 화면에 반영, 실시간성 부족</li>
+  <li><b>테이블 확장 부담</b> — 신규 센서 테이블 추가 시 스케줄러에 분기 로직이 누적, 단일 파일 비대화</li>
+</ul>
 
-  <!-- =============================== -->
-  <!-- Project 5: MSA Side Project     -->
-  <!-- =============================== -->
-  <div class="project reveal" id="p5">
-    <div class="project-header">
-      <span class="project-tag purple">Side Project</span>
-      <span class="project-headline">MSA 설계 · Spring Cloud · Kubernetes</span>
-    </div>
-    <h3>GIVE ME CONTROLLER — MSA 에어컨 제어 시스템</h3>
-    <div class="project-subtitle" style="color:var(--purple)">Spring Cloud + AWS EKS 기반 MSA 구조 자기주도 학습</div>
-    <div class="project-meta">
-      <span>기간: 2025</span> | <span>기여도: 100%</span>
-      <span class="badge">Java 17</span>
-      <span class="badge">Spring Cloud</span>
-      <span class="badge">Kafka</span>
-      <span class="badge">AWS EKS</span>
-      <span class="badge">GitHub Actions</span>
-      <span class="badge">WebSocket</span>
-      <span class="badge">SSE</span>
-    </div>
+<figure class="arch">
+  <figcaption><span class="label">AS-IS</span>기존 아키텍처</figcaption>
+  <img src="arch/p4_as_is.jpg" alt="계측기 알람 AS-IS — Client JS가 1분마다 Spring Boot App에 GET → SELECT query → PostgreSQL (폴링 구조)" loading="lazy" />
+</figure>
 
-    <div class="project-section">
-      <div class="section-sub-label">🎯 배경 & 동기</div>
-      <div class="context-grid">
-        <div class="context-card" style="border-left-color:var(--purple)">
-          <h5 style="color:var(--purple)">MSA 깊이 이해 필요</h5>
-          <p>회사에서 46개 MSA 서비스를 운영하면서 전체 구조를 직접 설계부터 배포까지 경험할 필요성 체감</p>
-        </div>
-        <div class="context-card" style="border-left-color:var(--purple)">
-          <h5 style="color:var(--purple)">AWS 경험 확보</h5>
-          <p>회사는 KakaoCloud 사용, AWS EKS/ECR/RDS 경험을 통해 멀티 클라우드 범용성 확보 목표</p>
-        </div>
-      </div>
-    </div>
+<h3>해결 과정</h3>
+<ul>
+  <li><b>WAL 기반 변경 감지</b> — PostgreSQL WAL 로그를 Debezium Embedded가 Spring Boot 앱 내에서 읽도록 구성</li>
+  <li><b>테이블별 처리 클래스 분리 구조</b> — 어노테이션으로 테이블-처리 클래스를 매핑, 신규 테이블 추가 시 기존 코드 수정 없이 클래스 1개만 작성하면 연결되는 구조</li>
+  <li><b>처리 전략 이원화</b> — 알람은 WebSocket 즉시 푸시, 센서 데이터는 큐에 쌓아 배치 처리로 분리</li>
+  <li><b>동시성 안전한 이벤트 버퍼</b> — 여러 테이블 이벤트가 동시에 몰려도 데이터 유실 없이 처리되도록 동시성 안전한 큐 자료구조로 이벤트 버퍼 구현</li>
+</ul>
 
-    <div class="project-section">
-      <div class="section-sub-label">📐 Architecture</div>
-      <div class="arch-placeholder">
-        <img src="images/givemecontroller-arch.png" alt="GIVE ME CONTROLLER Architecture" style="width:100%;max-width:960px;">
-      </div>
-      <div class="solution-grid" style="margin-top:1rem;">
-        <div class="solution-card" style="border-left-color:var(--purple)">
-          <h5 style="color:var(--purple)">Spring Cloud Gateway</h5>
-          <p>API 라우팅, 3개 서비스 분리 (control / alarm / temp)</p>
-        </div>
-        <div class="solution-card" style="border-left-color:var(--purple)">
-          <h5 style="color:var(--purple)">Kafka 이벤트 전파</h5>
-          <p>에어컨 상태 변경 시 control → alarm/temp 서비스로 비동기 이벤트 전달</p>
-        </div>
-        <div class="solution-card" style="border-left-color:var(--purple)">
-          <h5 style="color:var(--purple)">AWS EKS + ECR</h5>
-          <p>4노드 클러스터(t3.small), 서비스별 ECR 리포지토리, GitHub Actions CI/CD</p>
-        </div>
-        <div class="solution-card" style="border-left-color:var(--purple)">
-          <h5 style="color:var(--purple)">실시간 통신</h5>
-          <p>alarm-service: WebSocket 익명 채팅, temp-service: SSE 실시간 상태 갱신</p>
-        </div>
-      </div>
-    </div>
+<figure class="arch">
+  <figcaption><span class="label">TO-BE</span>개선된 아키텍처</figcaption>
+  <img src="arch/p4_to_be.jpg" alt="계측기 알람 TO-BE — Sensor → PostgreSQL → WAL Log → Debezium Embedded(Spring Boot App) → AlarmHandler → WebSocket Handler → Client (이벤트 기반)" loading="lazy" />
+</figure>
 
-    <div class="project-section">
-      <div class="lesson-grid">
-        <div class="lesson-card good">
-          <h5>✅ 학습 성과</h5>
-          <ul>
-            <li>MSA 구조 설계 → 구현 → 배포 전 사이클 직접 경험</li>
-            <li>Kafka 이벤트 드리븐 패턴으로 서비스 간 느슨한 결합 구현</li>
-            <li>Route53 → LB → Ingress → Gateway → Service 전체 네트워크 흐름 이해</li>
-            <li>회사 실무에 AWS EKS 경험을 대비하여 클라우드 범용성 확보</li>
-          </ul>
-        </div>
-        <div class="lesson-card bad">
-          <h5>💭 아쉬운 점</h5>
-          <ul>
-            <li>t3.small 4노드로 비용 부담</li>
-            <li>CI/CD 를 서비스 별로 아닌 전체 프로젝트 단위로 구성</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<h3>역할</h3>
+<ul>
+  <li><b>전체 아키텍처 설계</b> — 폴링 → 이벤트 기반 전환 의사결정 및 Debezium Embedded 기반 구조 선택</li>
+  <li><b>확장 가능한 처리 구조 설계</b> — 어노테이션 기반 매핑 구조 설계, 신규 테이블 추가 시 클래스 1개 작성으로 확장 가능하도록 구현</li>
+  <li><b>JPA 기반 도메인 모델링</b> — 재난안전 도메인 엔티티 간 관계를 <code>@Entity</code>로 설계, JPA 연관관계 매핑 직접 구성</li>
+  <li><b>WebSocket 메시지 프로토콜 정의</b> — 알람·센서 데이터 전송을 위한 JSON 메시지 스키마 직접 설계, 프론트엔드와 인터페이스 규약 합의</li>
+</ul>
 
-</section>
+<h3>기술 선택 근거</h3>
+<dl class="rationale">
+  <dt>Kafka Connect를 쓰지 않은 이유</dt>
+  <dd>Kafka 클러스터 운영 부담과 추가 인프라 비용을 감수할 정도의 요구사항이 아니었음. Spring Boot 앱 하나에 임베드하는 것이 운영상 단순.</dd>
+  <dt>DB 트리거를 쓰지 않은 이유</dt>
+  <dd>테이블이 늘어날수록 트리거 관리 비용 증가. WAL 기반이면 DB 레벨에서 모든 변경을 자동 캡처.</dd>
+  <dt>분기 로직 대신 클래스 분리를 택한 이유</dt>
+  <dd>테이블이 5개만 넘어가도 분기 로직이 한 파일에 쌓여 유지보수가 어려워짐. 테이블당 클래스 하나로 분리하면 신규 테이블 추가 시 기존 코드 수정이 불필요해 확장 비용이 테이블 수에 비례해 늘지 않음.</dd>
+</dl>
 
-<!-- TECH STACK -->
-<section id="stack">
-  <div class="section-label reveal">Tech Stack</div>
-  <h2 class="section-title reveal">기술 스택</h2>
-  <div class="stack-grid reveal">
-    <div class="stack-card">
-      <h4>Backend & Data</h4>
-      <p>Spring Boot (Java) · FastAPI (Python)<br>PostgreSQL<br>Kafka · Redis · Temporal<br>Elasticsearch · Airbyte</p>
-    </div>
-    <div class="stack-card">
-      <h4>Infrastructure & CI/CD</h4>
-      <p>Kubernetes · Docker · Helm<br>Jenkins · ArgoCD · GitHub Actions</p>
-    </div>
-  </div>
-</section>
+<div class="result">
+  <b>성과 · 일 폴링 쿼리 43,200 → 0</b><br>
+  DB CPU 약 35% 감소, 변경 감지 지연 60s → 50ms.
+</div>
 
-<!-- FOOTER -->
+<h3>배운 점</h3>
+<ul>
+  <li>"무엇을 변경할지"가 아니라 "변경이 일어났는지"를 DB가 알려주게 하면, 애플리케이션은 반응만 하면 된다</li>
+  <li>처음에 구조 잡는 시간은 나중에 몇 배로 돌려받는다 — 테이블별로 처리 로직을 분리해둔 덕분에 이후 다수의 테이블이 추가되어도 기존 코드를 수정할 필요가 없었다</li>
+</ul>
+
+<h3>아쉬운 점</h3>
+<ul>
+  <li>앱 재시작 시 오프셋 기반 복구 전략이 더 정교할 필요</li>
+  <li>Debezium Engine 자체 장애 시 자동 복구 로직 미흡</li>
+</ul>
+
+<!-- =================== PROJECT 5 =================== -->
+<h2 id="p5"><span class="pnum">05</span>지역 군청 공간정보 시스템 &amp; 키오스크</h2>
+<p class="meta">입사 첫 SI 프로젝트 · Spring Boot 기반 공공 공간정보 풀스택 구축 · 기간 2023.05 ~ 2023.10 · 기여도 100%</p>
+<p class="stack-line">
+  <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span><span>Vue.js</span><span>GPKI</span>
+</p>
+
+<h3>프로젝트 개요</h3>
+<ul>
+  <li><b>지역 군청 소개 및 공간정보 서비스</b> — 군청에서 실사용되는 공간정보 시스템 및 방문객 소개 키오스크 개발</li>
+  <li><b>방문객 키오스크 + 외부 시스템 연계</b> — 군청 방문객이 직접 조작하는 키오스크를 Vue.js SPA로 구현, 공공 부동산시스템과 GPKI 기반 인증 연계 수행</li>
+  <li><b>백엔드 중심 풀스택 범위</b> — Spring Boot 백엔드를 중심으로 Vue 키오스크·외부 연계까지 함께 담당</li>
+</ul>
+
+<figure class="arch">
+  <figcaption><span class="label">ARCHITECTURE</span>전체 시스템 구성도</figcaption>
+  <img src="arch/p5_arch.jpg" alt="지역 군청 공간정보 시스템 — Visitor → Kiosk(Vue) → JSON → Spring Boot App(REST API + GPKI Service) → PostgreSQL & 부동산시스템" loading="lazy" />
+</figure>
+
+<h3>주요 구현 내용</h3>
+<ul>
+  <li><b>RESTful API 설계·구현</b> — Spring Boot 기반 공간정보 CRUD API 개발, Vue.js 키오스크에서 JSON 비동기 호출</li>
+  <li><b>DB 스키마 설계</b> — PostgreSQL 기반 공간정보 테이블 구조 직접 설계</li>
+  <li><b>Vue.js 키오스크 UI</b> — 방문객 터치 인터랙션 중심 SPA 구현</li>
+  <li><b>GPKI 부동산시스템 연계</b> — 공인인증(GPKI) 기반 외부 부동산시스템 API 연계 구현</li>
+</ul>
+
+<h3>역할</h3>
+<ul>
+  <li><b>주요 구현 담당</b> — 백엔드 API·DB 설계부터 Vue 키오스크 UI, 외부 연계까지 주요 구현 담당</li>
+  <li><b>요구사항 직접 소통</b> — 군청 담당자와 직접 커뮤니케이션하며 현장 요구사항 반영</li>
+  <li><b>공공 인증 프로토콜 학습</b> — GPKI 인증·부동산시스템 연동 스펙을 직접 조사·적용</li>
+  <li><b>API 스펙 정의</b> — Vue 키오스크와 Spring 백엔드 간 JSON 메시지 규약 직접 설계</li>
+</ul>
+
+<h3>배운 점</h3>
+<ul>
+  <li>신입 첫 SI에서 백엔드·프론트·외부 연계를 함께 다루며, 각 파트가 시스템 안에서 어떻게 엮이는지 먼저 보는 관점의 기반을 쌓았다</li>
+  <li>공공 시스템 연계는 기술 스펙보다 인증 프로토콜·정책 제약이 더 큰 변수임을 체감 — GPKI 연동에서 기술 난이도보다 절차·증빙이 더 복잡</li>
+</ul>
+
+<h3>아쉬운 점</h3>
+<ul>
+  <li>설계 의사결정의 근거를 문서화하지 않아 이후 후임 인계 시 애로</li>
+  <li>테스트 코드 작성 경험 부재 — 수동 검증에 의존한 구조</li>
+</ul>
+
+<!-- =================== PROJECT 6 =================== -->
+<h2 id="p6"><span class="pnum">06</span>웹툰 검색 파이프라인<span class="side">side project</span></h2>
+<p class="meta">수동 크롤링 + PostgreSQL → Airbyte + Elasticsearch 자동화 · 기간 2025 · 기여도 100%</p>
+<p class="stack-line">
+  <span>Airbyte</span><span>Elasticsearch</span><span>PostgreSQL</span>
+</p>
+
+<h3>문제 상황</h3>
+<ul>
+  <li><b>수동 적재 부담</b> — 1분 주기 크론 크롤링 + SQL 비교 + DB 적재를 Shell Script로 직접 관리</li>
+  <li><b>검색 응답 저하</b> — PostgreSQL LIKE 검색은 데이터 증가에 따라 응답 시간 급락</li>
+</ul>
+
+<figure class="arch">
+  <figcaption><span class="label">AS-IS</span>기존 아키텍처</figcaption>
+  <img src="arch/p6_as_is.jpg" alt="웹툰 검색 AS-IS — Cron Job → PostgreSQL ← Client (LIKE 검색)" loading="lazy" />
+</figure>
+
+<h3>해결 과정</h3>
+<ul>
+  <li><b>EL 자동화 도입</b> — Airbyte 커넥터로 PostgreSQL → Elasticsearch 스케줄 Sync 구성</li>
+  <li><b>검색 전용 엔진 분리</b> — 텍스트 검색은 Elasticsearch의 역인덱스 기반으로 처리</li>
+</ul>
+
+<figure class="arch">
+  <figcaption><span class="label">TO-BE</span>개선된 아키텍처</figcaption>
+  <img src="arch/p6_to_be.jpg" alt="웹툰 검색 TO-BE — Cron Job → PostgreSQL → Airbyte (auto sync) → Elasticsearch ← Client (역인덱스 검색)" loading="lazy" />
+</figure>
+
+<h3>역할</h3>
+<ul>
+  <li><b>전체 설계·구현</b> — Airbyte 커넥터 설정, Elasticsearch 인덱스 매핑, 검색 API 구현까지 단독 담당</li>
+</ul>
+
+<h3>기술 선택 근거</h3>
+<dl class="rationale">
+  <dt>Airflow 대신 Airbyte를 쓴 이유</dt>
+  <dd>DAG 작성 없이 커넥터 기반 EL 자동화가 가능. 단순 적재 목적에 Airflow는 과함.</dd>
+  <dt>PostgreSQL FTS 대신 Elasticsearch를 쓴 이유</dt>
+  <dd>텍스트 검색·필터 위주 패턴. 역인덱스 구조가 LIKE 대비 검색 성능 우위.</dd>
+</dl>
+
+<h3>배운 점</h3>
+<p>"저장"과 "조회"는 같은 DB로 해결할 필요가 없다 — 목적에 맞는 엔진을 분리하는 것이 더 단순할 때가 많다.</p>
+
+<h3>아쉬운 점</h3>
+<ul>
+  <li>Elasticsearch의 UPDATE/DELETE 제약으로 데이터 수정 시 재적재 필요</li>
+</ul>
+
+<!-- =================== PROJECT 7 =================== -->
+<h2 id="p7"><span class="pnum">07</span>Give Me Controller<span class="side">side project</span></h2>
+<p class="meta">Spring Cloud + AWS EKS 기반 MSA 구조 자기주도 학습 · 기간 2025 · 기여도 100%</p>
+<p class="stack-line">
+  <span>Spring Cloud</span><span>Kafka</span><span>AWS EKS</span><span>GitHub Actions</span><span>WebSocket</span><span>SSE</span>
+</p>
+
+<h3>문제 상황</h3>
+<ul>
+  <li><b>MSA 전체 사이클 경험 부족</b> — 회사에서 40+ MSA를 운영하지만, 설계→구현→배포 전 사이클을 직접 경험할 기회는 제한적</li>
+  <li><b>멀티 클라우드 경험 확보</b> — 회사는 KakaoCloud 중심, AWS 경험을 쌓아 범용성 확보 필요</li>
+</ul>
+
+<h3>해결 과정</h3>
+<ul>
+  <li><b>Spring Cloud Gateway 구성</b> — 3개 서비스(control/alarm/temp)를 Gateway로 라우팅</li>
+  <li><b>Kafka 이벤트 전파</b> — 상태 변경 시 control → alarm/temp로 비동기 이벤트 전달</li>
+  <li><b>AWS EKS + GitHub Actions</b> — 4노드 클러스터 + ECR + CI/CD 파이프라인 구축</li>
+</ul>
+
+<figure class="arch">
+  <figcaption><span class="label">ARCHITECTURE</span>전체 시스템 구성도</figcaption>
+  <img src="arch/p7_arch.jpg" alt="Give Me Controller — User → Route53 → LB → AWS EKS Cluster (Ingress → Spring Cloud Gateway → control/alarm/temp Pods) + Kafka + RDS PostgreSQL + ECR + GitHub Actions CI/CD" loading="lazy" />
+</figure>
+
+<h3>역할</h3>
+<ul>
+  <li><b>설계부터 배포까지 단독 수행</b> — 아키텍처 설계, 서비스 구현, 인프라 구성, CI/CD 파이프라인 모두 혼자 수행</li>
+</ul>
+
+<h3>배운 점</h3>
+<p>운영해본 경험과 "처음부터 만들어본" 경험은 다르다 — 직접 설계해봐야 비로소 각 구성요소의 존재 이유가 이해된다.</p>
+
+<h3>아쉬운 점</h3>
+<ul>
+  <li>t3.small 4노드로 비용 부담</li>
+  <li>CI/CD가 서비스 단위가 아닌 전체 프로젝트 단위로 구성</li>
+</ul>
+
+<!-- =================== TECH STACK =================== -->
+<h2 id="stack">Tech Stack</h2>
+<h3>Backend &amp; Data</h3>
+<p class="stack-line">
+  <span>Spring Boot (Java)</span><span>FastAPI (Python)</span><span>PostgreSQL</span><span>Kafka</span><span>Redis</span><span>Temporal</span><span>Elasticsearch</span><span>Airbyte</span>
+</p>
+<h3>Frontend</h3>
+<p class="stack-line">
+  <span>JavaScript</span><span>Vue.js</span>
+</p>
+<h3>Infrastructure &amp; CI/CD</h3>
+<p class="stack-line">
+  <span>Kubernetes</span><span>Docker</span><span>Helm</span><span>Jenkins</span><span>ArgoCD</span>
+</p>
+<h3>AI / LLM</h3>
+<p class="stack-line">
+  <span>LangChain</span><span>LangGraph</span>
+</p>
+
 <footer>
-  <p class="copy">© 2026 김두현 · DevOps/Backend Engineer</p>
+  <p>© 2026 김두현 · <a href="mailto:engus9781@gmail.com">engus9781@gmail.com</a> · <a href="https://github.com/DuHyeon2" target="_blank" rel="noopener">github.com/DuHyeon2</a></p>
 </footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-</script>
-
+</div>
 </body>
 </html>
